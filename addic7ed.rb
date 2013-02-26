@@ -44,6 +44,7 @@ puts "Language: #{options[:language]}"
 options[:filenames].each do |filename|
   unless File.file? filename
     puts "Warning: #{filename} does not exist or is not a regular file. Skipping."
+    next
   end
 
   # begin
