@@ -8,7 +8,9 @@ require 'rubygems'
 require 'bundler/setup'
 Bundler.require
 # Local modules
-require './lib/addic7ed-filename'
+require './lib/addic7ed-errors'
+require './lib/addic7ed-episode'
+require './lib/addic7ed-subtitle'
 
 VERSION="0.0.3"
 
@@ -54,31 +56,11 @@ options[:filenames].each do |filename|
   end
 
   begin
-    file = Addic7ed::Filename.new(filename)
+    sub = Addic7ed::Subtitle.new(filename)
+    sub = Addic7ed::Subtitle.new(filename)
   rescue Addic7ed::InvalidFilenameError
     puts "Warning: #{filename} does not seem to be a valid TV show filename. Skipping." unless options[:quiet]
     next
-  rescue Exception => e
-    puts "Error: #{e.message}"
-    next
   end
-
-  # begin
-  #   sub = Addic7ed::Subtitle.new(file)
-  # rescue Exception => e
-  #   puts "Error: "
-
-  # shows_ids = {}
-  # seasons_ids = {}
-  # episodes_ids = {}
-
-  # shows_url = "http://www.addic7ed.com/ajax_getShows.php"
-  # seasons_url = "http://www.addic7ed.com/ajax_getSeasons.php"
-  # episodes_url = "http://www.addic7ed.com/ajax_getEpisodes.php"
-
-  # # Fetch shows list
-  # Nokogiri::HTML(open(shows_url)).css('option').each do |show_html|
-  #   shows_ids[show_html.content] = show_html['value']
-  # end
 
 end

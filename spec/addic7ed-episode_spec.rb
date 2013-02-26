@@ -1,7 +1,7 @@
 require 'spec_helper'
-require './lib/addic7ed-filename'
+require './lib/addic7ed-episode'
 
-describe Addic7ed::Filename do
+describe Addic7ed::Episode do
 
   before :all do
     # Valid filenames
@@ -33,7 +33,7 @@ describe Addic7ed::Filename do
 
   it 'should succeed given valid argument' do
     expect {
-      @file = Addic7ed::Filename.new(@filename)
+      @file = Addic7ed::Episode.new(@filename)
     }.to_not raise_error
     @file.showname.should == 'Californication'
     @file.season.should == 6
@@ -44,7 +44,7 @@ describe Addic7ed::Filename do
 
   it 'should succeed given filename with x notation' do
     expect {
-      @file = Addic7ed::Filename.new(@filename_x)
+      @file = Addic7ed::Episode.new(@filename_x)
     }.to_not raise_error
     @file.showname.should == 'Californication'
     @file.season.should == 6
@@ -55,7 +55,7 @@ describe Addic7ed::Filename do
 
   it 'should succeed given filename with 3-digits notation' do
     expect {
-      @file = Addic7ed::Filename.new(@filename_3digits)
+      @file = Addic7ed::Episode.new(@filename_3digits)
     }.to_not raise_error
     @file.showname.should == 'Californication'
     @file.season.should == 6
@@ -66,7 +66,7 @@ describe Addic7ed::Filename do
 
   it 'should succeed given filename with brackets notation' do
     expect {
-      @file = Addic7ed::Filename.new(@filename_brackets)
+      @file = Addic7ed::Episode.new(@filename_brackets)
     }.to_not raise_error
     @file.showname.should == 'Californication'
     @file.season.should == 6
@@ -77,7 +77,7 @@ describe Addic7ed::Filename do
 
   it 'should succeed given filename with brackets and x notation' do
     expect {
-      @file = Addic7ed::Filename.new(@filename_x_brackets)
+      @file = Addic7ed::Episode.new(@filename_x_brackets)
     }.to_not raise_error
     @file.showname.should == 'Californication'
     @file.season.should == 6
@@ -88,7 +88,7 @@ describe Addic7ed::Filename do
 
   it 'should succeed given filename with brackets and 3-digits notation' do
     expect {
-      @file = Addic7ed::Filename.new(@filename_3digits_brackets)
+      @file = Addic7ed::Episode.new(@filename_3digits_brackets)
     }.to_not raise_error
     @file.showname.should == 'Californication'
     @file.season.should == 6
@@ -99,7 +99,7 @@ describe Addic7ed::Filename do
 
   it 'should succeed given filename with brackets notation and space separator' do
     expect {
-      @file = Addic7ed::Filename.new(@filename_brackets_spaces)
+      @file = Addic7ed::Episode.new(@filename_brackets_spaces)
     }.to_not raise_error
     @file.showname.should == 'Californication'
     @file.season.should == 6
@@ -110,7 +110,7 @@ describe Addic7ed::Filename do
 
   it 'should succeed given filename with brackets and x notation and space separator' do
     expect {
-      @file = Addic7ed::Filename.new(@filename_x_brackets_spaces)
+      @file = Addic7ed::Episode.new(@filename_x_brackets_spaces)
     }.to_not raise_error
     @file.showname.should == 'Californication'
     @file.season.should == 6
@@ -121,7 +121,7 @@ describe Addic7ed::Filename do
 
   it 'should succeed given filename with brackets and 3-digits notation and space separator' do
     expect {
-      @file = Addic7ed::Filename.new(@filename_3digits_brackets_spaces)
+      @file = Addic7ed::Episode.new(@filename_3digits_brackets_spaces)
     }.to_not raise_error
     @file.showname.should == 'Californication'
     @file.season.should == 6
@@ -132,7 +132,7 @@ describe Addic7ed::Filename do
 
   it 'should succeed given lowercase filename' do
     expect {
-      @file = Addic7ed::Filename.new(@filename_lowercase)
+      @file = Addic7ed::Episode.new(@filename_lowercase)
     }.to_not raise_error
     @file.showname.should == 'californication'
     @file.season.should == 6
@@ -143,7 +143,7 @@ describe Addic7ed::Filename do
 
   it 'should succeed given lowercase filename with x notation' do
     expect {
-      @file = Addic7ed::Filename.new(@filename_lowercase_x)
+      @file = Addic7ed::Episode.new(@filename_lowercase_x)
     }.to_not raise_error
     @file.showname.should == 'californication'
     @file.season.should == 6
@@ -154,7 +154,7 @@ describe Addic7ed::Filename do
 
   it 'should succeed given filename with showname containing multiple words' do
     expect {
-      @file = Addic7ed::Filename.new(@filename_multiple_words)
+      @file = Addic7ed::Episode.new(@filename_multiple_words)
     }.to_not raise_error
     @file.showname.should == 'The Walking Dead'
     @file.season.should == 3
@@ -165,7 +165,7 @@ describe Addic7ed::Filename do
 
   it 'should succeed given filename with showname containing multiple words with space separator' do
     expect {
-      @file = Addic7ed::Filename.new(@filename_multiple_words_spaces)
+      @file = Addic7ed::Episode.new(@filename_multiple_words_spaces)
     }.to_not raise_error
     @file.showname.should == 'The Walking Dead'
     @file.season.should == 3
@@ -176,7 +176,7 @@ describe Addic7ed::Filename do
 
   it 'should succeed given filename with showname containing only numbers' do
     expect {
-      @file = Addic7ed::Filename.new(@filename_numbers_only)
+      @file = Addic7ed::Episode.new(@filename_numbers_only)
     }.to_not raise_error
     @file.showname.should == '90210'
     @file.season.should == 5
@@ -187,7 +187,7 @@ describe Addic7ed::Filename do
 
   it 'should succeed given filename with showname containing production year' do
     expect {
-      @file = Addic7ed::Filename.new(@filename_showname_year)
+      @file = Addic7ed::Episode.new(@filename_showname_year)
     }.to_not raise_error
     @file.showname.should == 'The Americans 2013'
     @file.season.should == 1
@@ -198,7 +198,7 @@ describe Addic7ed::Filename do
 
   it 'should succeed given filename containing full path' do
     expect {
-      @file = Addic7ed::Filename.new(@filename_full_path)
+      @file = Addic7ed::Episode.new(@filename_full_path)
     }.to_not raise_error
     @file.showname.should == 'Californication'
     @file.season.should == 6
@@ -209,7 +209,7 @@ describe Addic7ed::Filename do
 
   it 'should succeed given filename containing relative path' do
     expect {
-      @file = Addic7ed::Filename.new(@filename_relative_path)
+      @file = Addic7ed::Episode.new(@filename_relative_path)
     }.to_not raise_error
     @file.showname.should == 'Californication'
     @file.season.should == 6
@@ -220,7 +220,7 @@ describe Addic7ed::Filename do
 
   it 'should succeed given filename containing no extension' do
     expect {
-      @file = Addic7ed::Filename.new(@filename_no_extension)
+      @file = Addic7ed::Episode.new(@filename_no_extension)
     }.to_not raise_error
     @file.showname.should == 'Californication'
     @file.season.should == 6
@@ -231,31 +231,31 @@ describe Addic7ed::Filename do
 
   it 'should fail given filename with no showname' do
     expect {
-      @file = Addic7ed::Filename.new(@filename_no_showname)
+      @file = Addic7ed::Episode.new(@filename_no_showname)
     }.to raise_error
   end
 
   it 'should fail given filename with no season number' do
     expect {
-      @file = Addic7ed::Filename.new(@filename_no_season)
+      @file = Addic7ed::Episode.new(@filename_no_season)
     }.to raise_error
   end
 
   it 'should fail given filename with no episode number' do
     expect {
-      @file = Addic7ed::Filename.new(@filename_no_episode)
+      @file = Addic7ed::Episode.new(@filename_no_episode)
     }.to raise_error
   end
 
   it 'should fail given filename with no tags' do
     expect {
-      @file = Addic7ed::Filename.new(@filename_no_tags)
+      @file = Addic7ed::Episode.new(@filename_no_tags)
     }.to raise_error
   end
 
   it 'should fail given filename with no group' do
     expect {
-      @file = Addic7ed::Filename.new(@filename_no_group)
+      @file = Addic7ed::Episode.new(@filename_no_group)
     }.to raise_error
   end
 
