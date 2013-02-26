@@ -16,12 +16,20 @@ options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: addic7ed.rb [options] <file1> [<file2>, <file3>, ...]"
 
+  opts.on("-l [LANGUAGE]", "--language [LANGUAGE]", "Language to look subtitles for") do |l|
+    options[:language] = l
+  end
+
   opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
     options[:verbose] = v
   end
 
-  opts.on("-l [LANGUAGE]", "--language [LANGUAGE]", "Language to look subtitles for") do |l|
-    options[:language] = l
+  opts.on("-q", "--quiet", "Run without output (cron-mode)") do |q|
+    options[:quiet] = q
+  end
+
+  opts.on("-d", "--debug", "Debug mode [do not use]") do |d|
+    options[:debug] = d
   end
 
   opts.on_tail("-h", "--help", "Show this message") do
@@ -37,23 +45,28 @@ end.parse!
 
 options[:filenames] = ARGV
 
-puts "Verbose:  #{options[:verbose]}"
-puts "Filenames: #{options[:filenames]}"
-puts "Language: #{options[:language]}"
+# Main loop over mandatory arguments (e.g. filenames)
 
 options[:filenames].each do |filename|
-  unless File.file? filename
-    puts "Warning: #{filename} does not exist or is not a regular file. Skipping."
+  unless File.file? filename or options[:debug]
+    puts "Warning: #{filename} does not exist or is not a regular file. Skipping." unless options[:quiet]
+    next
+  end
+
+  begin
+    file = Addic7ed::Filename.new(filename)
+  rescue Addic7ed::InvalidFilenameError
+    puts "Warning: #{filename} does not seem to be a valid TV show filename. Skipping." unless options[:quiet]
+    next
+  rescue Exception => e
+    puts "Error: #{e.message}"
     next
   end
 
   # begin
-  #   file = Addic7ed::Filename.new(filename)
-  #   puts file
+  #   sub = Addic7ed::Subtitle.new(file)
   # rescue Exception => e
-  #   puts "Error: #{e.message}"
-  #   puts 'Aborting.'
-  # end
+  #   puts "Error: "
 
   # shows_ids = {}
   # seasons_ids = {}

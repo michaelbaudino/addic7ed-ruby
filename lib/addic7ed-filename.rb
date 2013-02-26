@@ -1,4 +1,5 @@
 require 'fileutils'
+require 'addic7ed-errors'
 
 module Addic7ed
   class Filename
@@ -17,7 +18,7 @@ module Addic7ed
         @tags     = match[:tags].split(/[\. ]/)
         @group    = match[:group]
       else
-        raise ArgumentError.new("Filename does not seem to be a valid TV show file name : #{@basename}")
+        raise InvalidFilenameError
       end
     end
 
