@@ -20,6 +20,7 @@ No. Not yet.
 
     ```bash
     $ cd addic7ed-ruby
+    $ rvm gemset create addic7ed-ruby # do this only if you use RVM
     $ bundle install
     ```
 3. Say you want to download a French subtitle for the last "Californication" episode, all you have to do is :
