@@ -68,7 +68,8 @@ options[:filenames].each do |filename|
 
   begin
     ep = Addic7ed::Episode.new(filename)
-    puts "!!! Episode URL is : #{ep.url}"
+    puts "!!! Episode URL is : #{ep.global_url}"
+    puts "!!! Episode localized URL is : #{ep.localized_url(options[:language])}"
   rescue Addic7ed::InvalidFilenameError
     puts "Warning: #{filename} does not seem to be a valid TV show filename. Skipping." unless options[:quiet]
     next
@@ -78,6 +79,9 @@ options[:filenames].each do |filename|
   rescue Addic7ed::EpisodeNotFoundError
     puts "Warning: Episode not found on Addic7ed : #{ep.filename.showname} S#{ep.filename.season}E#{ep.filename.episode}. Skipping."
     next
+  rescue Addic7ed::LanguageNotSupportedError
+    puts "Error: Addic7ed does not support language '#{options[:language]}'. Exiting."
+    break
   end
 
 end

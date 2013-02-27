@@ -28,14 +28,31 @@ describe Addic7ed::Episode do
     end
   end
 
-  describe '#url' do
-    it 'should return a show ID given existing episode' do
+  describe '#global_url' do
+    it 'should return a show URL given existing episode' do
       @episode = Addic7ed::Episode.new(@filename)
-      @episode.url.should == 'http://www.addic7ed.com/serie/Californication/6/7/The_Dope_Show'
+      @episode.global_url.should == 'http://www.addic7ed.com/serie/Californication/6/7/The_Dope_Show'
     end
     it 'should raise an error given existing show not existing episode' do
       @episode = Addic7ed::Episode.new(@filename_episode_not_found)
-      expect {@episode.url}.to raise_error(Addic7ed::EpisodeNotFoundError)
+      expect {@episode.global_url}.to raise_error(Addic7ed::EpisodeNotFoundError)
     end
+  end
+
+  describe '#localized_url' do
+    it 'should return a show localized URL given existing episode' do
+      @episode = Addic7ed::Episode.new(@filename)
+      @episode.localized_url('fr').should == 'http://www.addic7ed.com/serie/Californication/6/7/8'
+      @episode.localized_url('es').should == 'http://www.addic7ed.com/serie/Californication/6/7/4'
+    end
+    it 'should use French as default language' do
+      @episode = Addic7ed::Episode.new(@filename)
+      @episode.localized_url.should == @episode.localized_url('fr')
+    end
+    it 'should raise an error given existing show not existing episode' do
+      @episode = Addic7ed::Episode.new(@filename_episode_not_found)
+      expect {@episode.localized_url}.to raise_error(Addic7ed::EpisodeNotFoundError)
+    end
+
   end
 end

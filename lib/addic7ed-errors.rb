@@ -5,4 +5,6 @@ module Addic7ed
   end
   class EpisodeNotFoundError < StandardError
   end
+  class LanguageNotSupportedError < StandardError
+  end
 end

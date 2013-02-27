@@ -11,8 +11,21 @@ module Addic7ed
       @show_id ||= find_show_id
     end
 
-    def url
-      @url ||= find_url
+    def global_url
+      @global_url ||= find_global_url
+    end
+
+    def localized_url(lang = 'fr')
+      if LANGUAGES[lang]
+        url = "http://www.addic7ed.com/serie/#{@filename.showname.gsub(' ', '_')}/#{@filename.season}/#{@filename.episode}/#{LANGUAGES[lang][:id]}"
+        if Net::HTTP.get_response(URI(url)).body != " "
+          url
+        else
+          raise EpisodeNotFoundError
+        end
+      else
+        raise LanguageNotSupportedError
+      end
     end
 
     protected
@@ -24,10 +37,10 @@ module Addic7ed
       @show_id or raise ShowNotFoundError
     end
 
-    def find_url
+    def find_global_url
       response = Net::HTTP.get_response(URI("#{EPISODE_REDIRECT_URL}?ep=#{show_id}-#{@filename.season}x#{@filename.episode}"))
       if response['location'] and not response['location'] == '/index.php'
-        @url = 'http://www.addic7ed.com/' + response['location']
+        @global_url = 'http://www.addic7ed.com/' + response['location']
       else
         raise EpisodeNotFoundError
       end
