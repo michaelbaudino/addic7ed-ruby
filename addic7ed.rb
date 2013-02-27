@@ -20,7 +20,7 @@ options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: addic7ed.rb [options] <file1> [<file2>, <file3>, ...]"
 
-  opts.on("-l [LANGUAGE]", "--language [LANGUAGE]", "Language to look subtitles for (default: French)") do |l|
+  opts.on("-l [LANGUAGE]", "--language [LANGUAGE]", "Language code to look subtitles for (default: French)") do |l|
     options[:language] = l
   end
 
@@ -38,6 +38,14 @@ OptionParser.new do |opts|
 
   opts.on_tail("-h", "--help", "Show this message") do
     puts opts
+    exit
+  end
+
+  opts.on_tail("-L", "--list-languages", "List all available languages") do
+    puts "All available languages (with their corresponding ISO code):"
+    Addic7ed::LANGUAGES.each do |lang, infos|
+      puts "#{lang}:\t#{infos[:name]}"
+    end
     exit
   end
 
