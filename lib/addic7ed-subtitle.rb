@@ -1,7 +1,7 @@
 module Addic7ed
   SHOWS_URL = 'http://www.addic7ed.com/ajax_getShows.php'
-  SEASONS_URL = 'http://www.addic7ed.com/ajax_getSeasons.php'
   EPISODES_URL = 'http://www.addic7ed.com/ajax_getEpisodes.php'
+  EPISODE_REDIRECT_URL = 'http://www.addic7ed.com/re_episode.php'
 
   class Subtitle
 
@@ -9,15 +9,32 @@ module Addic7ed
 
     def initialize(filename)
       @episode = Addic7ed::Episode.new(filename)
-      init_shows
     end
 
-    def init_shows
-      @shows_ids ||= {}
+    def show_id
+      @show_id ||= find_show_id
+    end
+
+    def episode_url
+      @episode_url ||= find_episode_url
+    end
+
+    protected
+
+    def find_show_id
       Nokogiri::HTML(open(SHOWS_URL)).css('option').each do |show_html|
-        @shows_ids[show_html.content] = show_html['value']
+        @show_id = show_html['value'] if show_html.content == @episode.showname
+      end
+      @show_id or raise ShowNotFoundError
+    end
+
+    def find_episode_url
+      response = Net::HTTP.get_response(URI("#{EPISODE_REDIRECT_URL}?ep=#{show_id}-#{@episode.season}x#{@episode.episode}"))
+      if response['location'] and not response['location'] == '/index.php'
+        @episode_url = 'http://www.addic7ed.com/' + response['location']
+      else
+        raise EpisodeNotFoundError
       end
     end
-
   end
 end

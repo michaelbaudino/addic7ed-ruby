@@ -3,6 +3,7 @@
 # Ruby modules
 require 'open-uri'
 require 'optparse'
+require 'net/http'
 # Bundler
 require 'rubygems'
 require 'bundler/setup'
@@ -57,8 +58,15 @@ options[:filenames].each do |filename|
 
   begin
     sub = Addic7ed::Subtitle.new(filename)
+    puts "!!! Episode URL is : #{sub.episode_url}"
   rescue Addic7ed::InvalidFilenameError
     puts "Warning: #{filename} does not seem to be a valid TV show filename. Skipping." unless options[:quiet]
+    next
+  rescue Addic7ed::ShowNotFoundError
+    puts "Warning: Show not found on Addic7ed : #{sub.episode.showname}. Skipping."
+    next
+  rescue Addic7ed::EpisodeNotFoundError
+    puts "Warning: Episode not found on Addic7ed : #{sub.episode.showname} S#{sub.episode.season}E#{sub.episode.episode}. Skipping."
     next
   end
 
