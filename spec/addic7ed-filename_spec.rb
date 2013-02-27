@@ -1,5 +1,5 @@
 require 'spec_helper'
-require './lib/addic7ed-episode'
+require './lib/addic7ed-filename'
 
 describe Addic7ed::Episode do
 

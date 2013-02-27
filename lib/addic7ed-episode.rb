@@ -1,46 +1,36 @@
 module Addic7ed
   class Episode
 
-    TVSHOW_REGEX = /\A(?<showname>.*\w)[\[\. ]+S?(?<season>\d{1,2})[-\. ]?[EX]?(?<episode>\d{2})[\]\. ]+(?<tags>.*)-(?<group>\w*)(\.\w{3})?\z/i
-
-    attr_reader :filename, :showname, :season, :episode, :tags, :group
+    attr_reader :filename
 
     def initialize(filename)
-      @filename = filename
-      match = TVSHOW_REGEX.match basename
-      if match
-        @showname = match[:showname].gsub('.', ' ')
-        @season   = match[:season].to_i
-        @episode  = match[:episode].to_i
-        @tags     = match[:tags].split(/[\. ]/)
-        @group    = match[:group]
+      @filename = Addic7ed::Filename.new(filename)
+    end
+
+    def show_id
+      @show_id ||= find_show_id
+    end
+
+    def url
+      @url ||= find_url
+    end
+
+    protected
+
+    def find_show_id
+      Nokogiri::HTML(open(SHOWS_URL)).css('option').each do |show_html|
+        @show_id = show_html['value'] if show_html.content == @filename.showname
+      end
+      @show_id or raise ShowNotFoundError
+    end
+
+    def find_url
+      response = Net::HTTP.get_response(URI("#{EPISODE_REDIRECT_URL}?ep=#{show_id}-#{@filename.season}x#{@filename.episode}"))
+      if response['location'] and not response['location'] == '/index.php'
+        @url = 'http://www.addic7ed.com/' + response['location']
       else
-        raise InvalidFilenameError
+        raise EpisodeNotFoundError
       end
     end
-
-    # Lazy getters
-
-    def basename
-      @basename ||= File.basename(@filename)
-    end
-
-    def dirname
-      @dirname ||= File.dirname(@filename)
-    end
-
-    def extname
-      @extname ||= File.extname(@filename)
-    end
-
-    def to_s
-"##### Guesses for #{@filename}
-# Show:    #{@showname}
-# Season:  #{@season}
-# Episode: #{@episode}
-# Tags:    #{@tags}
-# Group:   #{@group}"
-    end
-
   end
 end

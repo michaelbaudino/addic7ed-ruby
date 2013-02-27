@@ -11,8 +11,8 @@ Bundler.require
 # Local modules
 require './lib/addic7ed-errors'
 require './lib/addic7ed-common'
+require './lib/addic7ed-filename'
 require './lib/addic7ed-episode'
-require './lib/addic7ed-subtitle'
 
 VERSION="0.0.3"
 
@@ -67,16 +67,16 @@ options[:filenames].each do |filename|
   end
 
   begin
-    sub = Addic7ed::Subtitle.new(filename)
-    puts "!!! Episode URL is : #{sub.episode_url}"
+    ep = Addic7ed::Episode.new(filename)
+    puts "!!! Episode URL is : #{ep.url}"
   rescue Addic7ed::InvalidFilenameError
     puts "Warning: #{filename} does not seem to be a valid TV show filename. Skipping." unless options[:quiet]
     next
   rescue Addic7ed::ShowNotFoundError
-    puts "Warning: Show not found on Addic7ed : #{sub.episode.showname}. Skipping."
+    puts "Warning: Show not found on Addic7ed : #{ep.filename.showname}. Skipping."
     next
   rescue Addic7ed::EpisodeNotFoundError
-    puts "Warning: Episode not found on Addic7ed : #{sub.episode.showname} S#{sub.episode.season}E#{sub.episode.episode}. Skipping."
+    puts "Warning: Episode not found on Addic7ed : #{ep.filename.showname} S#{ep.filename.season}E#{ep.filename.episode}. Skipping."
     next
   end
 
