@@ -19,7 +19,7 @@ options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: addic7ed.rb [options] <file1> [<file2>, <file3>, ...]"
 
-  opts.on("-l [LANGUAGE]", "--language [LANGUAGE]", "Language to look subtitles for") do |l|
+  opts.on("-l [LANGUAGE]", "--language [LANGUAGE]", "Language to look subtitles for (default: French)") do |l|
     options[:language] = l
   end
 
@@ -47,6 +47,7 @@ OptionParser.new do |opts|
 end.parse!
 
 options[:filenames] = ARGV
+options[:language] ||= 'fr'
 
 # Main loop over mandatory arguments (e.g. filenames)
 
