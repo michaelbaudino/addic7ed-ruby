@@ -3,8 +3,6 @@ module Addic7ed
   SEASONS_URL = 'http://www.addic7ed.com/ajax_getSeasons.php'
   EPISODES_URL = 'http://www.addic7ed.com/ajax_getEpisodes.php'
 
-  @shows_ids = {}
-
   class Subtitle
 
     attr_reader :episode
