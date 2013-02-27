@@ -10,6 +10,7 @@ require 'bundler/setup'
 Bundler.require
 # Local modules
 require './lib/addic7ed-errors'
+require './lib/addic7ed-common'
 require './lib/addic7ed-episode'
 require './lib/addic7ed-subtitle'
 
