@@ -57,7 +57,6 @@ options[:filenames].each do |filename|
 
   begin
     sub = Addic7ed::Subtitle.new(filename)
-    sub = Addic7ed::Subtitle.new(filename)
   rescue Addic7ed::InvalidFilenameError
     puts "Warning: #{filename} does not seem to be a valid TV show filename. Skipping." unless options[:quiet]
     next
