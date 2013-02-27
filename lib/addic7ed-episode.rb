@@ -1,3 +1,7 @@
+require 'nokogiri'
+require 'net/http'
+require 'open-uri'
+
 module Addic7ed
   class Episode
 

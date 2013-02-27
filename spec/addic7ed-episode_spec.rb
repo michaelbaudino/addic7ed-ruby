@@ -1,6 +1,4 @@
 require 'spec_helper'
-require 'open-uri'
-Bundler.require
 require './lib/addic7ed-errors'
 require './lib/addic7ed-episode'
 
