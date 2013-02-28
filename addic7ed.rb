@@ -13,6 +13,7 @@ require './lib/addic7ed-errors'
 require './lib/addic7ed-common'
 require './lib/addic7ed-filename'
 require './lib/addic7ed-episode'
+require './lib/addic7ed-subtitle'
 
 VERSION="0.0.5"
 
@@ -68,20 +69,30 @@ options[:filenames].each do |filename|
 
   begin
     ep = Addic7ed::Episode.new(filename)
-    puts "!!! Episode URL is : #{ep.global_url}"
-    puts "!!! Episode localized URL is : #{ep.localized_url(options[:language])}"
-  rescue Addic7ed::InvalidFilenameError
+    ep.list_subtitles(options[:language]).each do |sub|
+      puts sub
+    end
+  rescue Addic7ed::InvalidFilename
     puts "Warning: #{filename} does not seem to be a valid TV show filename. Skipping." unless options[:quiet]
     next
-  rescue Addic7ed::ShowNotFoundError
+  rescue Addic7ed::ShowNotFound
     puts "Warning: Show not found on Addic7ed : #{ep.filename.showname}. Skipping."
     next
-  rescue Addic7ed::EpisodeNotFoundError
+  rescue Addic7ed::EpisodeNotFound
     puts "Warning: Episode not found on Addic7ed : #{ep.filename.showname} S#{ep.filename.season}E#{ep.filename.episode}. Skipping."
     next
-  rescue Addic7ed::LanguageNotSupportedError
+  rescue Addic7ed::LanguageNotSupported
     puts "Error: Addic7ed does not support language '#{options[:language]}'. Exiting."
     break
+  rescue Addic7ed::ParsingError
+    puts "Warning: HTML parsing failed. Either you've found a bug (please submit an issue) or Addic7ed website has been updated and cannot be crawled anymore (in this case, please wait for an update or submit a pull request). Skipping."
+    next
+  rescue Addic7ed::NoSubtitleFound
+    puts "No (acceptable) subtitle has been found on Addic7ed for #{filename}. Maybe try again later."
+    next
+  rescue Addic7ed::WTFError => e
+    puts "WTF (I sincerely have no idea what I'm doing): #{e.message}"
+    next
   end
 
 end

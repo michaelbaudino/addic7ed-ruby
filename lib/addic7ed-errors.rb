@@ -1,10 +1,16 @@
 module Addic7ed
-  class InvalidFilenameError < StandardError
+  class InvalidFilename < StandardError
   end
-  class ShowNotFoundError < StandardError
+  class ShowNotFound < StandardError
   end
-  class EpisodeNotFoundError < StandardError
+  class EpisodeNotFound < StandardError
   end
-  class LanguageNotSupportedError < StandardError
+  class LanguageNotSupported < StandardError
+  end
+  class ParsingError < StandardError
+  end
+  class NoSubtitleFound < StandardError
+  end
+  class WTFError < StandardError
   end
 end

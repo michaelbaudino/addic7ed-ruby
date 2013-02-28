@@ -15,7 +15,7 @@ module Addic7ed
         @tags     = match[:tags].split(/[\. ]/)
         @group    = match[:group]
       else
-        raise InvalidFilenameError
+        raise InvalidFilename
       end
     end
 

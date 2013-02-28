@@ -241,22 +241,22 @@ describe Addic7ed::Filename do
     }.to raise_error
   end
 
-  it 'should fail given filename with no episode number' do
+  it 'should raise InvalidFilename given filename with no episode number' do
     expect {
       @file = Addic7ed::Filename.new(@filename_no_episode)
-    }.to raise_error
+    }.to raise_error(Addic7ed::InvalidFilename)
   end
 
-  it 'should fail given filename with no tags' do
+  it 'should raise InvalidFilename given filename with no tags' do
     expect {
       @file = Addic7ed::Filename.new(@filename_no_tags)
-    }.to raise_error
+    }.to raise_error(Addic7ed::InvalidFilename)
   end
 
-  it 'should fail given filename with no group' do
+  it 'should raise InvalidFilename given filename with no group' do
     expect {
       @file = Addic7ed::Filename.new(@filename_no_group)
-    }.to raise_error
+    }.to raise_error(Addic7ed::InvalidFilename)
   end
 
 end
