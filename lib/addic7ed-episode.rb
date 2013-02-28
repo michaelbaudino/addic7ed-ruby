@@ -11,15 +11,7 @@ module Addic7ed
       @filename = Addic7ed::Filename.new(filename)
     end
 
-    def show_id
-      @show_id ||= find_show_id
-    end
-
-    def global_url
-      @global_url ||= find_global_url
-    end
-
-    def localized_url(lang = 'fr')
+    def url(lang = 'fr')
       raise LanguageNotSupported unless LANGUAGES[lang]
       @localized_urls ||= {}
       @localized_urls[lang] ||= "http://www.addic7ed.com/serie/#{@filename.showname.gsub(' ', '_')}/#{@filename.season}/#{@filename.episode}/#{LANGUAGES[lang][:id]}"
@@ -30,7 +22,7 @@ module Addic7ed
       unless @subtitles and @subtitles[lang]
         @subtitles ||= {}
         @subtitles[lang] ||= []
-        response = Net::HTTP.get_response(URI(localized_url(lang)))
+        response = Net::HTTP.get_response(URI(url(lang)))
         raise EpisodeNotFound if response.body == " "
         doc = Nokogiri::HTML(response.body)
         raise NoSubtitleFound unless doc.css('select#filterlang ~ font[color="yellow"]').empty?
@@ -58,22 +50,5 @@ module Addic7ed
       @subtitles[lang]
     end
 
-    protected
-
-    def find_show_id
-      Nokogiri::HTML(open(SHOWS_URL)).css('option').each do |show_html|
-        @show_id = show_html['value'] if show_html.content == @filename.showname
-      end
-      @show_id or raise ShowNotFound
-    end
-
-    def find_global_url
-      response = Net::HTTP.get_response(URI("#{EPISODE_REDIRECT_URL}?ep=#{show_id}-#{@filename.season}x#{@filename.episode}"))
-      if response['location'] and not response['location'] == '/index.php'
-        @global_url = 'http://www.addic7ed.com/' + response['location']
-      else
-        raise EpisodeNotFound
-      end
-    end
   end
 end
