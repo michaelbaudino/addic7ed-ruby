@@ -69,7 +69,7 @@ options[:filenames].each do |filename|
 
   begin
     ep = Addic7ed::Episode.new(filename)
-    ep.list_subtitles(options[:language]).each do |sub|
+    ep.subtitles(options[:language]).each do |sub|
       puts sub
     end
   rescue Addic7ed::InvalidFilename

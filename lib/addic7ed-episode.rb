@@ -47,7 +47,9 @@ module Addic7ed
             status = status_node.content.strip
             url_node = sub_node.css('a.buttonDownload').first
             url = 'http://www.addic7ed.com' + url_node['href']
-            @subtitles[lang] << Addic7ed::Subtitle.new(title, language, status, url)
+            downloads_node = sub_node.css('tr:nth-child(4) td.newsDate').first
+            downloads = /(?<downloads>\d*) Downloads/.match(downloads_node.content)[:downloads]
+            @subtitles[lang] << Addic7ed::Subtitle.new(title, language, status, url, downloads)
           rescue
             raise ParsingError
           end
