@@ -259,4 +259,28 @@ describe Addic7ed::Filename do
     }.to raise_error(Addic7ed::InvalidFilename)
   end
 
+  describe '#basename' do
+    it 'should return only file name given a full path' do
+      Addic7ed::Filename.new(@filename_full_path).basename.should == 'Californication.S06E07.720p.HDTV.x264-2HD.mkv'
+    end
+  end
+
+  describe '#dirname' do
+    it 'should return only path given a full path' do
+      Addic7ed::Filename.new(@filename_full_path).dirname.should == '/data/public/Series/Californication/Saison 06'
+    end
+  end
+
+  describe '#extname' do
+    it 'should return only file extension given a full path' do
+      Addic7ed::Filename.new(@filename_full_path).extname.should == '.mkv'
+    end
+  end
+
+  describe '#to_s' do
+    it 'should return file name as a string' do
+      Addic7ed::Filename.new(@filename_full_path).to_s.should == 'Californication.S06E07.720p.HDTV.x264-2HD.mkv'
+    end
+  end
+
 end
