@@ -43,8 +43,8 @@ module Addic7ed
 
     def parse_subtitle_node(sub_node, lang)
       begin
-        title_node = sub_node.css('.NewsTitle').first
-        title = title_node.content.gsub(/ \nVersion /, '').gsub(/,.*/, '')
+        version_node = sub_node.css('.NewsTitle').first
+        version = version_node.content.gsub(/ \nVersion /, '').gsub(/,.*/, '')
         language_node = sub_node.css('.language').first
         language = language_node.content.gsub(/\A\W*/, '').gsub(/[^\w\)]*\z/, '')
         raise WTFError.new("We're asking for #{LANGUAGES[lang][:name].capitalize} subtitles and Addic7ed gives us #{language.capitalize} subtitles") if LANGUAGES[lang][:name].downcase != language.downcase
@@ -54,7 +54,7 @@ module Addic7ed
         url = 'http://www.addic7ed.com' + url_node['href']
         downloads_node = sub_node.css('tr:nth-child(4) td.newsDate').first
         downloads = /(?<downloads>\d*) Downloads/.match(downloads_node.content)[:downloads]
-        Addic7ed::Subtitle.new(title, language, status, url, downloads)
+        Addic7ed::Subtitle.new(version, language, status, url, downloads)
       rescue
         raise ParsingError
       end

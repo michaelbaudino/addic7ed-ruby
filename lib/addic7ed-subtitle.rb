@@ -1,18 +1,18 @@
 module Addic7ed
   class Subtitle
 
-    attr_reader :title, :language, :status, :url, :downloads
+    attr_reader :version, :language, :status, :url, :downloads
 
-    def initialize(title, language, status, url, downloads)
-      @title     = title
+    def initialize(version, language, status, url, downloads)
+      @version   = version.upcase
       @language  = language
       @status    = status
       @url       = url
-      @downloads = downloads
+      @downloads = downloads.to_i
     end
 
     def to_s
-      "#{url}\t->\t#{@title} (#{language}, #{status}) [#{@downloads} downloads]"
+      "#{url}\t->\t#{@version} (#{language}, #{status}) [#{@downloads} downloads]"
     end
 
   end
