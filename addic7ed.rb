@@ -84,22 +84,22 @@ options[:filenames].each do |filename|
     puts "Warning: #{filename} does not seem to be a valid TV show filename. Skipping." unless options[:quiet]
     next
   rescue Addic7ed::ShowNotFound
-    puts "Warning: Show not found on Addic7ed : #{ep.filename.showname}. Skipping."
+    puts "Warning: Show not found on Addic7ed : #{ep.filename.showname}. Skipping." unless options[:quiet]
     next
   rescue Addic7ed::EpisodeNotFound
-    puts "Warning: Episode not found on Addic7ed : #{ep.filename.showname} S#{ep.filename.season}E#{ep.filename.episode}. Skipping."
+    puts "Warning: Episode not found on Addic7ed : #{ep.filename.showname} S#{ep.filename.season}E#{ep.filename.episode}. Skipping." unless options[:quiet]
     next
   rescue Addic7ed::LanguageNotSupported
-    puts "Error: Addic7ed does not support language '#{options[:language]}'. Exiting."
+    puts "Error: Addic7ed does not support language '#{options[:language]}'. Exiting." unless options[:quiet]
     break
   rescue Addic7ed::ParsingError
-    puts "Warning: HTML parsing failed. Either you've found a bug (please submit an issue) or Addic7ed website has been updated and cannot be crawled anymore (in this case, please wait for an update or submit a pull request). Skipping."
+    puts "Warning: HTML parsing failed. Either you've found a bug (please submit an issue) or Addic7ed website has been updated and cannot be crawled anymore (in this case, please wait for an update or submit a pull request). Skipping." unless options[:quiet]
     next
   rescue Addic7ed::NoSubtitleFound
-    puts "No (acceptable) subtitle has been found on Addic7ed for #{filename}. Maybe try again later."
+    puts "No (acceptable) subtitle has been found on Addic7ed for #{filename}. Maybe try again later." unless options[:quiet]
     next
   rescue Addic7ed::WTFError => e
-    puts "WTF (I sincerely have no idea what I'm doing): #{e.message}"
+    puts "WTF (I sincerely have no idea what I'm doing): #{e.message}" unless options[:quiet]
     next
   end
 
