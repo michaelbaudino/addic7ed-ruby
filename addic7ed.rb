@@ -25,8 +25,12 @@ OptionParser.new do |opts|
     options[:language] = l
   end
 
-  opts.on("-a", "--all-subtitles", "Show all available subtitles") do |a|
+  opts.on("-a", "--all-subtitles", "Display all available subtitles") do |a|
     options[:all] = a
+  end
+
+  opts.on("-n", "--do-not-download", "Do not download the subtitle") do |n|
+    options[:nodownload] = n
   end
 
   opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
@@ -73,33 +77,45 @@ options[:filenames].each do |filename|
 
   begin
     ep = Addic7ed::Episode.new(filename)
-    if options[:all]
+    puts "Searching subtitles for #{ep.filename}" if options[:verbose]
+    puts ep.filename.inspect.gsub(/^/, '  ') if options[:verbose]
+    ep.subtitles
+    if options[:all] or options[:verbose]
+      puts 'Available subtitles:'.gsub(/^/, options[:verbose] ? '  ' : '')
       ep.subtitles(options[:language]).each do |sub|
-        puts sub
+        puts "#{sub}".gsub(/^/, options[:verbose] ? '    ' : '  ')
       end
-    else
-      puts ep.best_subtitle
+      next if options[:all]
+    end
+    ep.best_subtitle
+    if options[:verbose]
+      puts '  Best subtitle:'
+      puts "    #{ep.best_subtitle}"
+    end
+    unless options[:nodownload]
+      # TODO: Download subtitle
+      puts "New subtitle downloaded for #{filename}.\nEnjoy your show :-)".gsub(/^/, options[:verbose] ? '  ' : '')
     end
   rescue Addic7ed::InvalidFilename
-    puts "Warning: #{filename} does not seem to be a valid TV show filename. Skipping." unless options[:quiet]
+    puts "#{filename} does not seem to be a valid TV show filename. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     next
   rescue Addic7ed::ShowNotFound
-    puts "Warning: Show not found on Addic7ed : #{ep.filename.showname}. Skipping." unless options[:quiet]
+    puts "Show not found on Addic7ed : #{ep.filename.showname}. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     next
   rescue Addic7ed::EpisodeNotFound
-    puts "Warning: Episode not found on Addic7ed : #{ep.filename.showname} S#{ep.filename.season}E#{ep.filename.episode}. Skipping." unless options[:quiet]
+    puts "Episode not found on Addic7ed : #{ep.filename.showname} S#{ep.filename.season}E#{ep.filename.episode}. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     next
   rescue Addic7ed::LanguageNotSupported
-    puts "Error: Addic7ed does not support language '#{options[:language]}'. Exiting." unless options[:quiet]
+    puts "Addic7ed does not support language '#{options[:language]}'. Exiting.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     break
   rescue Addic7ed::ParsingError
-    puts "Warning: HTML parsing failed. Either you've found a bug (please submit an issue) or Addic7ed website has been updated and cannot be crawled anymore (in this case, please wait for an update or submit a pull request). Skipping." unless options[:quiet]
+    puts "HTML parsing failed. Either you've found a bug (please submit an issue) or Addic7ed website has been updated and cannot be crawled anymore (in this case, please wait for an update or submit a pull request). Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     next
   rescue Addic7ed::NoSubtitleFound
-    puts "No (acceptable) subtitle has been found on Addic7ed for #{filename}. Maybe try again later." unless options[:quiet]
+    puts "No (acceptable) subtitle has been found on Addic7ed for #{filename}. Maybe try again later.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     next
   rescue Addic7ed::WTFError => e
-    puts "WTF (I sincerely have no idea what I'm doing): #{e.message}" unless options[:quiet]
+    puts "WTF (I sincerely have no idea what I'm doing): #{e.message}".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     next
   end
 

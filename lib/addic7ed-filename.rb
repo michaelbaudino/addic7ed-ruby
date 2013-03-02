@@ -34,12 +34,16 @@ module Addic7ed
     end
 
     def to_s
-"##### Guesses for #{@filename}
-# Show:    #{@showname}
-# Season:  #{@season}
-# Episode: #{@episode}
-# Tags:    #{@tags}
-# Group:   #{@group}"
+      basename
+    end
+
+    def inspect
+"Guesses for #{@filename}:
+  show:    #{@showname}
+  season:  #{@season}
+  episode: #{@episode}
+  tags:    #{@tags}
+  group:   #{@group}"
     end
 
   end
