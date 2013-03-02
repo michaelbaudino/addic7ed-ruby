@@ -25,6 +25,10 @@ OptionParser.new do |opts|
     options[:language] = l
   end
 
+  opts.on("-a", "--all-subtitles", "Show all available subtitles") do |a|
+    options[:all] = a
+  end
+
   opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
     options[:verbose] = v
   end
@@ -69,10 +73,13 @@ options[:filenames].each do |filename|
 
   begin
     ep = Addic7ed::Episode.new(filename)
-    # ep.subtitles(options[:language]).each do |sub|
-    #   puts sub
-    # end
-    puts ep.best_subtitle
+    if options[:all]
+      ep.subtitles(options[:language]).each do |sub|
+        puts sub
+      end
+    else
+      puts ep.best_subtitle
+    end
   rescue Addic7ed::InvalidFilename
     puts "Warning: #{filename} does not seem to be a valid TV show filename. Skipping." unless options[:quiet]
     next
