@@ -33,6 +33,10 @@ OptionParser.new do |opts|
     options[:nodownload] = n
   end
 
+  opts.on("-f", "--force", "Overwrite existing subtitle") do |f|
+    options[:force] = f
+  end
+
   opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
     options[:verbose] = v
   end
@@ -72,13 +76,17 @@ options[:language] ||= 'fr'
 
 options[:filenames].each do |filename|
   unless File.file? filename or options[:debug]
-    puts "Warning: #{filename} does not exist or is not a regular file. Skipping." unless options[:quiet]
+    puts "Warning: #{filename} does not exist or is not a regular file. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     next
   end
 
   begin
     ep = Addic7ed::Episode.new(filename)
     puts "Searching subtitles for #{ep.filename.basename}" if options[:verbose]
+    if File.file?(filename.gsub(/\.\w{3}$/, '.srt')) and not options[:force]
+      puts "A subtitle already exists (#{filename.gsub(/\.\w{3}$/, '.srt')}). Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
+      next
+    end
     puts ep.filename.inspect.gsub(/^/, '  ') if options[:verbose]
     ep.subtitles(options[:language])
     if options[:all] or options[:verbose]
@@ -95,7 +103,7 @@ options[:filenames].each do |filename|
     end
     unless options[:nodownload]
       ep.download_best_subtitle!(options[:language])
-      puts "New subtitle downloaded for #{filename}.\nEnjoy your show :-)".gsub(/^/, options[:verbose] ? '  ' : '')
+      puts "New subtitle downloaded for #{filename}.\nEnjoy your show :-)".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     end
   rescue Addic7ed::InvalidFilename
     puts "#{filename} does not seem to be a valid TV show filename. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
@@ -119,7 +127,7 @@ options[:filenames].each do |filename|
     puts "The subtitle could not be downloaded. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     next
   rescue Addic7ed::SubtitleCannotBeSaved
-    puts "The downloaded subtitle could not be saved as #{ep.filename.to_s.gsub(/\.\w{3}$/, '.srt')}. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
+    puts "The downloaded subtitle could not be saved as #{filename.gsub(/\.\w{3}$/, '.srt')}. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     next
   rescue Addic7ed::WTFError => e
     puts "WTF (I sincerely have no idea what I'm doing): #{e.message}".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
