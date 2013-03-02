@@ -36,7 +36,17 @@ module Addic7ed
     end
 
     def best_subtitle(lang = 'fr')
-      # TODO
+      raise LanguageNotSupported unless LANGUAGES[lang]
+      unless @best_subtitle and @best_subtitle[lang]
+        @best_subtitle ||= {}
+        subtitles(lang).each do |sub|
+          if sub.status == 'Completed' and (sub.version == @filename.group or COMPATIBILITY_720P[sub.version] == @filename.group)
+            @best_subtitle[lang] = sub unless @best_subtitle[lang] and @best_subtitle[lang].downloads > sub.downloads
+          end
+        end
+        raise NoSubtitleFound unless @best_subtitle[lang]
+      end
+      return @best_subtitle[lang]
     end
 
     protected

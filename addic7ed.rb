@@ -69,9 +69,10 @@ options[:filenames].each do |filename|
 
   begin
     ep = Addic7ed::Episode.new(filename)
-    ep.subtitles(options[:language]).each do |sub|
-      puts sub
-    end
+    # ep.subtitles(options[:language]).each do |sub|
+    #   puts sub
+    # end
+    puts ep.best_subtitle
   rescue Addic7ed::InvalidFilename
     puts "Warning: #{filename} does not seem to be a valid TV show filename. Skipping." unless options[:quiet]
     next

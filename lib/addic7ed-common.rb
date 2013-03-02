@@ -5,6 +5,13 @@ module Addic7ed
   EPISODES_URL = 'http://www.addic7ed.com/ajax_getEpisodes.php'
   EPISODE_REDIRECT_URL = 'http://www.addic7ed.com/re_episode.php'
 
+  COMPATIBILITY_720P = {
+    'LOL' => 'DIMENSION',
+    'SYS' => 'DIMENSION',
+    'XII' => 'IMMERSE',
+    'ASAP' => 'IMMERSE'
+  }
+
   LANGUAGES = {
     'ar' => {name: 'Arabic', id: 38},
     'az' => {name: 'Azerbaijani', id: 48},

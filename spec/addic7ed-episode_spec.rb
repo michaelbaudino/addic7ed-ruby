@@ -66,4 +66,36 @@ describe Addic7ed::Episode do
     it 'may raise a WTFError, but it\'s unsure when, so it stays untested'
   end
 
+  describe '#best_subtitle' do
+    before :all do
+      @filename = 'The.Walking.Dead.S03E03.720p.HDTV.x264-EVOLVE.mkv'
+      @filename_compatible_group = 'The.Walking.Dead.S03E06.720p.HDTV.x264-IMMERSE.mkv'
+      @episode = Addic7ed::Episode.new(@filename)
+    end
+    it 'should find the subtitle with status completed and same group name' do
+      @episode.best_subtitle('fr').url.should == 'http://www.addic7ed.com/updated/8/68290/2'
+    end
+    it 'should find the subtitle with status completed, compatible group name and as many downloads as possible' do
+      @episode = Addic7ed::Episode.new(@filename_compatible_group)
+      @episode.best_subtitle('fr').url.should == 'http://www.addic7ed.com/updated/8/68980/2'
+    end
+    it 'should use French as default language' do
+      @episode.best_subtitle.should == @episode.best_subtitle('fr')
+    end
+    it 'should raise LanguageNotSupported given an unsupported language code' do
+      expect{
+        @episode.best_subtitle('aa')
+      }.to raise_error(Addic7ed::LanguageNotSupported)
+    end
+    it 'should raise EpisodeNotFound given not existing episode' do
+      expect{
+        Addic7ed::Episode.new(@filename_episode_not_found).best_subtitle
+      }.to raise_error(Addic7ed::EpisodeNotFound)
+    end
+    it 'should raise NoSubtitleFound given valid episode which has no subtitle on Addic7ed' do
+      expect{
+        @episode.best_subtitle('es')
+      }.to raise_error(Addic7ed::NoSubtitleFound)
+    end
+  end
 end
