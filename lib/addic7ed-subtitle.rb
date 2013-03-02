@@ -1,7 +1,8 @@
 module Addic7ed
   class Subtitle
 
-    attr_reader :version, :language, :status, :url, :downloads
+    attr_reader :version, :language, :status, :downloads
+    attr_accessor :url
 
     def initialize(version, language, status, url, downloads)
       @version   = version.upcase

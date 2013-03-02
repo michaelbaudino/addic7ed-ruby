@@ -11,6 +11,10 @@ module Addic7ed
   end
   class NoSubtitleFound < StandardError
   end
+  class DownloadError < StandardError
+  end
+  class SubtitleCannotBeSaved < StandardError
+  end
   class WTFError < StandardError
   end
 end

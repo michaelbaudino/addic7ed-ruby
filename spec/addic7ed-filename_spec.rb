@@ -279,7 +279,7 @@ describe Addic7ed::Filename do
 
   describe '#to_s' do
     it 'should return file name as a string' do
-      Addic7ed::Filename.new(@filename_full_path).to_s.should == 'Californication.S06E07.720p.HDTV.x264-2HD.mkv'
+      Addic7ed::Filename.new(@filename_full_path).to_s.should == '/data/public/Series/Californication/Saison 06/Californication.S06E07.720p.HDTV.x264-2HD.mkv'
     end
   end
 

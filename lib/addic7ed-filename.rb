@@ -34,7 +34,7 @@ module Addic7ed
     end
 
     def to_s
-      basename
+      @filename
     end
 
     def inspect

@@ -78,7 +78,7 @@ options[:filenames].each do |filename|
 
   begin
     ep = Addic7ed::Episode.new(filename)
-    puts "Searching subtitles for #{ep.filename}" if options[:verbose]
+    puts "Searching subtitles for #{ep.filename.basename}" if options[:verbose]
     puts ep.filename.inspect.gsub(/^/, '  ') if options[:verbose]
     ep.subtitles(options[:language])
     if options[:all] or options[:verbose]
@@ -94,7 +94,7 @@ options[:filenames].each do |filename|
       puts "    #{ep.best_subtitle(options[:language])}"
     end
     unless options[:nodownload]
-      # TODO: Download subtitle
+      ep.download_best_subtitle!(options[:language])
       puts "New subtitle downloaded for #{filename}.\nEnjoy your show :-)".gsub(/^/, options[:verbose] ? '  ' : '')
     end
   rescue Addic7ed::InvalidFilename
@@ -114,6 +114,12 @@ options[:filenames].each do |filename|
     next
   rescue Addic7ed::NoSubtitleFound
     puts "No (acceptable) subtitle has been found on Addic7ed for #{filename}. Maybe try again later.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
+    next
+  rescue Addic7ed::DownloadError
+    puts "The subtitle could not be downloaded. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
+    next
+  rescue Addic7ed::SubtitleCannotBeSaved
+    puts "The downloaded subtitle could not be saved as #{ep.filename.to_s.gsub(/\.\w{3}$/, '.srt')}. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     next
   rescue Addic7ed::WTFError => e
     puts "WTF (I sincerely have no idea what I'm doing): #{e.message}".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]

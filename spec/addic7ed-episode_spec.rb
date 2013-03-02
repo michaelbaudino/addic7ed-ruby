@@ -98,4 +98,8 @@ describe Addic7ed::Episode do
       }.to raise_error(Addic7ed::NoSubtitleFound)
     end
   end
+
+  describe '#download_best_subtitle!' do
+    it 'should be tested, but I\'m not sure how to do it properly'
+  end
 end
