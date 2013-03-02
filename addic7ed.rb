@@ -60,6 +60,7 @@ OptionParser.new do |opts|
 
   opts.on_tail("-V", "--version", "Show version number") do
     puts "This is addic7ed-ruby version #{VERSION} by Michael Baudino (https://github.com/michaelbaudino)"
+    puts "Licensed under the terms of the MIT License"
     exit
   end
 end.parse!
