@@ -2,7 +2,7 @@
 
 Ruby command-line script to fetch subtitles on Addic7ed
 
-Current version: **0.0.5**
+Current version: **0.0.6**
 
 ### Is it working ?
 
@@ -31,6 +31,7 @@ No. Not yet.
 
 ### Changelog
 
+* 0.0.6: Added choice of the best subtitle to download, amongst all available for an episode
 * 0.0.5: Added support for Travis-CI
 * 0.0.4: Added retrieving of Addic7ed URL for an episode (including URL for a specific language)
 * 0.0.3: Added parsing of command line arguments

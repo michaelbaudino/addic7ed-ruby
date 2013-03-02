@@ -15,7 +15,7 @@ require './lib/addic7ed-filename'
 require './lib/addic7ed-episode'
 require './lib/addic7ed-subtitle'
 
-VERSION="0.0.5"
+VERSION='0.0.6'
 
 options = {}
 OptionParser.new do |opts|
