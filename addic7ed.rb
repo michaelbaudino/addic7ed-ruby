@@ -80,7 +80,7 @@ options[:filenames].each do |filename|
     ep = Addic7ed::Episode.new(filename)
     puts "Searching subtitles for #{ep.filename}" if options[:verbose]
     puts ep.filename.inspect.gsub(/^/, '  ') if options[:verbose]
-    ep.subtitles
+    ep.subtitles(options[:language])
     if options[:all] or options[:verbose]
       puts 'Available subtitles:'.gsub(/^/, options[:verbose] ? '  ' : '')
       ep.subtitles(options[:language]).each do |sub|
@@ -88,10 +88,10 @@ options[:filenames].each do |filename|
       end
       next if options[:all]
     end
-    ep.best_subtitle
+    ep.best_subtitle(options[:language])
     if options[:verbose]
       puts '  Best subtitle:'
-      puts "    #{ep.best_subtitle}"
+      puts "    #{ep.best_subtitle(options[:language])}"
     end
     unless options[:nodownload]
       # TODO: Download subtitle
