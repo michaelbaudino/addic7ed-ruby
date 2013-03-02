@@ -12,8 +12,8 @@ module Addic7ed
         @showname = match[:showname].gsub('.', ' ')
         @season   = match[:season].to_i
         @episode  = match[:episode].to_i
-        @tags     = match[:tags].split(/[\. ]/)
-        @group    = match[:group]
+        @tags     = match[:tags].upcase.split(/[\. ]/)
+        @group    = match[:group].upcase
       else
         raise InvalidFilename
       end

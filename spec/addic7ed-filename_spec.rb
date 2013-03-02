@@ -38,7 +38,7 @@ describe Addic7ed::Filename do
     @file.showname.should == 'Californication'
     @file.season.should == 6
     @file.episode.should == 7
-    @file.tags.should == ['720p', 'HDTV', 'x264']
+    @file.tags.should == ['720P', 'HDTV', 'X264']
     @file.group.should == '2HD'
   end
 
@@ -49,7 +49,7 @@ describe Addic7ed::Filename do
     @file.showname.should == 'Californication'
     @file.season.should == 6
     @file.episode.should == 7
-    @file.tags.should == ['720p', 'HDTV', 'x264']
+    @file.tags.should == ['720P', 'HDTV', 'X264']
     @file.group.should == '2HD'
   end
 
@@ -60,7 +60,7 @@ describe Addic7ed::Filename do
     @file.showname.should == 'Californication'
     @file.season.should == 6
     @file.episode.should == 7
-    @file.tags.should == ['720p', 'HDTV', 'x264']
+    @file.tags.should == ['720P', 'HDTV', 'X264']
     @file.group.should == '2HD'
   end
 
@@ -71,7 +71,7 @@ describe Addic7ed::Filename do
     @file.showname.should == 'Californication'
     @file.season.should == 6
     @file.episode.should == 7
-    @file.tags.should == ['720p', 'HDTV', 'x264']
+    @file.tags.should == ['720P', 'HDTV', 'X264']
     @file.group.should == '2HD'
   end
 
@@ -82,7 +82,7 @@ describe Addic7ed::Filename do
     @file.showname.should == 'Californication'
     @file.season.should == 6
     @file.episode.should == 7
-    @file.tags.should == ['720p', 'HDTV', 'x264']
+    @file.tags.should == ['720P', 'HDTV', 'X264']
     @file.group.should == '2HD'
   end
 
@@ -93,7 +93,7 @@ describe Addic7ed::Filename do
     @file.showname.should == 'Californication'
     @file.season.should == 6
     @file.episode.should == 7
-    @file.tags.should == ['720p', 'HDTV', 'x264']
+    @file.tags.should == ['720P', 'HDTV', 'X264']
     @file.group.should == '2HD'
   end
 
@@ -104,7 +104,7 @@ describe Addic7ed::Filename do
     @file.showname.should == 'Californication'
     @file.season.should == 6
     @file.episode.should == 7
-    @file.tags.should == ['720p', 'HDTV', 'x264']
+    @file.tags.should == ['720P', 'HDTV', 'X264']
     @file.group.should == '2HD'
   end
 
@@ -115,7 +115,7 @@ describe Addic7ed::Filename do
     @file.showname.should == 'Californication'
     @file.season.should == 6
     @file.episode.should == 7
-    @file.tags.should == ['720p', 'HDTV', 'x264']
+    @file.tags.should == ['720P', 'HDTV', 'X264']
     @file.group.should == '2HD'
   end
 
@@ -126,7 +126,7 @@ describe Addic7ed::Filename do
     @file.showname.should == 'Californication'
     @file.season.should == 6
     @file.episode.should == 7
-    @file.tags.should == ['720p', 'HDTV', 'x264']
+    @file.tags.should == ['720P', 'HDTV', 'X264']
     @file.group.should == '2HD'
   end
 
@@ -137,8 +137,8 @@ describe Addic7ed::Filename do
     @file.showname.should == 'californication'
     @file.season.should == 6
     @file.episode.should == 7
-    @file.tags.should == ['720p', 'hdtv', 'x264']
-    @file.group.should == '2hd'
+    @file.tags.should == ['720P', 'HDTV', 'X264']
+    @file.group.should == '2HD'
   end
 
   it 'should succeed given lowercase filename with x notation' do
@@ -148,8 +148,8 @@ describe Addic7ed::Filename do
     @file.showname.should == 'californication'
     @file.season.should == 6
     @file.episode.should == 7
-    @file.tags.should == ['720p', 'hdtv', 'x264']
-    @file.group.should == '2hd'
+    @file.tags.should == ['720P', 'HDTV', 'X264']
+    @file.group.should == '2HD'
   end
 
   it 'should succeed given filename with showname containing multiple words' do
@@ -159,7 +159,7 @@ describe Addic7ed::Filename do
     @file.showname.should == 'The Walking Dead'
     @file.season.should == 3
     @file.episode.should == 11
-    @file.tags.should == ['720p', 'HDTV', 'x264']
+    @file.tags.should == ['720P', 'HDTV', 'X264']
     @file.group.should == 'EVOLVE'
   end
 
@@ -170,7 +170,7 @@ describe Addic7ed::Filename do
     @file.showname.should == 'The Walking Dead'
     @file.season.should == 3
     @file.episode.should == 11
-    @file.tags.should == ['720p', 'HDTV', 'x264']
+    @file.tags.should == ['720P', 'HDTV', 'X264']
     @file.group.should == 'EVOLVE'
   end
 
@@ -181,7 +181,7 @@ describe Addic7ed::Filename do
     @file.showname.should == '90210'
     @file.season.should == 5
     @file.episode.should == 12
-    @file.tags.should == ['720p', 'HDTV', 'X264']
+    @file.tags.should == ['720P', 'HDTV', 'X264']
     @file.group.should == 'DIMENSION'
   end
 
@@ -192,7 +192,7 @@ describe Addic7ed::Filename do
     @file.showname.should == 'The Americans 2013'
     @file.season.should == 1
     @file.episode.should == 4
-    @file.tags.should == ['720p', 'HDTV', 'X264']
+    @file.tags.should == ['720P', 'HDTV', 'X264']
     @file.group.should == 'DIMENSION'
   end
 
@@ -203,7 +203,7 @@ describe Addic7ed::Filename do
     @file.showname.should == 'Californication'
     @file.season.should == 6
     @file.episode.should == 7
-    @file.tags.should == ['720p', 'HDTV', 'x264']
+    @file.tags.should == ['720P', 'HDTV', 'X264']
     @file.group.should == '2HD'
   end
 
@@ -214,7 +214,7 @@ describe Addic7ed::Filename do
     @file.showname.should == 'Californication'
     @file.season.should == 6
     @file.episode.should == 7
-    @file.tags.should == ['720p', 'HDTV', 'x264']
+    @file.tags.should == ['720P', 'HDTV', 'X264']
     @file.group.should == '2HD'
   end
 
@@ -225,7 +225,7 @@ describe Addic7ed::Filename do
     @file.showname.should == 'Californication'
     @file.season.should == 6
     @file.episode.should == 7
-    @file.tags.should == ['720p', 'HDTV', 'x264']
+    @file.tags.should == ['720P', 'HDTV', 'X264']
     @file.group.should == '2HD'
   end
 
