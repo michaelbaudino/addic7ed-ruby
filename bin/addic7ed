@@ -1,21 +1,16 @@
 #!/usr/bin/env ruby
 
 # Ruby modules
-require 'open-uri'
 require 'optparse'
-require 'net/http'
 # Bundler
-require 'rubygems'
 require 'bundler/setup'
 Bundler.require
 # Local modules
-require './lib/addic7ed'
-
-VERSION='0.0.7'
+require 'addic7ed'
 
 options = {}
 OptionParser.new do |opts|
-  opts.banner = "Usage: addic7ed.rb [options] <file1> [<file2>, <file3>, ...]"
+  opts.banner = "Usage: addic7ed [options] <file1> [<file2>, <file3>, ...]"
 
   opts.on("-l [LANGUAGE]", "--language [LANGUAGE]", "Language code to look subtitles for (default: French)") do |l|
     options[:language] = l
@@ -59,7 +54,7 @@ OptionParser.new do |opts|
   end
 
   opts.on_tail("-V", "--version", "Show version number") do
-    puts "This is addic7ed-ruby version #{VERSION} by Michael Baudino (https://github.com/michaelbaudino)"
+    puts "This is addic7ed-ruby version #{Addic7ed::VERSION} by Michael Baudino (https://github.com/michaelbaudino)"
     puts "Licensed under the terms of the MIT License"
     exit
   end

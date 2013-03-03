@@ -2,36 +2,67 @@
 
 Ruby command-line script to fetch subtitles on Addic7ed
 
-Current version: **0.0.7**
+Current version: **0.1.0**
 
 ### Is it working ?
 
 Well, it should...
 
-### Usage example
+### How to use it ?
 
-1. Clone the repository:
-
-    ```bash
-    $ git clone git://github.com/michaelbaudino/addic7ed-ruby.git
-    ```
-2. Install dependencies
+1. Install it:
 
     ```bash
-    $ cd addic7ed-ruby
-    $ rvm gemset create addic7ed-ruby # do this only if you use RVM
-    $ bundle install
+    $ gem install addic7ed
     ```
-3. Say you want to download a French subtitle for the last "Californication" episode, all you have to do is :
+2. Use it (e.g. to download a French subtitle for a "Californication" episode):
 
     ```bash
-    $ ./addic7ed.rb -l fr /path/to/Californication.S06E07.720p.HDTV.x264-2HD.mkv
+    $ addic7ed -l fr /path/to/Californication.S06E07.720p.HDTV.x264-2HD.mkv
     ```
-4. Enjoy your show :tv:
+3. Enjoy your show :tv:
+
+### Are there any options ?
+
+Sure
+
+```bash
+$ addic7ed -h
+Usage: addic7ed [options] <file1> [<file2>, <file3>, ...]
+    -l, --language [LANGUAGE]        Language code to look subtitles for (default: French)
+    -a, --all-subtitles              Display all available subtitles
+    -n, --do-not-download            Do not download the subtitle
+    -f, --force                      Overwrite existing subtitle
+    -v, --[no-]verbose               Run verbosely
+    -q, --quiet                      Run without output (cron-mode)
+    -d, --debug                      Debug mode [do not use]
+    -h, --help                       Show this message
+    -L, --list-languages             List all available languages
+    -V, --version                    Show version number
+```
+
+### How to contribute ?
+
+Feel free to submit a Pull Request, I'd be glad to review/merge it.
+
+Also, if you like the awesome work done by the Addic7ed team, please consider [donating to them](http://www.chipin.com/contribute/id/780aa4c5d8c51efd).
+
+### Notes
+
+Addic7ed restricts the number of subtitle download to 15 per 24h (30 per 24h for registered users, and 55 for VIP users). Don't get mad, they have to pay for their servers, you know.
+
+### Roadmap
+
+There's some work remaining:
+- [ ] Support registered users
+- [ ] Document code
+- [ ] Test cli behaviour
+- [ ] Colorize output
 
 ### Changelog
 
-* 0.0.7: Added ability to actually download a subtitle
+* 0.1.0: This is now a gem
+* 0.0.1: Added ability to actually download a subtitle
 * 0.0.6: Added choice of the best subtitle to download, amongst all available for an episode
 * 0.0.5: Added support for Travis-CI
 * 0.0.4: Added retrieving of Addic7ed URL for an episode (including URL for a specific language)
