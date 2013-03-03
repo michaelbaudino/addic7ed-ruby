@@ -57,7 +57,7 @@ module Addic7ed
           request = Net::HTTP::Get.new(uri.request_uri)
           # Addic7ed needs the Referer to be correct. User-agent is just here to fake a real browser request, because we never know...
           request['Referer'] = url(lang)
-          request['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.17 (KHTML, like Gecko) Ubuntu Chromium/24.0.1312.56 Chrome/24.0.1312.56 Safari/537.17'
+          request['User-Agent'] = USER_AGENTS.sample
           http.request(request)
         end
       rescue Errno::ECONNREFUSED
