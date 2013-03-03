@@ -1,3 +1,4 @@
+require 'addic7ed/version'
 require 'addic7ed/common'
 require 'addic7ed/errors'
 require 'addic7ed/filename'

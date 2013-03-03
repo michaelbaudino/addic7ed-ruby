@@ -1,12 +1,17 @@
 #!/usr/bin/env ruby
 
-# Ruby modules
-require 'optparse'
-# Bundler
-require 'bundler/setup'
-Bundler.require
-# Local modules
-require 'addic7ed'
+def require_dependencies
+  require 'optparse'
+  require 'nokogiri'
+  require 'addic7ed'
+end
+
+begin
+  require_dependencies # People don't all use rubygems, you know...
+rescue LoadError
+  require 'rubygems' # But most do :-)
+  require_dependencies
+end
 
 options = {}
 OptionParser.new do |opts|

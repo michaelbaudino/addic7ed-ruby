@@ -1,3 +1,9 @@
+PATH
+  remote: .
+  specs:
+    addic7ed (0.1.1)
+      nokogiri
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -17,6 +23,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  nokogiri
+  addic7ed!
   rake
   rspec
