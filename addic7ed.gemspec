@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.summary     = "Addic7ed auto-downloader"
   s.description = "Ruby script (cli) to fetch subtitles on Addic7ed"
   s.authors     = ["Michael Baudino"]
-  s.email       = 'mike@kamehouse.biz'
+  s.email       = 'michael.baudino@alpine-lab.com'
   s.homepage    = 'https://github.com/michaelbaudino/addic7ed-ruby'
   s.executables = ['addic7ed']
   s.files       = FileList['lib/**/*.rb', 'bin/*', '[A-Z]*', 'test/**/*'].to_a
