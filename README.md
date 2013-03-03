@@ -57,9 +57,12 @@ Don't get mad, they have to pay for their servers, you know.
 
 There's some work remaining:
 - Support registered users
+- Support directory parsing
 - Document code
 - Test cli behaviour
 - Colorize output
+- Write doc for cron usage
+- Write doc for iwatch usage
 
 ### Changelog
 
