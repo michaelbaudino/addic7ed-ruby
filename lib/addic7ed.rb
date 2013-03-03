@@ -1,0 +1,5 @@
+require 'addic7ed/common'
+require 'addic7ed/errors'
+require 'addic7ed/filename'
+require 'addic7ed/episode'
+require 'addic7ed/subtitle'
