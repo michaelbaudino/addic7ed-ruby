@@ -1,5 +1,5 @@
 require 'spec_helper'
-require './lib/addic7ed-common'
+require './lib/addic7ed'
 
 describe Addic7ed do
   it 'should define SHOWS_URL' do

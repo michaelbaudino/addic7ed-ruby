@@ -1,5 +1,5 @@
 require 'spec_helper'
-require './lib/addic7ed-filename'
+require './lib/addic7ed'
 
 describe Addic7ed::Filename do
 

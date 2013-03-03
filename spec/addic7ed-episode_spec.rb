@@ -1,7 +1,5 @@
 require 'spec_helper'
-require './lib/addic7ed-errors'
-require './lib/addic7ed-episode'
-require './lib/addic7ed-subtitle'
+require './lib/addic7ed'
 
 describe Addic7ed::Episode do
   before :all do
