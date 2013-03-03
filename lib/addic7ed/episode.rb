@@ -60,8 +60,6 @@ module Addic7ed
           request['User-Agent'] = USER_AGENTS.sample
           http.request(request)
         end
-      rescue Errno::ECONNREFUSED
-        raise DownloadLimitReached
       rescue
         raise DownloadError
       end
@@ -69,6 +67,7 @@ module Addic7ed
         # Addic7ed is serving redirection URL not-encoded.
         # Ruby does not support it yet (see http://bugs.ruby-lang.org/issues/7396)
          best_subtitle(lang).url = URI.escape(response['location'])
+         raise DownloadLimitReached if /^\/downloadexceeded.php/.match best_subtitle(lang).url
          download_best_subtitle!(lang, redirect_limit - 1)
       else
         begin
