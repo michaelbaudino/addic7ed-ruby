@@ -50,6 +50,7 @@ Also, if you like the awesome work done by the Addic7ed team, please consider [d
 ### Notes
 
 Addic7ed restricts the number of subtitle download to 15 per 24h (30 per 24h for registered users, and 55 for VIP users).
+
 Don't get mad, they have to pay for their servers, you know.
 
 ### Roadmap
