@@ -60,6 +60,8 @@ module Addic7ed
           request['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.17 (KHTML, like Gecko) Ubuntu Chromium/24.0.1312.56 Chrome/24.0.1312.56 Safari/537.17'
           http.request(request)
         end
+      rescue Errno::ECONNREFUSED
+        raise DownloadLimitReached
       rescue
         raise DownloadError
       end

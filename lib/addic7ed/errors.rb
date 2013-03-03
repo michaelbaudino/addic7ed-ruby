@@ -13,6 +13,8 @@ module Addic7ed
   end
   class DownloadError < StandardError
   end
+  class DownloadLimitReached < StandardError
+  end
   class SubtitleCannotBeSaved < StandardError
   end
   class WTFError < StandardError
