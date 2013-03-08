@@ -45,14 +45,8 @@ Usage: addic7ed [options] <file1> [<file2>, <file3>, ...]
 
 Feel free to submit a Pull Request, I'd be glad to review/merge it.
 
-Also, if you like the awesome work done by the Addic7ed team, please consider donating to them:
+Also, if you like the awesome work done by the Addic7ed team, please consider donating to them (no link here as they are just in the middle of changing their donation system, but feel free to go their website) !
 
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-  <input type="hidden" name="cmd" value="_s-xclick">
-  <input type="hidden" name="hosted_button_id" value="EC7EPAVR5MXV6">
-  <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-  <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
 
 ### Notes
 
