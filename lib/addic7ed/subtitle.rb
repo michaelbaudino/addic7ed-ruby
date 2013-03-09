@@ -5,7 +5,7 @@ module Addic7ed
     attr_accessor :url
 
     def initialize(version, language, status, url, downloads)
-      @version   = version.upcase
+      @version   = version.gsub(/ *720p */i, '').upcase
       @language  = language
       @status    = status
       @url       = url
