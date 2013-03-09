@@ -3,7 +3,7 @@
 def require_dependencies
   require 'optparse'
   require 'nokogiri'
-  require './lib/addic7ed'
+  require 'addic7ed'
 end
 
 begin
