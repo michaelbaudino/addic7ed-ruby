@@ -29,6 +29,13 @@ describe Addic7ed::Filename do
     @filename_no_episode = 'Californication.S06.720p.HDTV.x264-2HD.mkv'
     @filename_no_tags = 'Californication.S06E07.2HD.mkv'
     @filename_no_group = 'Californication.S06E07.720p.HDTV.x264.mkv'
+    # Filename with special tags
+    @filename_showname_US = 'Shameless.US.S03E06.720p.HDTV.x264-IMMERSE.mkv'
+    @filename_showname_UK = 'Shameless.UK.S09E11.720p.HDTV.x264-TLA.mkv'
+    @filename_showname_UK_year = 'The.Hour.UK.2011.S01E03.REPACK.HDTV.XviD-FoV.avi'
+    @filename_showname_year_UK = 'The.Hour.2011.UK.S01E03.REPACK.HDTV.XviD-FoV.avi'
+    @filename_showname_US_year = 'The.Hour.US.2011.S01E03.REPACK.HDTV.XviD-FoV.avi'
+    @filename_showname_year_US = 'The.Hour.2011.US.S01E03.REPACK.HDTV.XviD-FoV.avi'
   end
 
   it 'should succeed given valid argument' do
@@ -257,6 +264,31 @@ describe Addic7ed::Filename do
     expect {
       @file = Addic7ed::Filename.new(@filename_no_group)
     }.to raise_error(Addic7ed::InvalidFilename)
+  end
+
+  describe '#encoded_filename' do
+    it 'should change all spaces to underscores' do
+      Addic7ed::Filename.new(@filename_multiple_words).encoded_showname.should == 'The_Walking_Dead'
+    end
+
+    it 'should wrap country code with parenthesis' do
+      Addic7ed::Filename.new(@filename_showname_US).encoded_showname.should == 'Shameless_(US)'
+    end
+
+    it 'should remove country code for the original show (usually UK)' do
+      Addic7ed::Filename.new(@filename_showname_UK).encoded_showname.should == 'Shameless'
+    end
+
+    it 'should remove production year' do
+      Addic7ed::Filename.new(@filename_showname_year).encoded_showname.should == 'The_Americans'
+    end
+
+    it 'should handle when both country code and production year are present' do
+      Addic7ed::Filename.new(@filename_showname_UK_year).encoded_showname.should == 'The_Hour'
+      Addic7ed::Filename.new(@filename_showname_year_UK).encoded_showname.should == 'The_Hour'
+      Addic7ed::Filename.new(@filename_showname_US_year).encoded_showname.should == 'The_Hour_(US)'
+      Addic7ed::Filename.new(@filename_showname_year_US).encoded_showname.should == 'The_Hour_(US)'
+    end
   end
 
   describe '#basename' do

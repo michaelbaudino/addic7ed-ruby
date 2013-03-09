@@ -20,7 +20,14 @@ module Addic7ed
     end
 
     def encoded_showname
-      @showname.gsub(/ /, '_').gsub(/_US$/, '_(US)')
+      @showname.
+        gsub(/ /, '_').
+        gsub(/_US$/, '_(US)').
+        gsub(/_US_/, '_(US)_').
+        gsub(/_UK$/, '').
+        gsub(/_UK_/, '_').
+        gsub(/_\d{4}$/, '').
+        gsub(/_\d{4}_/, '_')
     end
 
     # Lazy getters
