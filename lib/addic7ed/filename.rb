@@ -19,6 +19,10 @@ module Addic7ed
       end
     end
 
+    def encoded_showname
+      @showname.gsub(/ /, '_').gsub(/_US$/, '_(US)')
+    end
+
     # Lazy getters
 
     def basename

@@ -14,7 +14,7 @@ module Addic7ed
     def url(lang = 'fr')
       raise LanguageNotSupported unless LANGUAGES[lang]
       @localized_urls ||= {}
-      @localized_urls[lang] ||= "http://www.addic7ed.com/serie/#{@filename.showname.gsub(' ', '_')}/#{@filename.season}/#{@filename.episode}/#{LANGUAGES[lang][:id]}"
+      @localized_urls[lang] ||= "http://www.addic7ed.com/serie/#{@filename.encoded_showname}/#{@filename.season}/#{@filename.episode}/#{LANGUAGES[lang][:id]}"
     end
 
     def subtitles(lang = 'fr')
