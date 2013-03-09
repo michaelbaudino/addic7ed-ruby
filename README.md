@@ -2,7 +2,7 @@
 
 Ruby command-line script to fetch subtitles on Addic7ed
 
-Current version: **0.1.2**
+Current version: **0.1.3**
 
 ### Is it working ?
 
@@ -67,6 +67,7 @@ There's some work remaining:
 
 ### Changelog
 
+* 0.1.3: Fixed bugs with show names containing country code or production year
 * 0.1.2: Fixed how the daily download limit reach is detected
 * 0.1.1: This is now a _working_ gem
 * 0.1.0: This is now a gem
