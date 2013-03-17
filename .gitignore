@@ -15,3 +15,9 @@
 .DS_Store
 
 pkg
+
+# Ignore Coveralls config file (it should be kept secret)
+/.coveralls.yml
+
+# Ignore built gems
+/*.gem

@@ -1,4 +1,5 @@
-# addic7ed-ruby [![Build Status](https://travis-ci.org/michaelbaudino/addic7ed-ruby.png)](https://travis-ci.org/michaelbaudino/addic7ed-ruby) [![Dependency Status](https://gemnasium.com/michaelbaudino/addic7ed-ruby.png)](https://gemnasium.com/michaelbaudino/addic7ed-ruby) [![Code Climate](https://codeclimate.com/github/michaelbaudino/addic7ed-ruby.png)](https://codeclimate.com/github/michaelbaudino/addic7ed-ruby)
+# addic7ed-ruby [![Build Status](https://travis-ci.org/michaelbaudino/addic7ed-ruby.png)](https://travis-ci.org/michaelbaudino/addic7ed-ruby) [![Dependency Status](https://gemnasium.com/michaelbaudino/addic7ed-ruby.png)](https://gemnasium.com/michaelbaudino/addic7ed-ruby) [![Code Climate](https://codeclimate.com/github/michaelbaudino/addic7ed-ruby.png)](https://codeclimate.com/github/michaelbaudino/addic7ed-ruby) [![Coverage Status](https://coveralls.io/repos/michaelbaudino/addic7ed-ruby/badge.png?branch=master)](https://coveralls.io/r/michaelbaudino/addic7ed-ruby)
+
 
 Ruby command-line script to fetch subtitles on Addic7ed
 
