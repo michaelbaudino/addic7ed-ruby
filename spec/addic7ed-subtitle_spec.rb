@@ -22,6 +22,12 @@ describe Addic7ed::Subtitle do
       Addic7ed::Subtitle.new(' DIMENSION ', '', '', '', '0').version.should == 'DIMENSION'
     end
 
+    it 'should remove heading and trailing dashes' do
+      Addic7ed::Subtitle.new('-DIMENSION', '', '', '', '0').version.should == 'DIMENSION'
+      Addic7ed::Subtitle.new('DIMENSION-', '', '', '', '0').version.should == 'DIMENSION'
+      Addic7ed::Subtitle.new('-DIMENSION-', '', '', '', '0').version.should == 'DIMENSION'
+    end
+
     it 'should automatically remove "720p" in version string' do
       Addic7ed::Subtitle.new('720p DIMENSION', '', '', '', '0').version.should == 'DIMENSION'
       Addic7ed::Subtitle.new('720P DIMENSION', '', '', '', '0').version.should == 'DIMENSION'

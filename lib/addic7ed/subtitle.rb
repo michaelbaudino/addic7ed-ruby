@@ -23,8 +23,8 @@ module Addic7ed
         gsub(/720p/i, '').
         gsub(/hdtv/i, '').
         gsub(/x\.?264/i, '').
-        gsub(/^[ \.]*/, '').
-        gsub(/[ \.]*$/, '').
+        gsub(/^[- \.]*/, '').
+        gsub(/[- \.]*$/, '').
         upcase
     end
 
