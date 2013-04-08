@@ -91,7 +91,7 @@ module Addic7ed
         raise WTFError.new("We're asking for #{LANGUAGES[lang][:name].capitalize} subtitles and Addic7ed gives us #{language.capitalize} subtitles") if LANGUAGES[lang][:name].downcase != language.downcase
         status_node = sub_node.css('tr:nth-child(3) td:nth-child(4) b').first
         status = status_node.content.strip
-        url_node = sub_node.css('a.buttonDownload').first
+        url_node = sub_node.css('a.buttonDownload').last
         url = 'http://www.addic7ed.com' + url_node['href']
         downloads_node = sub_node.css('tr:nth-child(4) td.newsDate').first
         downloads = /(?<downloads>\d*) Downloads/.match(downloads_node.content)[:downloads]
