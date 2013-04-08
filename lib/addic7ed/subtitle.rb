@@ -5,7 +5,7 @@ module Addic7ed
     attr_accessor :url
 
     def initialize(version, language, status, url, downloads)
-      @version   = version.gsub(/ *720p */i, '').upcase
+      @version   = normalized_version(version)
       @language  = language
       @status    = status
       @url       = url
@@ -14,6 +14,18 @@ module Addic7ed
 
     def to_s
       "#{url}\t->\t#{@version} (#{language}, #{status}) [#{@downloads} downloads]"
+    end
+
+    private
+
+    def normalized_version(version)
+      version.
+        gsub(/720p/i, '').
+        gsub(/hdtv/i, '').
+        gsub(/x\.?264/i, '').
+        gsub(/^[ \.]*/, '').
+        gsub(/[ \.]*$/, '').
+        upcase
     end
 
   end
