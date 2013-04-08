@@ -1,19 +1,20 @@
 module Addic7ed
   class Subtitle
 
-    attr_reader :version, :language, :status, :downloads
+    attr_reader :version, :language, :status, :via, :downloads
     attr_accessor :url
 
-    def initialize(version, language, status, url, downloads)
+    def initialize(version, language, status, url, via, downloads)
       @version   = normalized_version(version)
       @language  = language
       @status    = status
       @url       = url
+      @via       = via
       @downloads = downloads.to_i
     end
 
     def to_s
-      "#{url}\t->\t#{@version} (#{language}, #{status}) [#{@downloads} downloads]"
+      "#{url}\t->\t#{@version} (#{language}, #{status}) [#{@downloads} downloads]#{" (via #{via})" if @via}"
     end
 
     private

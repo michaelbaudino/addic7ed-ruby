@@ -41,7 +41,7 @@ module Addic7ed
         @best_subtitle ||= {}
         subtitles(lang).each do |sub|
           if sub.status == 'Completed' and (sub.version == @filename.group or COMPATIBILITY_720P[sub.version] == @filename.group)
-            @best_subtitle[lang] = sub unless @best_subtitle[lang] and @best_subtitle[lang].downloads > sub.downloads
+            @best_subtitle[lang] = sub unless @best_subtitle[lang] and (@best_subtitle[lang].downloads > sub.downloads or @best_subtitle[lang].via == 'http://addic7ed.com')
           end
         end
         raise NoSubtitleFound unless @best_subtitle[lang]
@@ -93,9 +93,11 @@ module Addic7ed
         status = status_node.content.strip
         url_node = sub_node.css('a.buttonDownload').last
         url = 'http://www.addic7ed.com' + url_node['href']
+        via_node = sub_node.css('tr:nth-child(3) td:first-child a').first
+        via = via_node['href'] if via_node
         downloads_node = sub_node.css('tr:nth-child(4) td.newsDate').first
         downloads = /(?<downloads>\d*) Downloads/.match(downloads_node.content)[:downloads]
-        Addic7ed::Subtitle.new(version, language, status, url, downloads)
+        Addic7ed::Subtitle.new(version, language, status, url, via, downloads)
       rescue
         raise ParsingError
       end
