@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    addic7ed (0.1.7)
+    addic7ed (0.1.8)
       nokogiri
 
 GEM
