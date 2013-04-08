@@ -3,7 +3,7 @@
 
 Ruby command-line script to fetch subtitles on Addic7ed
 
-Current version: **0.1.6**
+Current version: **0.1.7**
 
 ### Is it working ?
 
@@ -68,6 +68,7 @@ There's some work remaining:
 
 ### Changelog
 
+* 0.1.7: Fixed a bug when a subtitle had multiple revisions on Addic7ed.com
 * 0.1.6: Enhanced subtitles version string filters (remove heading and trailing dashes)
 * 0.1.5: Enhanced subtitles version string filters (remove heading and trailing spaces and dots)
 * 0.1.4: Fixed a bug in require paths which made 0.1.3 unusable
