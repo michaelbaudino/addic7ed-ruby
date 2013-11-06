@@ -26,6 +26,7 @@ module Addic7ed
         gsub(/x\.?264/i, '').
         gsub(/^[- \.]*/, '').
         gsub(/[- \.]*$/, '').
+        gsub(/^Version */i, '').
         upcase
     end
 

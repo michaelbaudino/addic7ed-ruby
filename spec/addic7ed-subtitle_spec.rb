@@ -52,5 +52,10 @@ describe Addic7ed::Subtitle do
       Addic7ed::Subtitle.new('DIMENSION x.264', '', '', '', '', '0').version.should == 'DIMENSION'
       Addic7ed::Subtitle.new('DIMENSION X.264', '', '', '', '', '0').version.should == 'DIMENSION'
     end
+
+    it 'should automatically remove "Version" prefix in version string' do
+      Addic7ed::Subtitle.new('Version DIMENSION', '', '', '', '', '0').version.should == 'DIMENSION'
+    end
+
   end
 end
