@@ -46,8 +46,7 @@ Usage: addic7ed [options] <file1> [<file2>, <file3>, ...]
 
 Feel free to submit a Pull Request, I'd be glad to review/merge it.
 
-Also, if you like the awesome work done by the Addic7ed team, please consider donating to them (no link here as they are just in the middle of changing their donation system, but feel free to go their website) !
-
+Also, if you like the awesome work done by the Addic7ed team, please consider [donating to them](http://www.addic7ed.com) !
 
 ### Notes
 
