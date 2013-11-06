@@ -2,8 +2,6 @@ require 'spec_helper'
 require './lib/addic7ed'
 
 describe Addic7ed::Subtitle do
-  before :all do
-  end
 
   describe '#normalized_version' do
     it 'should upcase the version string' do
