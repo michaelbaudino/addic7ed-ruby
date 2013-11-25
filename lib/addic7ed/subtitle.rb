@@ -23,6 +23,7 @@ module Addic7ed
       version.
         gsub(/720p/i, '').
         gsub(/hdtv/i, '').
+        gsub(/proper/i, '').
         gsub(/x\.?264/i, '').
         gsub(/^[- \.]*/, '').
         gsub(/[- \.]*$/, '').
