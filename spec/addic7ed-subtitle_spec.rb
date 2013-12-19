@@ -4,6 +4,7 @@ require './lib/addic7ed'
 describe Addic7ed::Subtitle do
 
   describe '#normalized_version' do
+
     it 'should upcase the version string' do
       Addic7ed::Subtitle.new('DiMENSiON', '', '', '', '', '0').version.should == 'DIMENSION'
     end
@@ -56,4 +57,5 @@ describe Addic7ed::Subtitle do
     end
 
   end
+
 end

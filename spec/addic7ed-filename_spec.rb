@@ -267,6 +267,7 @@ describe Addic7ed::Filename do
   end
 
   describe '#encoded_filename' do
+
     it 'should change all spaces to underscores' do
       Addic7ed::Filename.new(@filename_multiple_words).encoded_showname.should == 'The_Walking_Dead'
     end
@@ -289,30 +290,39 @@ describe Addic7ed::Filename do
       Addic7ed::Filename.new(@filename_showname_US_year).encoded_showname.should == 'The_Hour_(US)'
       Addic7ed::Filename.new(@filename_showname_year_US).encoded_showname.should == 'The_Hour_(US)'
     end
+
   end
 
   describe '#basename' do
+
     it 'should return only file name given a full path' do
       Addic7ed::Filename.new(@filename_full_path).basename.should == 'Californication.S06E07.720p.HDTV.x264-2HD.mkv'
     end
+
   end
 
   describe '#dirname' do
+
     it 'should return only path given a full path' do
       Addic7ed::Filename.new(@filename_full_path).dirname.should == '/data/public/Series/Californication/Saison 06'
     end
+
   end
 
   describe '#extname' do
+
     it 'should return only file extension given a full path' do
       Addic7ed::Filename.new(@filename_full_path).extname.should == '.mkv'
     end
+
   end
 
   describe '#to_s' do
+
     it 'should return file name as a string' do
       Addic7ed::Filename.new(@filename_full_path).to_s.should == '/data/public/Series/Californication/Saison 06/Californication.S06E07.720p.HDTV.x264-2HD.mkv'
     end
+
   end
 
 end
