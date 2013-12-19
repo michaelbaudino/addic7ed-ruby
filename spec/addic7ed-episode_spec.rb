@@ -96,13 +96,6 @@ describe Addic7ed::Episode do
         @episode.best_subtitle('aa')
       }.to raise_error(Addic7ed::LanguageNotSupported)
     end
-    it 'should raise EpisodeNotFound given not existing episode' do
-      stub_request(:get, 'http://www.addic7ed.com/serie/The_Walking_Dead/3/42/8')
-        .to_return File.new('spec/responses/walking-dead-3-42-8.http')
-      expect{
-        Addic7ed::Episode.new(@filename_episode_not_found).best_subtitle
-      }.to raise_error(Addic7ed::EpisodeNotFound)
-    end
     it 'should raise NoSubtitleFound given valid episode which has no subtitle on Addic7ed' do
       stub_request(:get, 'http://www.addic7ed.com/serie/The_Walking_Dead/3/2/48')
         .to_return File.new('spec/responses/walking-dead-3-2-48.http')
