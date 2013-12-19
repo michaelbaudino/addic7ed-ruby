@@ -1,0 +1,13 @@
+HTTP/1.1 302 Found
+Date: Wed, 18 Dec 2013 23:26:35 GMT
+Server: Apache/2
+X-Powered-By: PHP/5.2.10
+Set-Cookie: PHPSESSID=2f4023b26134fffd2f081058461ab114; path=/
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Pragma: no-cache
+Location: /index.php
+Vary: Accept-Encoding,User-Agent
+Content-Length: 0
+Content-Type: text/html
+

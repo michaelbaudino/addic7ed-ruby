@@ -23,7 +23,7 @@ module Addic7ed
         @subtitles ||= {}
         @subtitles[lang] ||= []
         response = Net::HTTP.get_response(URI(url(lang)))
-        raise EpisodeNotFound if response.body == " "
+        raise EpisodeNotFound unless response.body
         doc = Nokogiri::HTML(response.body)
         raise NoSubtitleFound unless doc.css('select#filterlang ~ font[color="yellow"]').empty?
         sublist_node = doc.css('#container95m table.tabel95 table.tabel95')
@@ -40,7 +40,7 @@ module Addic7ed
       unless @best_subtitle and @best_subtitle[lang]
         @best_subtitle ||= {}
         subtitles(lang).each do |sub|
-          if sub.status == 'Completed' and (sub.version == @filename.group or COMPATIBILITY_720P[sub.version] == @filename.group)
+          if sub.status == 'Completed' and (sub.version == @filename.group or COMPATIBILITY_720P[sub.version] == @filename.group or COMPATIBILITY_720P[@filename.group] == sub.version)
             @best_subtitle[lang] = sub unless @best_subtitle[lang] and (@best_subtitle[lang].downloads > sub.downloads or @best_subtitle[lang].via == 'http://addic7ed.com')
           end
         end
