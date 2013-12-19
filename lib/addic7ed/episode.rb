@@ -1,4 +1,3 @@
-require 'nokogiri'
 require 'net/http'
 require 'open-uri'
 
@@ -12,16 +11,17 @@ module Addic7ed
     end
 
     def url(lang = 'fr')
-      check_language_availability lang
+      check_language_availability(lang)
       @localized_urls ||= {}
       @localized_urls[lang] ||= "http://www.addic7ed.com/serie/#{@filename.encoded_showname}/#{@filename.season}/#{@filename.episode}/#{LANGUAGES[lang][:id]}"
     end
 
     def subtitles(lang = 'fr')
-      check_language_availability lang
+      check_language_availability(lang)
       unless @subtitles and @subtitles[lang]
-        initialize_language lang
-        parse_subtitles_page(lang)
+        initialize_language(lang)
+        parser = Addic7ed::Parser.new(self, lang)
+        @subtitles[lang] = parser.extract_subtitles
       end
       @subtitles[lang]
     end
@@ -73,41 +73,6 @@ module Addic7ed
 
     protected
 
-    def parse_subtitles_page(lang)
-      dom = subtitles_page_dom(lang)
-      check_subtitles_presence(dom)
-      parse_subtitle_nodes_list(dom, lang)
-    end
-
-    def parse_subtitle_nodes_list(dom, lang)
-      sublist_node = dom.css('#container95m table.tabel95 table.tabel95')
-      raise NoSubtitleFound if sublist_node.size == 0
-      sublist_node.each do |sub_node|
-        @subtitles[lang] << parse_subtitle_node(sub_node, lang)
-      end
-    end
-
-    def parse_subtitle_node(sub_node, lang)
-      begin
-        version_node = sub_node.css('.NewsTitle').first
-        version = version_node.content.gsub(/ \nVersion /, '').gsub(/,.*/, '')
-        language_node = sub_node.css('.language').first
-        language = language_node.content.gsub(/\A\W*/, '').gsub(/[^\w\)]*\z/, '')
-        raise WTFError.new("We're asking for #{LANGUAGES[lang][:name].capitalize} subtitles and Addic7ed gives us #{language.capitalize} subtitles") if LANGUAGES[lang][:name].downcase != language.downcase
-        status_node = sub_node.css('tr:nth-child(3) td:nth-child(4) b').first
-        status = status_node.content.strip
-        url_node = sub_node.css('a.buttonDownload').last
-        url = 'http://www.addic7ed.com' + url_node['href']
-        via_node = sub_node.css('tr:nth-child(3) td:first-child a').first
-        via = via_node['href'] if via_node
-        downloads_node = sub_node.css('tr:nth-child(4) td.newsDate').first
-        downloads = /(?<downloads>\d*) Downloads/.match(downloads_node.content)[:downloads]
-        Addic7ed::Subtitle.new(version, language, status, url, via, downloads)
-      rescue
-        raise ParsingError
-      end
-    end
-
     def check_language_availability(lang)
       raise LanguageNotSupported unless LANGUAGES[lang]
     end
@@ -117,14 +82,5 @@ module Addic7ed
       @subtitles[lang] ||= []
     end
 
-    def subtitles_page_dom(lang)
-      response = Net::HTTP.get_response(URI(url(lang)))
-      raise EpisodeNotFound unless response.body
-      Nokogiri::HTML(response.body)
-    end
-
-    def check_subtitles_presence(dom)
-      raise NoSubtitleFound unless dom.css('select#filterlang ~ font[color="yellow"]').empty?
-    end
   end
 end
