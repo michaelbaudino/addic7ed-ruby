@@ -12,31 +12,22 @@ module Addic7ed
     end
 
     def url(lang = 'fr')
-      raise LanguageNotSupported unless LANGUAGES[lang]
+      check_language_availability lang
       @localized_urls ||= {}
       @localized_urls[lang] ||= "http://www.addic7ed.com/serie/#{@filename.encoded_showname}/#{@filename.season}/#{@filename.episode}/#{LANGUAGES[lang][:id]}"
     end
 
     def subtitles(lang = 'fr')
-      raise LanguageNotSupported unless LANGUAGES[lang]
+      check_language_availability lang
       unless @subtitles and @subtitles[lang]
-        @subtitles ||= {}
-        @subtitles[lang] ||= []
-        response = Net::HTTP.get_response(URI(url(lang)))
-        raise EpisodeNotFound unless response.body
-        doc = Nokogiri::HTML(response.body)
-        raise NoSubtitleFound unless doc.css('select#filterlang ~ font[color="yellow"]').empty?
-        sublist_node = doc.css('#container95m table.tabel95 table.tabel95')
-        raise NoSubtitleFound if sublist_node.size == 0
-        sublist_node.each do |sub_node|
-          @subtitles[lang] << parse_subtitle_node(sub_node, lang)
-        end
+        initialize_language lang
+        parse_subtitles_page(lang)
       end
       @subtitles[lang]
     end
 
     def best_subtitle(lang = 'fr')
-      raise LanguageNotSupported unless LANGUAGES[lang]
+      check_language_availability lang
       unless @best_subtitle and @best_subtitle[lang]
         @best_subtitle ||= {}
         subtitles(lang).each do |sub|
@@ -82,6 +73,20 @@ module Addic7ed
 
     protected
 
+    def parse_subtitles_page(lang)
+      dom = subtitles_page_dom(lang)
+      check_subtitles_presence(dom)
+      parse_subtitle_nodes_list(dom, lang)
+    end
+
+    def parse_subtitle_nodes_list(dom, lang)
+      sublist_node = dom.css('#container95m table.tabel95 table.tabel95')
+      raise NoSubtitleFound if sublist_node.size == 0
+      sublist_node.each do |sub_node|
+        @subtitles[lang] << parse_subtitle_node(sub_node, lang)
+      end
+    end
+
     def parse_subtitle_node(sub_node, lang)
       begin
         version_node = sub_node.css('.NewsTitle').first
@@ -103,5 +108,23 @@ module Addic7ed
       end
     end
 
+    def check_language_availability(lang)
+      raise LanguageNotSupported unless LANGUAGES[lang]
+    end
+
+    def initialize_language(lang)
+      @subtitles ||= {}
+      @subtitles[lang] ||= []
+    end
+
+    def subtitles_page_dom(lang)
+      response = Net::HTTP.get_response(URI(url(lang)))
+      raise EpisodeNotFound unless response.body
+      Nokogiri::HTML(response.body)
+    end
+
+    def check_subtitles_presence(dom)
+      raise NoSubtitleFound unless dom.css('select#filterlang ~ font[color="yellow"]').empty?
+    end
   end
 end
