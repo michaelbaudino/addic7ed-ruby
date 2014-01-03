@@ -45,10 +45,7 @@ module Addic7ed
       uri = URI(best_subtitle(lang).url)
       response = get_http_response(uri, url(lang))
       if response.kind_of?(Net::HTTPRedirection)
-        # Addic7ed is serving redirection URL not-encoded, but Ruby does not support it (see http://bugs.ruby-lang.org/issues/7396)
-        best_subtitle(lang).url = URI.escape(response['location'])
-        raise DownloadLimitReached if /^\/downloadexceeded.php/.match best_subtitle(lang).url
-        download_best_subtitle!(lang, http_redirect_limit - 1)
+        follow_redirection(lang, response['location'], http_redirect_limit)
       else
         save_subtitle response.body
       end
@@ -75,6 +72,13 @@ module Addic7ed
       end
     rescue
       raise DownloadError
+    end
+
+    def follow_redirection(lang, new_uri, http_redirect_limit)
+      # Addic7ed is serving redirection URL not-encoded, but Ruby does not support it (see http://bugs.ruby-lang.org/issues/7396)
+      best_subtitle(lang).url = URI.escape(new_uri)
+      raise DownloadLimitReached if /^\/downloadexceeded.php/.match best_subtitle(lang).url
+      download_best_subtitle!(lang, http_redirect_limit - 1)
     end
 
     def save_subtitle(content)
