@@ -17,6 +17,6 @@ module Addic7ed
   end
   class SubtitleCannotBeSaved < StandardError
   end
-  class WTFError < StandardError
+  class HTTPError < StandardError
   end
 end

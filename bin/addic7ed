@@ -128,8 +128,8 @@ options[:filenames].each do |filename|
   rescue Addic7ed::SubtitleCannotBeSaved
     puts "The downloaded subtitle could not be saved as #{filename.gsub(/\.\w{3}$/, '.srt')}. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     next
-  rescue Addic7ed::WTFError => e
-    puts "WTF (I sincerely have no idea what I'm doing): #{e.message}".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
+  rescue Addic7ed::HTTPError => e
+    puts "Network error: #{e.message}".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     next
   end
 
