@@ -58,6 +58,15 @@ describe Addic7ed::Subtitle do
 
   end
 
+  describe '#to_s' do
+
+    it 'should print a human readable version' do
+      sub = Addic7ed::Subtitle.new('DIMENSION', 'fr', 'Completed', 'http://some.fancy.url', 'http://addic7ed.com', '42')
+      expect(sub.to_s).to eql("http://some.fancy.url\t->\tDIMENSION (fr, Completed) [42 downloads] (via http://addic7ed.com)")
+    end
+
+  end
+
   describe '#works_for?' do
 
     context 'when incomplete' do
