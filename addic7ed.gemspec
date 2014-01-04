@@ -18,7 +18,14 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rspec')
   s.add_development_dependency('rake')
   s.add_development_dependency('webmock')
+
   s.add_runtime_dependency('nokogiri')
+
+  if RUBY_ENGINE == 'rbx'
+    s.add_runtime_dependency('json')
+    s.add_runtime_dependency('rubysl')
+    s.add_runtime_dependency('racc')
+  end
 
   s.executables = ['addic7ed']
   s.files       = FileList['lib/**/*.rb', 'bin/*', '[A-Z]*', 'spec/**/*'].to_a
