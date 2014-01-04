@@ -325,4 +325,18 @@ describe Addic7ed::Filename do
 
   end
 
+  describe '#inspect' do
+
+    it 'should print a human-readable detailed version' do
+      Addic7ed::Filename.new(@filename).inspect.should ==
+'Guesses for Californication.S06E07.720p.HDTV.x264-2HD.mkv:
+  show:    Californication
+  season:  6
+  episode: 7
+  tags:    ["720P", "HDTV", "X264"]
+  group:   2HD'
+    end
+
+  end
+
 end
