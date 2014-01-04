@@ -4,10 +4,10 @@ require './lib/addic7ed'
 describe Addic7ed::Episode do
 
   before :all do
-    @filename = 'The Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.mkv'
+    @filename = 'The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.mkv'
     @filename_show_not_found = 'Show.Not.Found.S03E02.720p.HDTV.x264-EVOLVE.mkv'
-    @filename_episode_not_found = 'The Walking.Dead.S03E42.720p.HDTV.x264-EVOLVE.mkv'
-    @filename_compatible_group = 'The Walking.Dead.S03E04.HDTV.XviD-ASAP.mkv'
+    @filename_episode_not_found = 'The.Walking.Dead.S03E42.720p.HDTV.x264-EVOLVE.mkv'
+    @filename_compatible_group = 'The.Walking.Dead.S03E04.HDTV.XviD-ASAP.mkv'
     @episode = Addic7ed::Episode.new(@filename)
   end
 
@@ -76,8 +76,6 @@ describe Addic7ed::Episode do
     end
 
     it 'may raise a ParsingError, but I don\'t know how to test it :-('
-
-    it 'may raise a WTFError, but it\'s unsure when, so it stays untested'
 
   end
 

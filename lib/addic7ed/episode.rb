@@ -18,25 +18,13 @@ module Addic7ed
 
     def subtitles(lang = 'fr')
       check_language_availability(lang)
-      unless @subtitles and @subtitles[lang]
-        initialize_language(lang)
-        parser = Addic7ed::Parser.new(self, lang)
-        @subtitles[lang] = parser.extract_subtitles
-      end
-      @subtitles[lang]
+      find_subtitles(lang) unless @subtitles and @subtitles[lang]
+      return @subtitles[lang]
     end
 
     def best_subtitle(lang = 'fr')
-      check_language_availability lang
-      unless @best_subtitle and @best_subtitle[lang]
-        @best_subtitle ||= {}
-        subtitles(lang).each do |sub|
-          if sub.status == 'Completed' and (sub.version == @filename.group or COMPATIBILITY_720P[sub.version] == @filename.group or COMPATIBILITY_720P[@filename.group] == sub.version)
-            @best_subtitle[lang] = sub unless @best_subtitle[lang] and (@best_subtitle[lang].downloads > sub.downloads or @best_subtitle[lang].via == 'http://addic7ed.com')
-          end
-        end
-        raise NoSubtitleFound unless @best_subtitle[lang]
-      end
+      check_language_availability(lang)
+      find_best_subtitle(lang) unless @best_subtitle and @best_subtitle[lang]
       return @best_subtitle[lang]
     end
 
@@ -52,6 +40,20 @@ module Addic7ed
     end
 
     protected
+
+    def find_subtitles(lang)
+      initialize_language(lang)
+      parser = Addic7ed::Parser.new(self, lang)
+      @subtitles[lang] = parser.extract_subtitles
+    end
+
+    def find_best_subtitle(lang)
+      @best_subtitle ||= {}
+      subtitles(lang).each do |sub|
+        @best_subtitle[lang] = sub if sub.works_for? @filename.group and sub.can_replace? @best_subtitle[lang]
+      end
+      raise NoSubtitleFound unless @best_subtitle[lang]
+    end
 
     def check_language_availability(lang)
       raise LanguageNotSupported unless LANGUAGES[lang]
