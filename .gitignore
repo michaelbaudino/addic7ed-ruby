@@ -20,6 +20,7 @@ pkg
 
 # Ignore Coveralls config file (it should be kept secret)
 /.coveralls.yml
+/coverage
 
 # Ignore Gemfile.lock, since we're building a gem
 /Gemfile.lock
