@@ -21,12 +21,6 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency('nokogiri')
 
-  if RUBY_ENGINE == 'rbx'
-    s.add_runtime_dependency('json')
-    s.add_runtime_dependency('rubysl')
-    s.add_runtime_dependency('racc')
-  end
-
   s.executables = ['addic7ed']
   s.files       = FileList['lib/**/*.rb', 'bin/*', '[A-Z]*', 'spec/**/*'].to_a
   s.test_files  = Dir.glob('spec/*_spec.rb')
