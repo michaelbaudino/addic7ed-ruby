@@ -1,13 +1,10 @@
 $:.push File.expand_path('../lib', __FILE__)
 
-require 'rake'
-require 'date'
 require 'addic7ed/version'
 
 Gem::Specification.new do |s|
   s.name        = 'addic7ed'
   s.version     = Addic7ed::VERSION
-  s.date        = Date.today.to_s
   s.platform    = Gem::Platform::RUBY
   s.summary     = "Addic7ed auto-downloader"
   s.description = "Ruby script (cli) to fetch subtitles on Addic7ed"
@@ -22,8 +19,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('nokogiri')
 
   s.executables = ['addic7ed']
-  s.files       = FileList['lib/**/*.rb', 'bin/*', '[A-Z]*', 'spec/**/*'].to_a
-  s.test_files  = Dir.glob('spec/*_spec.rb')
+  s.files       = `git ls-files -- lib/*`.split("\n")
+  s.test_files  = `git ls-files -- spec/*`.split("\n")
   s.require_paths = ['lib']
   s.has_rdoc    = false
   s.license     = 'MIT'
