@@ -39,6 +39,7 @@ module Addic7ed
         gsub(/^[- \.]*/, '').
         gsub(/[- \.]*$/, '').
         gsub(/^Version */i, '').
+        gsub(/^PROPER */i, '').
         upcase
     end
 

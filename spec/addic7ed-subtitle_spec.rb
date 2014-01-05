@@ -56,6 +56,10 @@ describe Addic7ed::Subtitle do
       Addic7ed::Subtitle.new('Version DIMENSION', '', '', '', '', '0').version.should == 'DIMENSION'
     end
 
+    it 'should automatically remove "PROPER" prefix in version string' do
+      Addic7ed::Subtitle.new('PROPER DIMENSION', '', '', '', '', '0').version.should == 'DIMENSION'
+    end
+
   end
 
   describe '#to_s' do
@@ -93,6 +97,12 @@ describe Addic7ed::Subtitle do
 
       it 'should return true given a compatible version' do
         expect(@sub.works_for? 'LOL').to be true
+      end
+
+      it 'should return true when the subtitle is for a PROPER version' do
+        sub = Addic7ed::Subtitle.new('PROPER DIMENSION', '', 'Completed', '', '', '10')
+        expect(sub.works_for? 'DIMENSION').to be true
+        expect(sub.works_for? 'LOL').to be true
       end
 
       it 'should return false given an incompatible version' do
