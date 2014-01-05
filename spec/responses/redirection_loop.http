@@ -1,0 +1,12 @@
+HTTP/1.1 302 Found
+Date: Sun, 05 Jan 2014 09:35:33 GMT
+Server: Apache/2
+X-Powered-By: PHP/5.2.10
+Set-Cookie: PHPSESSID=0ab049bb2f9517e680300fa1eea40bb6; path=/
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Pragma: no-cache
+Location: http://www.addic7ed.com/original/68018/4
+Vary: Accept-Encoding,User-Agent
+Content-Length: 0
+Content-Type: text/html
