@@ -1,7 +1,5 @@
-unless RUBY_ENGINE == 'rbx'
-  require 'coveralls'
-  Coveralls.wear!
-end
+require 'coveralls'
+Coveralls.wear!
 
 require 'webmock/rspec'
 WebMock.disable_net_connect!(allow_localhost: true)
