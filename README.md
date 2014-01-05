@@ -68,6 +68,7 @@ There's some work remaining:
 
 ### Changelog
 
+* 0.3.0: Add support for PROPER versions of subtitles (thanks to @thibaudgg)
 * 0.2.0: Add Rubinius support (also, quite a large code refactoring)
 * 0.1.9: Fix the scraper because of a modification on Addic7ed website
 * 0.1.8: Added priority to subtitles uploaded by Addic7ed staff
