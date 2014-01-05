@@ -52,12 +52,15 @@ describe Addic7ed::Subtitle do
       Addic7ed::Subtitle.new('DIMENSION X.264', '', '', '', '', '0').version.should == 'DIMENSION'
     end
 
-    it 'should automatically remove "Version" prefix in version string' do
-      Addic7ed::Subtitle.new('Version DIMENSION', '', '', '', '', '0').version.should == 'DIMENSION'
+    it 'should automatically remove "PROPER" in version string' do
+      Addic7ed::Subtitle.new('PROPER DIMENSION', '', '', '', '', '0').version.should == 'DIMENSION'
+      Addic7ed::Subtitle.new('Proper DIMENSION', '', '', '', '', '0').version.should == 'DIMENSION'
+      Addic7ed::Subtitle.new('DIMENSION PROPER', '', '', '', '', '0').version.should == 'DIMENSION'
+      Addic7ed::Subtitle.new('DIMENSION Proper', '', '', '', '', '0').version.should == 'DIMENSION'
     end
 
-    it 'should automatically remove "PROPER" prefix in version string' do
-      Addic7ed::Subtitle.new('PROPER DIMENSION', '', '', '', '', '0').version.should == 'DIMENSION'
+    it 'should automatically remove "Version" prefix in version string' do
+      Addic7ed::Subtitle.new('Version DIMENSION', '', '', '', '', '0').version.should == 'DIMENSION'
     end
 
   end
