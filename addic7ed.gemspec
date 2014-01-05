@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('nokogiri')
 
   s.executables = ['addic7ed']
-  s.files       = `git ls-files -- lib/*`.split("\n")
+  s.files       = `git ls-files -- lib/* LICENSE.md`.split("\n")
   s.test_files  = `git ls-files -- spec/*`.split("\n")
   s.require_paths = ['lib']
   s.has_rdoc    = false
