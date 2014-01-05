@@ -86,6 +86,21 @@ There's some work remaining:
 * 0.0.2: Added Filename class to analyze filenames and guess showname, season and episode number
 * 0.0.1: Initial file structure (Bundler, Rspec, Readme, ...)
 
+### Supported Ruby versions
+
+This projet supports the following Ruby versions/implementations:
+
+* MRI 1.9.3
+* MRI 2.0
+* MRI 2.1
+* Rubinius 2.2.3
+
+Rubinius users may have to manually install [RubySL](https://github.com/RubySL) before they can use `addic7ed-ruby`:
+
+```shell
+$ gem install rubysl
+```
+
 ### License
 
 This project is released under the terms of the MIT license.
