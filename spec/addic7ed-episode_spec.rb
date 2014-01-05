@@ -118,9 +118,9 @@ describe Addic7ed::Episode do
 
     before :each do
       WebMock.reset!
-      stub_request(:get, 'http://www.addic7ed.com/serie/The_Walking_Dead/3/2/8')
+      @page_stub = stub_request(:get, 'http://www.addic7ed.com/serie/The_Walking_Dead/3/2/8')
         .to_return File.new('spec/responses/walking-dead-3-2-8.http')
-      stub_request(:get, 'http://www.addic7ed.com/original/68018/4')
+      @sub_stub = stub_request(:get, 'http://www.addic7ed.com/original/68018/4')
         .to_return File.new('spec/responses/walking-dead-3-2-8_best_subtitle.http')
       # The Episode object must be re-created between every test, since redirection may modify its URI
       @reset_episode = Addic7ed::Episode.new(@filename)
@@ -128,9 +128,16 @@ describe Addic7ed::Episode do
       Kernel.stub(:open)
     end
 
-    it 'should get the best subtitle candidate' do
+    it 'should get the best subtitle candidate with a network request' do
       Addic7ed::Episode.stub(:best_subtitle).once
       @reset_episode.download_best_subtitle!('fr')
+      @page_stub.should have_been_requested
+      @sub_stub.should have_been_requested
+    end
+
+    it 'should raise DownloadError when a network error happens' do
+      stub_request(:get, 'http://www.addic7ed.com/original/68018/4').to_timeout
+      expect{ @reset_episode.download_best_subtitle!('fr') }.to raise_error Addic7ed::DownloadError
     end
 
     it 'should be called recursively' do
@@ -151,6 +158,11 @@ describe Addic7ed::Episode do
       Kernel.should_receive(:open).with('The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.srt', 'w').and_yield(file)
       file.should_receive(:<<)
       @reset_episode.download_best_subtitle!('fr')
+    end
+
+    it 'should raise SubtitleCannotBeSaved when a disk error happens' do
+      Kernel.should_receive(:open).with('The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.srt', 'w').and_raise('Persmission denied')
+      expect{ @reset_episode.download_best_subtitle!('fr') }.to raise_error Addic7ed::SubtitleCannotBeSaved
     end
 
   end
