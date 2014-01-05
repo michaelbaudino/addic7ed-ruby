@@ -11,5 +11,4 @@ platforms :rbx do
   gem 'racc'
   gem 'rubysl'
   gem 'psych'
-  gem 'rubinius-coverage'
 end
