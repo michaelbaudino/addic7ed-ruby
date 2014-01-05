@@ -84,7 +84,7 @@ module Addic7ed
     end
 
     def save_subtitle(content)
-      open "#{filename}".gsub(/\.\w{3}$/, '.srt'), 'w' do |f|
+      Kernel.open "#{filename}".gsub(/\.\w{3}$/, '.srt'), 'w' do |f|
         f << content
       end
     rescue
