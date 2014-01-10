@@ -60,6 +60,7 @@ Don't get mad, they have to pay for their servers, you know.
 There's some work remaining:
 - Support registered users
 - Support directory parsing
+- Support "hearing impaired" versions
 - Document code
 - Test cli behaviour
 - Colorize output
@@ -68,6 +69,7 @@ There's some work remaining:
 
 ### Changelog
 
+* 0.3.1: Fix a bug in subtitle version string normalization
 * 0.3.0: Add support for PROPER versions of subtitles (thanks to @thibaudgg)
 * 0.2.0: Add Rubinius support (also, quite a large code refactoring)
 * 0.1.9: Fix the scraper because of a modification on Addic7ed website
