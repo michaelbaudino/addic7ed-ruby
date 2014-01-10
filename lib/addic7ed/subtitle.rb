@@ -33,13 +33,13 @@ module Addic7ed
 
     def normalized_version(version)
       version.
+        gsub(/^Version */i, '').
         gsub(/720p/i, '').
         gsub(/hdtv/i, '').
         gsub(/proper/i, '').
         gsub(/x\.?264/i, '').
         gsub(/^[- \.]*/, '').
         gsub(/[- \.]*$/, '').
-        gsub(/^Version */i, '').
         upcase
     end
 
