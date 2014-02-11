@@ -55,6 +55,8 @@ Addic7ed restricts the number of subtitle download to 15 per 24h (30 per 24h for
 
 Don't get mad, they have to pay for their servers, you know.
 
+Ho, and by the way, please, **please**: do not hammer their servers, play fair !
+
 ### Roadmap
 
 There's some work remaining:
