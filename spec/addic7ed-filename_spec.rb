@@ -32,6 +32,7 @@ describe Addic7ed::Filename do
     # Filename with special tags
     @filename_showname_US = 'Shameless.US.S03E06.720p.HDTV.x264-IMMERSE.mkv'
     @filename_showname_UK = 'Shameless.UK.S09E11.720p.HDTV.x264-TLA.mkv'
+    @filename_showname_US_lowercase = 'shameless.us.s04e01.720p.hdtv.x264-2hd.mkv'
     @filename_showname_UK_year = 'The.Hour.UK.2011.S01E03.REPACK.HDTV.XviD-FoV.avi'
     @filename_showname_year_UK = 'The.Hour.2011.UK.S01E03.REPACK.HDTV.XviD-FoV.avi'
     @filename_showname_US_year = 'The.Hour.US.2011.S01E03.REPACK.HDTV.XviD-FoV.avi'
@@ -274,6 +275,10 @@ describe Addic7ed::Filename do
 
     it 'should wrap country code with parenthesis' do
       Addic7ed::Filename.new(@filename_showname_US).encoded_showname.should == 'Shameless_(US)'
+    end
+
+    it 'should detect country code even in lowercase' do
+      Addic7ed::Filename.new(@filename_showname_US_lowercase).encoded_showname.should == 'shameless_(us)'
     end
 
     it 'should remove country code for the original show (usually UK)' do

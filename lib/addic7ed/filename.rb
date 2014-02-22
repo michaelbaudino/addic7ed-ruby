@@ -22,10 +22,10 @@ module Addic7ed
     def encoded_showname
       @showname.
         gsub(/ /, '_').
-        gsub(/_US$/, '_(US)').
-        gsub(/_US_/, '_(US)_').
-        gsub(/_UK$/, '').
-        gsub(/_UK_/, '_').
+        gsub(/_(US)$/i, '_(\1)').
+        gsub(/_(US)_/i, '_(\1)_').
+        gsub(/_UK$/i, '').
+        gsub(/_UK_/i, '_').
         gsub(/_\d{4}$/, '').
         gsub(/_\d{4}_/, '_')
     end
