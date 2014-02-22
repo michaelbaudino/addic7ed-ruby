@@ -26,7 +26,7 @@ Well, it should...
 
 ### Are there any options ?
 
-Sure
+Sure !
 
 ```bash
 $ addic7ed -h
