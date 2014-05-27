@@ -35,7 +35,7 @@ module Addic7ed
       if response.kind_of?(Net::HTTPRedirection)
         follow_redirection(lang, response['location'], http_redirect_limit)
       else
-        save_subtitle response.body
+        save_subtitle(response.body, lang)
       end
     end
 
@@ -83,8 +83,8 @@ module Addic7ed
       download_best_subtitle!(lang, http_redirect_limit - 1)
     end
 
-    def save_subtitle(content)
-      Kernel.open "#{filename}".gsub(/\.\w{3}$/, '.srt'), 'w' do |f|
+    def save_subtitle(content, lang)
+      Kernel.open "#{filename}".gsub(/\.\w{3}$/, ".#{lang}.srt"), 'w' do |f|
         f << content
       end
     rescue
