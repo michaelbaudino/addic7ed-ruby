@@ -26,3 +26,6 @@ pkg
 
 # Ignore built gems
 /*.gem
+
+# Ignore test coverage reports
+/coverage
