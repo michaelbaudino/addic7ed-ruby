@@ -1,10 +1,10 @@
 unless RUBY_ENGINE == 'rbx'
-  require 'coveralls'
-  Coveralls.wear!
+  require "codeclimate-test-reporter"
+  CodeClimate::TestReporter.start
 end
 
 require 'webmock/rspec'
-WebMock.disable_net_connect!(allow_localhost: true)
+WebMock.disable_net_connect!(allow_localhost: true, allow: 'codeclimate.com')
 
 RSpec.configure do |config|
   # Use color in STDOUT

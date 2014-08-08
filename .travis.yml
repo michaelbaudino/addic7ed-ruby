@@ -8,3 +8,6 @@ rvm:
   - jruby-19mode
   - jruby-20mode
   - jruby-21mode
+env:
+  matrix:
+    secure: VXyeNhhc80qP92EREAmwv+cfRV76wQUzdMTb+dm0W/Uc+KpExzVsfuuh86qCyf5HTm7crx4/+ja8cSGGcQodvIdgSQNOr7L0mCJqg0Xq7ZyJPiMQNgzFejD9OApQZlKIGhkIIWd7AUU494IZp48o1rFFWIJg499ZNw6pFDEvNWU=
