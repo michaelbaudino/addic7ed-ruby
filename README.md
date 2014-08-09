@@ -73,11 +73,11 @@ There's some work remaining:
 
 This projet supports the following Ruby versions/implementations:
 
-* MRI 1.9.3
-* MRI 2.0
-* MRI 2.1
-* Rubinius 2.2.5
-* JRuby (both 1.9, 2.0 and 2.1 mode)
+* Ruby 1.9.3 (MRI)
+* Ruby 2.0 (MRI)
+* Ruby 2.1 (MRI)
+* Rubinius
+* JRuby
 
 :warning: Rubinius users may have to manually install [RubySL](https://github.com/RubySL) before they can use `addic7ed-ruby`:
 
