@@ -155,13 +155,13 @@ describe Addic7ed::Episode do
 
     it 'should create a new file on disk' do
       file = double('file')
-      Kernel.should_receive(:open).with('The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.srt', 'w').and_yield(file)
+      Kernel.should_receive(:open).with('The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.fr.srt', 'w').and_yield(file)
       file.should_receive(:<<)
       @reset_episode.download_best_subtitle!('fr')
     end
 
     it 'should raise SubtitleCannotBeSaved when a disk error happens' do
-      Kernel.should_receive(:open).with('The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.srt', 'w').and_raise('Persmission denied')
+      Kernel.should_receive(:open).with('The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.fr.srt', 'w').and_raise('Persmission denied')
       expect{ @reset_episode.download_best_subtitle!('fr') }.to raise_error Addic7ed::SubtitleCannotBeSaved
     end
 
