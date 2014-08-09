@@ -7,8 +7,7 @@ module Addic7ed
 
     def initialize(filename)
       @filename = filename
-      match = TVSHOW_REGEX.match basename
-      if match
+      if match = TVSHOW_REGEX.match(basename)
         @showname = match[:showname].gsub('.', ' ')
         @season   = match[:season].to_i
         @episode  = match[:episode].to_i
@@ -20,7 +19,7 @@ module Addic7ed
     end
 
     def encoded_showname
-      @showname.
+      @encoded_showname ||= showname.
         gsub(/ /, '_').
         gsub(/_(US)$/i, '_(\1)').
         gsub(/_(US)_/i, '_(\1)_').
