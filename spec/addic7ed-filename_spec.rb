@@ -38,7 +38,7 @@ describe Addic7ed::Filename do
     @filename_showname_year_US = 'The.Hour.2011.US.S01E03.REPACK.HDTV.XviD-FoV.avi'
   end
 
-  define '#initialize' do
+  describe '#initialize' do
     it 'succeeds given valid argument' do
       expect{ @file = Addic7ed::Filename.new(@filename) }.to_not raise_error
       expect(@file.showname).to eq 'Californication'
