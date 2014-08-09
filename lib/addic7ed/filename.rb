@@ -1,7 +1,7 @@
 module Addic7ed
   class Filename
 
-    TVSHOW_REGEX = /\A(?<showname>.*\w)[\[\. ]+S?(?<season>\d{1,2})[-\. ]?[EX]?(?<episode>\d{2})[\]\. ]+(?<tags>.*)-(?<group>\w*)(\.\w{3})?\z/i
+    TVSHOW_REGEX = /\A(?<showname>.*\w)[\[\. ]+S?(?<season>\d{1,2})[-\. ]?[EX]?(?<episode>\d{2})([-\. ]?[EX]?\d{2})*[\]\. ]+(?<tags>.*)-(?<group>\w*)(\.\w{3})?\z/i
 
     attr_reader :filename, :showname, :season, :episode, :tags, :group
 

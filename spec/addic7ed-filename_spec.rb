@@ -22,6 +22,8 @@ describe Addic7ed::Filename do
     @filename_full_path = '/data/public/Series/Californication/Saison 06/Californication.S06E07.720p.HDTV.x264-2HD.mkv'
     @filename_relative_path = '../Saison 06/Californication.S06E07.720p.HDTV.x264-2HD.mkv'
     @filename_no_extension = 'Californication.S06E07.720p.HDTV.x264-2HD'
+    @filename_double_episode = 'Revenge.S02E21E22.720p.HDTV.X264-DIMENSION.mkv'
+    @filename_double_episode_with_dash = 'Revenge.S02E21-22.720p.HDTV.X264-DIMENSION.mkv'
     # Invalid filenames
     @filename_no_showname = '.S06E07.720p.HDTV.x264-2HD.mkv'
     @filename_no_season = 'Californication.E07.720p.HDTV.x264-2HD.mkv'
@@ -199,6 +201,24 @@ describe Addic7ed::Filename do
       expect(@file.episode ).to eq 7
       expect(@file.tags    ).to eq ['720P', 'HDTV', 'X264']
       expect(@file.group   ).to eq '2HD'
+    end
+
+    it 'succeeds given filename which is a double episode' do
+      expect{ @file = Addic7ed::Filename.new(@filename_double_episode) }.to_not raise_error
+      expect(@file.showname).to eq 'Revenge'
+      expect(@file.season  ).to eq 2
+      expect(@file.episode ).to eq 21
+      expect(@file.tags    ).to eq ['720P', 'HDTV', 'X264']
+      expect(@file.group   ).to eq 'DIMENSION'
+    end
+
+    it 'succeeds given filename which is a double episode (with a dash)' do
+      expect{ @file = Addic7ed::Filename.new(@filename_double_episode_with_dash) }.to_not raise_error
+      expect(@file.showname).to eq 'Revenge'
+      expect(@file.season  ).to eq 2
+      expect(@file.episode ).to eq 21
+      expect(@file.tags    ).to eq ['720P', 'HDTV', 'X264']
+      expect(@file.group   ).to eq 'DIMENSION'
     end
 
     it 'fails given filename with no showname' do
