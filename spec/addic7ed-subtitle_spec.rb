@@ -57,6 +57,13 @@ describe Addic7ed::Subtitle do
       expect(Addic7ed::Subtitle.new('DIMENSION Proper', '', '', '', '', '0').version).to eq 'DIMENSION'
     end
 
+    it 'automatically removes "RERIP" in version string' do
+      expect(Addic7ed::Subtitle.new('RERIP DIMENSION', '', '', '', '', '0').version).to eq 'DIMENSION'
+      expect(Addic7ed::Subtitle.new('Rerip DIMENSION', '', '', '', '', '0').version).to eq 'DIMENSION'
+      expect(Addic7ed::Subtitle.new('DIMENSION RERIP', '', '', '', '', '0').version).to eq 'DIMENSION'
+      expect(Addic7ed::Subtitle.new('DIMENSION Rerip', '', '', '', '', '0').version).to eq 'DIMENSION'
+    end
+
     it 'automatically removes "Version" prefix in version string' do
       expect(Addic7ed::Subtitle.new('Version DIMENSION', '', '', '', '', '0').version).to eq 'DIMENSION'
     end
