@@ -1,5 +1,6 @@
 ## Changelog
 
+* 0.3.3: Support double episodes
 * 0.3.2: Support lowercase country codes in filenames
 * 0.3.1: Fix a bug in subtitle version string normalization
 * 0.3.0: Add support for PROPER versions of subtitles (thanks to @thibaudgg)
