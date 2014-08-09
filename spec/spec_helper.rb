@@ -15,4 +15,6 @@ RSpec.configure do |config|
 
   # Use the specified formatter
   config.formatter = :documentation # :progress, :html, :textmate
+
+  config.raise_errors_for_deprecations!
 end

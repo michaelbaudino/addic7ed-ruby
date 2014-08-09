@@ -2,7 +2,6 @@ require 'spec_helper'
 require './lib/addic7ed'
 
 describe Addic7ed::Filename do
-
   before :all do
     # Valid filenames
     @filename = 'Californication.S06E07.720p.HDTV.x264-2HD.mkv'
@@ -39,309 +38,252 @@ describe Addic7ed::Filename do
     @filename_showname_year_US = 'The.Hour.2011.US.S01E03.REPACK.HDTV.XviD-FoV.avi'
   end
 
-  it 'should succeed given valid argument' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename)
-    }.to_not raise_error
-    @file.showname.should == 'Californication'
-    @file.season.should == 6
-    @file.episode.should == 7
-    @file.tags.should == ['720P', 'HDTV', 'X264']
-    @file.group.should == '2HD'
-  end
+  define '#initialize' do
+    it 'succeeds given valid argument' do
+      expect{ @file = Addic7ed::Filename.new(@filename) }.to_not raise_error
+      expect(@file.showname).to eq 'Californication'
+      expect(@file.season  ).to eq 6
+      expect(@file.episode ).to eq 7
+      expect(@file.tags    ).to eq ['720P', 'HDTV', 'X264']
+      expect(@file.group   ).to eq '2HD'
+    end
 
-  it 'should succeed given filename with x notation' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename_x)
-    }.to_not raise_error
-    @file.showname.should == 'Californication'
-    @file.season.should == 6
-    @file.episode.should == 7
-    @file.tags.should == ['720P', 'HDTV', 'X264']
-    @file.group.should == '2HD'
-  end
+    it 'succeeds given filename with x notation' do
+      expect{ @file = Addic7ed::Filename.new(@filename_x) }.to_not raise_error
+      expect(@file.showname).to eq 'Californication'
+      expect(@file.season  ).to eq 6
+      expect(@file.episode ).to eq 7
+      expect(@file.tags    ).to eq ['720P', 'HDTV', 'X264']
+      expect(@file.group   ).to eq '2HD'
+    end
 
-  it 'should succeed given filename with 3-digits notation' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename_3digits)
-    }.to_not raise_error
-    @file.showname.should == 'Californication'
-    @file.season.should == 6
-    @file.episode.should == 7
-    @file.tags.should == ['720P', 'HDTV', 'X264']
-    @file.group.should == '2HD'
-  end
+    it 'succeeds given filename with 3-digits notation' do
+      expect{ @file = Addic7ed::Filename.new(@filename_3digits) }.to_not raise_error
+      expect(@file.showname).to eq 'Californication'
+      expect(@file.season  ).to eq 6
+      expect(@file.episode ).to eq 7
+      expect(@file.tags    ).to eq ['720P', 'HDTV', 'X264']
+      expect(@file.group   ).to eq '2HD'
+    end
 
-  it 'should succeed given filename with brackets notation' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename_brackets)
-    }.to_not raise_error
-    @file.showname.should == 'Californication'
-    @file.season.should == 6
-    @file.episode.should == 7
-    @file.tags.should == ['720P', 'HDTV', 'X264']
-    @file.group.should == '2HD'
-  end
+    it 'succeeds given filename with brackets notation' do
+      expect{ @file = Addic7ed::Filename.new(@filename_brackets) }.to_not raise_error
+      expect(@file.showname).to eq 'Californication'
+      expect(@file.season  ).to eq 6
+      expect(@file.episode ).to eq 7
+      expect(@file.tags    ).to eq ['720P', 'HDTV', 'X264']
+      expect(@file.group   ).to eq '2HD'
+    end
 
-  it 'should succeed given filename with brackets and x notation' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename_x_brackets)
-    }.to_not raise_error
-    @file.showname.should == 'Californication'
-    @file.season.should == 6
-    @file.episode.should == 7
-    @file.tags.should == ['720P', 'HDTV', 'X264']
-    @file.group.should == '2HD'
-  end
+    it 'succeeds given filename with brackets and x notation' do
+      expect{ @file = Addic7ed::Filename.new(@filename_x_brackets) }.to_not raise_error
+      expect(@file.showname).to eq 'Californication'
+      expect(@file.season  ).to eq 6
+      expect(@file.episode ).to eq 7
+      expect(@file.tags    ).to eq ['720P', 'HDTV', 'X264']
+      expect(@file.group   ).to eq '2HD'
+    end
 
-  it 'should succeed given filename with brackets and 3-digits notation' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename_3digits_brackets)
-    }.to_not raise_error
-    @file.showname.should == 'Californication'
-    @file.season.should == 6
-    @file.episode.should == 7
-    @file.tags.should == ['720P', 'HDTV', 'X264']
-    @file.group.should == '2HD'
-  end
+    it 'succeeds given filename with brackets and 3-digits notation' do
+      expect{ @file = Addic7ed::Filename.new(@filename_3digits_brackets) }.to_not raise_error
+      expect(@file.showname).to eq 'Californication'
+      expect(@file.season  ).to eq 6
+      expect(@file.episode ).to eq 7
+      expect(@file.tags    ).to eq ['720P', 'HDTV', 'X264']
+      expect(@file.group   ).to eq '2HD'
+    end
 
-  it 'should succeed given filename with brackets notation and space separator' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename_brackets_spaces)
-    }.to_not raise_error
-    @file.showname.should == 'Californication'
-    @file.season.should == 6
-    @file.episode.should == 7
-    @file.tags.should == ['720P', 'HDTV', 'X264']
-    @file.group.should == '2HD'
-  end
+    it 'succeeds given filename with brackets notation and space separator' do
+      expect{ @file = Addic7ed::Filename.new(@filename_brackets_spaces) }.to_not raise_error
+      expect(@file.showname).to eq 'Californication'
+      expect(@file.season  ).to eq 6
+      expect(@file.episode ).to eq 7
+      expect(@file.tags    ).to eq ['720P', 'HDTV', 'X264']
+      expect(@file.group   ).to eq '2HD'
+    end
 
-  it 'should succeed given filename with brackets and x notation and space separator' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename_x_brackets_spaces)
-    }.to_not raise_error
-    @file.showname.should == 'Californication'
-    @file.season.should == 6
-    @file.episode.should == 7
-    @file.tags.should == ['720P', 'HDTV', 'X264']
-    @file.group.should == '2HD'
-  end
+    it 'succeeds given filename with brackets and x notation and space separator' do
+      expect{ @file = Addic7ed::Filename.new(@filename_x_brackets_spaces) }.to_not raise_error
+      expect(@file.showname).to eq 'Californication'
+      expect(@file.season  ).to eq 6
+      expect(@file.episode ).to eq 7
+      expect(@file.tags    ).to eq ['720P', 'HDTV', 'X264']
+      expect(@file.group   ).to eq '2HD'
+    end
 
-  it 'should succeed given filename with brackets and 3-digits notation and space separator' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename_3digits_brackets_spaces)
-    }.to_not raise_error
-    @file.showname.should == 'Californication'
-    @file.season.should == 6
-    @file.episode.should == 7
-    @file.tags.should == ['720P', 'HDTV', 'X264']
-    @file.group.should == '2HD'
-  end
+    it 'succeeds given filename with brackets and 3-digits notation and space separator' do
+      expect{ @file = Addic7ed::Filename.new(@filename_3digits_brackets_spaces) }.to_not raise_error
+      expect(@file.showname).to eq 'Californication'
+      expect(@file.season  ).to eq 6
+      expect(@file.episode ).to eq 7
+      expect(@file.tags    ).to eq ['720P', 'HDTV', 'X264']
+      expect(@file.group   ).to eq '2HD'
+    end
 
-  it 'should succeed given lowercase filename' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename_lowercase)
-    }.to_not raise_error
-    @file.showname.should == 'californication'
-    @file.season.should == 6
-    @file.episode.should == 7
-    @file.tags.should == ['720P', 'HDTV', 'X264']
-    @file.group.should == '2HD'
-  end
+    it 'succeeds given lowercase filename' do
+      expect{ @file = Addic7ed::Filename.new(@filename_lowercase) }.to_not raise_error
+      expect(@file.showname).to eq 'californication'
+      expect(@file.season  ).to eq 6
+      expect(@file.episode ).to eq 7
+      expect(@file.tags    ).to eq ['720P', 'HDTV', 'X264']
+      expect(@file.group   ).to eq '2HD'
+    end
 
-  it 'should succeed given lowercase filename with x notation' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename_lowercase_x)
-    }.to_not raise_error
-    @file.showname.should == 'californication'
-    @file.season.should == 6
-    @file.episode.should == 7
-    @file.tags.should == ['720P', 'HDTV', 'X264']
-    @file.group.should == '2HD'
-  end
+    it 'succeeds given lowercase filename with x notation' do
+      expect{ @file = Addic7ed::Filename.new(@filename_lowercase_x) }.to_not raise_error
+      expect(@file.showname).to eq 'californication'
+      expect(@file.season  ).to eq 6
+      expect(@file.episode ).to eq 7
+      expect(@file.tags    ).to eq ['720P', 'HDTV', 'X264']
+      expect(@file.group   ).to eq '2HD'
+    end
 
-  it 'should succeed given filename with showname containing multiple words' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename_multiple_words)
-    }.to_not raise_error
-    @file.showname.should == 'The Walking Dead'
-    @file.season.should == 3
-    @file.episode.should == 11
-    @file.tags.should == ['720P', 'HDTV', 'X264']
-    @file.group.should == 'EVOLVE'
-  end
+    it 'succeeds given filename with showname containing multiple words' do
+      expect{ @file = Addic7ed::Filename.new(@filename_multiple_words) }.to_not raise_error
+      expect(@file.showname).to eq 'The Walking Dead'
+      expect(@file.season  ).to eq 3
+      expect(@file.episode ).to eq 11
+      expect(@file.tags    ).to eq ['720P', 'HDTV', 'X264']
+      expect(@file.group   ).to eq 'EVOLVE'
+    end
 
-  it 'should succeed given filename with showname containing multiple words with space separator' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename_multiple_words_spaces)
-    }.to_not raise_error
-    @file.showname.should == 'The Walking Dead'
-    @file.season.should == 3
-    @file.episode.should == 11
-    @file.tags.should == ['720P', 'HDTV', 'X264']
-    @file.group.should == 'EVOLVE'
-  end
+    it 'succeeds given filename with showname containing multiple words with space separator' do
+      expect{ @file = Addic7ed::Filename.new(@filename_multiple_words_spaces) }.to_not raise_error
+      expect(@file.showname).to eq 'The Walking Dead'
+      expect(@file.season  ).to eq 3
+      expect(@file.episode ).to eq 11
+      expect(@file.tags    ).to eq ['720P', 'HDTV', 'X264']
+      expect(@file.group   ).to eq 'EVOLVE'
+    end
 
-  it 'should succeed given filename with showname containing only numbers' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename_numbers_only)
-    }.to_not raise_error
-    @file.showname.should == '90210'
-    @file.season.should == 5
-    @file.episode.should == 12
-    @file.tags.should == ['720P', 'HDTV', 'X264']
-    @file.group.should == 'DIMENSION'
-  end
+    it 'succeeds given filename with showname containing only numbers' do
+      expect{ @file = Addic7ed::Filename.new(@filename_numbers_only) }.to_not raise_error
+      expect(@file.showname).to eq '90210'
+      expect(@file.season  ).to eq 5
+      expect(@file.episode ).to eq 12
+      expect(@file.tags    ).to eq ['720P', 'HDTV', 'X264']
+      expect(@file.group   ).to eq 'DIMENSION'
+    end
 
-  it 'should succeed given filename with showname containing production year' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename_showname_year)
-    }.to_not raise_error
-    @file.showname.should == 'The Americans 2013'
-    @file.season.should == 1
-    @file.episode.should == 4
-    @file.tags.should == ['720P', 'HDTV', 'X264']
-    @file.group.should == 'DIMENSION'
-  end
+    it 'succeeds given filename with showname containing production year' do
+      expect{ @file = Addic7ed::Filename.new(@filename_showname_year) }.to_not raise_error
+      expect(@file.showname).to eq 'The Americans 2013'
+      expect(@file.season  ).to eq 1
+      expect(@file.episode ).to eq 4
+      expect(@file.tags    ).to eq ['720P', 'HDTV', 'X264']
+      expect(@file.group   ).to eq 'DIMENSION'
+    end
 
-  it 'should succeed given filename containing full path' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename_full_path)
-    }.to_not raise_error
-    @file.showname.should == 'Californication'
-    @file.season.should == 6
-    @file.episode.should == 7
-    @file.tags.should == ['720P', 'HDTV', 'X264']
-    @file.group.should == '2HD'
-  end
+    it 'succeeds given filename containing full path' do
+      expect{ @file = Addic7ed::Filename.new(@filename_full_path) }.to_not raise_error
+      expect(@file.showname).to eq 'Californication'
+      expect(@file.season  ).to eq 6
+      expect(@file.episode ).to eq 7
+      expect(@file.tags    ).to eq ['720P', 'HDTV', 'X264']
+      expect(@file.group   ).to eq '2HD'
+    end
 
-  it 'should succeed given filename containing relative path' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename_relative_path)
-    }.to_not raise_error
-    @file.showname.should == 'Californication'
-    @file.season.should == 6
-    @file.episode.should == 7
-    @file.tags.should == ['720P', 'HDTV', 'X264']
-    @file.group.should == '2HD'
-  end
+    it 'succeeds given filename containing relative path' do
+      expect{ @file = Addic7ed::Filename.new(@filename_relative_path) }.to_not raise_error
+      expect(@file.showname).to eq 'Californication'
+      expect(@file.season  ).to eq 6
+      expect(@file.episode ).to eq 7
+      expect(@file.tags    ).to eq ['720P', 'HDTV', 'X264']
+      expect(@file.group   ).to eq '2HD'
+    end
 
-  it 'should succeed given filename containing no extension' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename_no_extension)
-    }.to_not raise_error
-    @file.showname.should == 'Californication'
-    @file.season.should == 6
-    @file.episode.should == 7
-    @file.tags.should == ['720P', 'HDTV', 'X264']
-    @file.group.should == '2HD'
-  end
+    it 'succeeds given filename containing no extension' do
+      expect{ @file = Addic7ed::Filename.new(@filename_no_extension) }.to_not raise_error
+      expect(@file.showname).to eq 'Californication'
+      expect(@file.season  ).to eq 6
+      expect(@file.episode ).to eq 7
+      expect(@file.tags    ).to eq ['720P', 'HDTV', 'X264']
+      expect(@file.group   ).to eq '2HD'
+    end
 
-  it 'should fail given filename with no showname' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename_no_showname)
-    }.to raise_error
-  end
+    it 'fails given filename with no showname' do
+      expect{ Addic7ed::Filename.new(@filename_no_showname) }.to raise_error Addic7ed::InvalidFilename
+    end
 
-  it 'should fail given filename with no season number' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename_no_season)
-    }.to raise_error
-  end
+    it 'fails given filename with no season number' do
+      expect{ Addic7ed::Filename.new(@filename_no_season) }.to raise_error Addic7ed::InvalidFilename
+    end
 
-  it 'should raise InvalidFilename given filename with no episode number' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename_no_episode)
-    }.to raise_error(Addic7ed::InvalidFilename)
-  end
+    it 'raises InvalidFilename given filename with no episode number' do
+      expect{ Addic7ed::Filename.new(@filename_no_episode) }.to raise_error Addic7ed::InvalidFilename
+    end
 
-  it 'should raise InvalidFilename given filename with no tags' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename_no_tags)
-    }.to raise_error(Addic7ed::InvalidFilename)
-  end
+    it 'raises InvalidFilename given filename with no tags' do
+      expect{ Addic7ed::Filename.new(@filename_no_tags) }.to raise_error Addic7ed::InvalidFilename
+    end
 
-  it 'should raise InvalidFilename given filename with no group' do
-    expect {
-      @file = Addic7ed::Filename.new(@filename_no_group)
-    }.to raise_error(Addic7ed::InvalidFilename)
+    it 'raises InvalidFilename given filename with no group' do
+      expect{ Addic7ed::Filename.new(@filename_no_group) }.to raise_error Addic7ed::InvalidFilename
+    end
   end
 
   describe '#encoded_filename' do
-
-    it 'should change all spaces to underscores' do
-      Addic7ed::Filename.new(@filename_multiple_words).encoded_showname.should == 'The_Walking_Dead'
+    it 'changes all spaces to underscores' do
+      expect(Addic7ed::Filename.new(@filename_multiple_words).encoded_showname).to eq 'The_Walking_Dead'
     end
 
-    it 'should wrap country code with parenthesis' do
-      Addic7ed::Filename.new(@filename_showname_US).encoded_showname.should == 'Shameless_(US)'
+    it 'wraps country code with parenthesis' do
+      expect(Addic7ed::Filename.new(@filename_showname_US).encoded_showname).to eq 'Shameless_(US)'
     end
 
-    it 'should detect country code even in lowercase' do
-      Addic7ed::Filename.new(@filename_showname_US_lowercase).encoded_showname.should == 'shameless_(us)'
+    it 'detects country code even in lowercase' do
+      expect(Addic7ed::Filename.new(@filename_showname_US_lowercase).encoded_showname).to eq 'shameless_(us)'
     end
 
-    it 'should remove country code for the original show (usually UK)' do
-      Addic7ed::Filename.new(@filename_showname_UK).encoded_showname.should == 'Shameless'
+    it 'removes country code for the original show (usually UK)' do
+      expect(Addic7ed::Filename.new(@filename_showname_UK).encoded_showname).to eq 'Shameless'
     end
 
-    it 'should remove production year' do
-      Addic7ed::Filename.new(@filename_showname_year).encoded_showname.should == 'The_Americans'
+    it 'removes production year' do
+      expect(Addic7ed::Filename.new(@filename_showname_year).encoded_showname).to eq 'The_Americans'
     end
 
-    it 'should handle when both country code and production year are present' do
-      Addic7ed::Filename.new(@filename_showname_UK_year).encoded_showname.should == 'The_Hour'
-      Addic7ed::Filename.new(@filename_showname_year_UK).encoded_showname.should == 'The_Hour'
-      Addic7ed::Filename.new(@filename_showname_US_year).encoded_showname.should == 'The_Hour_(US)'
-      Addic7ed::Filename.new(@filename_showname_year_US).encoded_showname.should == 'The_Hour_(US)'
+    it 'handles when both country code and production year are present' do
+      expect(Addic7ed::Filename.new(@filename_showname_UK_year).encoded_showname).to eq 'The_Hour'
+      expect(Addic7ed::Filename.new(@filename_showname_year_UK).encoded_showname).to eq 'The_Hour'
+      expect(Addic7ed::Filename.new(@filename_showname_US_year).encoded_showname).to eq 'The_Hour_(US)'
+      expect(Addic7ed::Filename.new(@filename_showname_year_US).encoded_showname).to eq 'The_Hour_(US)'
     end
-
   end
 
   describe '#basename' do
-
-    it 'should return only file name given a full path' do
-      Addic7ed::Filename.new(@filename_full_path).basename.should == 'Californication.S06E07.720p.HDTV.x264-2HD.mkv'
+    it 'returns only file name given a full path' do
+      expect(Addic7ed::Filename.new(@filename_full_path).basename).to eq 'Californication.S06E07.720p.HDTV.x264-2HD.mkv'
     end
-
   end
 
   describe '#dirname' do
-
-    it 'should return only path given a full path' do
-      Addic7ed::Filename.new(@filename_full_path).dirname.should == '/data/public/Series/Californication/Saison 06'
+    it 'returns only path given a full path' do
+      expect(Addic7ed::Filename.new(@filename_full_path).dirname).to eq '/data/public/Series/Californication/Saison 06'
     end
-
   end
 
   describe '#extname' do
-
-    it 'should return only file extension given a full path' do
-      Addic7ed::Filename.new(@filename_full_path).extname.should == '.mkv'
+    it 'returns only file extension given a full path' do
+      expect(Addic7ed::Filename.new(@filename_full_path).extname).to eq '.mkv'
     end
-
   end
 
   describe '#to_s' do
-
-    it 'should return file name as a string' do
-      Addic7ed::Filename.new(@filename_full_path).to_s.should == '/data/public/Series/Californication/Saison 06/Californication.S06E07.720p.HDTV.x264-2HD.mkv'
+    it 'returns file name as a string' do
+      expect(Addic7ed::Filename.new(@filename_full_path).to_s).to eq '/data/public/Series/Californication/Saison 06/Californication.S06E07.720p.HDTV.x264-2HD.mkv'
     end
-
   end
 
   describe '#inspect' do
-
-    it 'should print a human-readable detailed version' do
-      Addic7ed::Filename.new(@filename).inspect.should ==
+    it 'prints a human-readable detailed version' do
+      expect(Addic7ed::Filename.new(@filename).inspect).to eq(
 'Guesses for Californication.S06E07.720p.HDTV.x264-2HD.mkv:
   show:    Californication
   season:  6
   episode: 7
   tags:    ["720P", "HDTV", "X264"]
-  group:   2HD'
+  group:   2HD')
     end
-
   end
-
 end
