@@ -35,7 +35,7 @@ module Addic7ed
       if response.kind_of?(Net::HTTPRedirection)
         follow_redirection(lang, response['location'], http_redirect_limit)
       else
-        save_subtitle response.body
+        save_subtitle response
       end
     end
 
@@ -84,9 +84,12 @@ module Addic7ed
     end
 
     def save_subtitle(content)
-      Kernel.open "#{filename}".gsub(/\.\w{3}$/, '.srt'), 'w' do |f|
-        f << content
+      subname = content.header['content-disposition'][/"(.*)"/, 1].gsub(/\.\w.*Addic7ed.com/, '')
+      Kernel.open @filename.dirname + "/" + subname, 'w' do |f|
+        f << content.body
       end
+      videoname = subname.gsub(/\.\w{3}$/, @filename.extname)
+      File.rename(@filename.to_s, @filename.dirname + "/" +videoname)
     rescue
       raise SubtitleCannotBeSaved
     end
