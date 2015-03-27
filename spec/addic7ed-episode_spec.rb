@@ -94,53 +94,64 @@ describe Addic7ed::Episode do
   end
 
   describe '#download_best_subtitle!' do
-    before :each do
+    let(:episode) { Addic7ed::Episode.new(@filename) }
+
+    before do
       WebMock.reset!
       @page_stub = stub_request(:get, 'http://www.addic7ed.com/serie/The_Walking_Dead/3/2/8')
         .to_return File.new('spec/responses/walking-dead-3-2-8.http')
       @sub_stub = stub_request(:get, 'http://www.addic7ed.com/original/68018/4')
         .to_return File.new('spec/responses/walking-dead-3-2-8_best_subtitle.http')
-      # The Episode object must be re-created between every test, since redirection may modify its URI
-      @reset_episode = Addic7ed::Episode.new(@filename)
       # Prevent actual disk writing
       allow(Kernel).to receive(:open)
     end
 
     it 'gets the best subtitle candidate with a network request' do
-      expect(@reset_episode).to receive(:best_subtitle).once.and_call_original
-      @reset_episode.download_best_subtitle!('fr')
+      expect(episode).to receive(:best_subtitle).once.and_call_original
+      episode.download_best_subtitle!('fr')
       expect(@page_stub).to have_been_requested
       expect(@sub_stub).to have_been_requested
     end
 
     it 'raises DownloadError when a network error happens' do
       stub_request(:get, 'http://www.addic7ed.com/original/68018/4').to_timeout
-      expect{ @reset_episode.download_best_subtitle!('fr') }.to raise_error Addic7ed::DownloadError
+      expect{ episode.download_best_subtitle!('fr') }.to raise_error Addic7ed::DownloadError
     end
 
     it 'is called recursively' do
       stub_request(:get, 'http://www.addic7ed.com/original/68018/4').to_return File.new('spec/responses/basic_redirection.http')
       stub_request(:get, 'http://www.addic7ed.com/original/68018/4.redirected').to_return File.new('spec/responses/walking-dead-3-2-8_best_subtitle.http')
-      expect(@reset_episode).to receive(:download_best_subtitle!).twice.and_call_original
-      @reset_episode.download_best_subtitle!('fr')
+      expect(episode).to receive(:download_best_subtitle!).twice.and_call_original
+      episode.download_best_subtitle!('fr')
     end
 
     it 'raises HTTPError when stuck in a HTTP redirections loop' do
       stub_request(:get, 'http://www.addic7ed.com/original/68018/4')
         .to_return File.new('spec/responses/redirection_loop.http')
-      expect{ @reset_episode.download_best_subtitle!('fr') }.to raise_error Addic7ed::HTTPError
+      expect{ episode.download_best_subtitle!('fr') }.to raise_error Addic7ed::HTTPError
     end
 
     it 'creates a new file on disk' do
       file = double('file')
-      expect(Kernel).to receive(:open).with('The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.srt', 'w').and_yield(file)
+      expect(Kernel).to receive(:open).with('The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.fr.srt', 'w').and_yield(file)
       expect(file).to receive(:<<)
-      @reset_episode.download_best_subtitle!('fr')
+      episode.download_best_subtitle!('fr')
+    end
+
+    context "when untagged option is set" do
+      let(:episode) { Addic7ed::Episode.new(@filename, true) }
+
+      it "does not include language code in subtitle filename" do
+        file = double('file')
+        expect(Kernel).to receive(:open).with('The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.srt', 'w').and_yield(file)
+        expect(file).to receive(:<<)
+        episode.download_best_subtitle!('fr')
+      end
     end
 
     it 'raises SubtitleCannotBeSaved when a disk error happens' do
-      expect(Kernel).to receive(:open).with('The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.srt', 'w').and_raise('Persmission denied')
-      expect{ @reset_episode.download_best_subtitle!('fr') }.to raise_error Addic7ed::SubtitleCannotBeSaved
+      expect(Kernel).to receive(:open).with('The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.fr.srt', 'w').and_raise('Persmission denied')
+      expect{ episode.download_best_subtitle!('fr') }.to raise_error Addic7ed::SubtitleCannotBeSaved
     end
   end
 end
