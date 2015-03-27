@@ -76,6 +76,7 @@ This projet supports the following Ruby versions/implementations:
 * Ruby 1.9.3 (MRI)
 * Ruby 2.0 (MRI)
 * Ruby 2.1 (MRI)
+* Ruby 2.2 (MRI)
 * Rubinius
 * JRuby
 
