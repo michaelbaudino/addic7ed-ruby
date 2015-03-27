@@ -1,5 +1,5 @@
 module Addic7ed
-  class Filename
+  class File
 
     TVSHOW_REGEX = /\A(?<showname>.*\w)[\[\. ]+S?(?<season>\d{1,2})[-\. ]?[EX]?(?<episode>\d{2})([-\. ]?[EX]?\d{2})*[\]\. ]+(?<tags>.*)-(?<group>\w*)(\.\w{3})?\z/i
 
@@ -32,15 +32,15 @@ module Addic7ed
     # Lazy getters
 
     def basename
-      @basename ||= File.basename(@filename)
+      @basename ||= ::File.basename(@filename)
     end
 
     def dirname
-      @dirname ||= File.dirname(@filename)
+      @dirname ||= ::File.dirname(@filename)
     end
 
     def extname
-      @extname ||= File.extname(@filename)
+      @extname ||= ::File.extname(@filename)
     end
 
     def to_s
