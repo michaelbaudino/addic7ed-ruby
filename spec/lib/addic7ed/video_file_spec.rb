@@ -1,8 +1,8 @@
 require 'spec_helper'
 require './lib/addic7ed'
 
-describe Addic7ed::File do
-  let(:file) { Addic7ed::File.new(filename) }
+describe Addic7ed::VideoFile do
+  let(:file) { Addic7ed::VideoFile.new(filename) }
 
   shared_examples "a media file" do |filename, expected_show_name|
     let(:filename) { filename }
@@ -124,60 +124,60 @@ describe Addic7ed::File do
 
   describe '#encoded_filename' do
     it 'changes all spaces to underscores' do
-      expect(Addic7ed::File.new("Show Name.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Show_Name'
+      expect(Addic7ed::VideoFile.new("Show Name.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Show_Name'
     end
 
     it 'wraps country code with parenthesis' do
-      expect(Addic7ed::File.new("Showname.US.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Showname_(US)'
+      expect(Addic7ed::VideoFile.new("Showname.US.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Showname_(US)'
     end
 
     it 'detects country code even in lowercase' do
-      expect(Addic7ed::File.new("showname.us.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'showname_(us)'
+      expect(Addic7ed::VideoFile.new("showname.us.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'showname_(us)'
     end
 
     it "removes country code for the original show when it's UK" do
-      expect(Addic7ed::File.new("Showname.UK.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Showname'
+      expect(Addic7ed::VideoFile.new("Showname.UK.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Showname'
     end
 
     it 'removes production year' do
-      expect(Addic7ed::File.new("Showname.2014.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Showname'
+      expect(Addic7ed::VideoFile.new("Showname.2014.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Showname'
     end
 
     it 'handles when both country code and production year are present' do
-      expect(Addic7ed::File.new("Showname.2014.UK.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Showname'
-      expect(Addic7ed::File.new("Showname.UK.2014.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Showname'
-      expect(Addic7ed::File.new("Showname.2014.US.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Showname_(US)'
-      expect(Addic7ed::File.new("Showname.US.2014.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Showname_(US)'
+      expect(Addic7ed::VideoFile.new("Showname.2014.UK.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Showname'
+      expect(Addic7ed::VideoFile.new("Showname.UK.2014.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Showname'
+      expect(Addic7ed::VideoFile.new("Showname.2014.US.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Showname_(US)'
+      expect(Addic7ed::VideoFile.new("Showname.US.2014.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Showname_(US)'
     end
   end
 
   describe '#basename' do
     it 'returns only file name given a full path' do
-      expect(Addic7ed::File.new("/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv").basename).to eq "Showname.S02E01.720p.HDTV.x264-GROUP.mkv"
+      expect(Addic7ed::VideoFile.new("/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv").basename).to eq "Showname.S02E01.720p.HDTV.x264-GROUP.mkv"
     end
   end
 
   describe '#dirname' do
     it 'returns only path given a full path' do
-      expect(Addic7ed::File.new("/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv").dirname).to eq '/full/path/to'
+      expect(Addic7ed::VideoFile.new("/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv").dirname).to eq '/full/path/to'
     end
   end
 
   describe '#extname' do
     it 'returns only file extension given a full path' do
-      expect(Addic7ed::File.new("/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv").extname).to eq '.mkv'
+      expect(Addic7ed::VideoFile.new("/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv").extname).to eq '.mkv'
     end
   end
 
   describe '#to_s' do
     it 'returns file name as a string' do
-      expect(Addic7ed::File.new("/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv").to_s).to eq "/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv"
+      expect(Addic7ed::VideoFile.new("/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv").to_s).to eq "/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv"
     end
   end
 
   describe '#inspect' do
     it 'prints a human-readable detailed version' do
-      expect(Addic7ed::File.new("Showname.S02E01.720p.HDTV.x264-GROUP.mkv").inspect).to eq(
+      expect(Addic7ed::VideoFile.new("Showname.S02E01.720p.HDTV.x264-GROUP.mkv").inspect).to eq(
 'Guesses for Showname.S02E01.720p.HDTV.x264-GROUP.mkv:
   show:    Showname
   season:  2

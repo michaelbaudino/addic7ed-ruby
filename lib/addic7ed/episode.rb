@@ -7,7 +7,7 @@ module Addic7ed
     attr_reader :file, :untagged
 
     def initialize(filename, untagged = false)
-      @file  = Addic7ed::File.new(filename)
+      @file  = Addic7ed::VideoFile.new(filename)
       @untagged = untagged
     end
 
