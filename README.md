@@ -22,7 +22,8 @@ Well, it should...
     ```bash
     $ addic7ed -l fr /path/to/Californication.S06E07.720p.HDTV.x264-2HD.mkv
     ```
-3. Enjoy your show :tv:
+3. A wild `Californication.S06E07.720p.HDTV.x264-2HD.fr.srt` file appears
+4. Enjoy your show :tv:
 
 ### Are there any options ?
 
@@ -35,6 +36,7 @@ Usage: addic7ed [options] <file1> [<file2>, <file3>, ...]
     -a, --all-subtitles              Display all available subtitles
     -n, --do-not-download            Do not download the subtitle
     -f, --force                      Overwrite existing subtitle
+    -u, --untagged                   Do not include language code in subtitle filename
     -v, --[no-]verbose               Run verbosely
     -q, --quiet                      Run without output (cron-mode)
     -d, --debug                      Debug mode [do not use]
