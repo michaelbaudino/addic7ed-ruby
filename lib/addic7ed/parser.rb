@@ -38,13 +38,14 @@ module Addic7ed
     end
 
     def parse_subtitle_node(sub_node)
-      version   = extract_version(sub_node)
-      language  = extract_language(sub_node)
-      status    = extract_status(sub_node)
-      url       = extract_url(sub_node)
-      source    = extract_source(sub_node)
-      downloads = extract_downloads(sub_node)
-      Addic7ed::Subtitle.new(version, language, status, url, source, downloads)
+      Addic7ed::Subtitle.new(
+        version:   extract_version(sub_node),
+        language:  extract_language(sub_node),
+        status:    extract_status(sub_node),
+        url:       extract_url(sub_node),
+        source:    extract_source(sub_node),
+        downloads: extract_downloads(sub_node)
+      )
     end
 
     def extract_version(sub_node)
