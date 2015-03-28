@@ -17,7 +17,7 @@ module Addic7ed
       @subtitles
     end
 
-    protected
+  protected
 
     def subtitles_page_dom
       response = Net::HTTP.get_response(URI(@episode.url(@lang)))

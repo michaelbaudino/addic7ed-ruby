@@ -40,7 +40,7 @@ module Addic7ed
       end
     end
 
-    protected
+  protected
 
     def find_subtitles(lang)
       initialize_language(lang)
