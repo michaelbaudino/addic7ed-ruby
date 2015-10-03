@@ -1,7 +1,7 @@
 module Addic7ed
   class Subtitle
 
-    attr_reader :version, :language, :status, :via, :downloads
+    attr_reader :version, :language, :status, :via, :downloads, :comment
     attr_accessor :url
 
     def initialize(options = {})
@@ -11,7 +11,9 @@ module Addic7ed
       @url       = options[:url]
       @via       = options[:via]
       @downloads = options[:downloads].to_i || 0
+      @comment   = options[:comment]
       normalize_version!
+      normalize_comment!
     end
 
     def to_s
@@ -53,10 +55,22 @@ module Addic7ed
       @version.upcase!
     end
 
+    def normalize_comment!
+      @comment ||= ""
+      @comment.downcase!
+    end
+
     def is_compatible_with?(other_version)
-      self.version == other_version ||
+      version_compatible = self.version == other_version ||
       COMPATIBILITY_720P[self.version] == other_version ||
       COMPATIBILITY_720P[other_version] == self.version
+
+      comment_compatible = self.comment.include? other_version.downcase
+      if COMPATIBILITY_720P[other_version]
+        comment_compatible ||= self.comment.include? COMPATIBILITY_720P[other_version].downcase
+      end
+
+      version_compatible || comment_compatible
     end
 
     def is_more_popular_than?(other_subtitle)

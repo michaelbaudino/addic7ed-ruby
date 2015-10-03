@@ -44,7 +44,8 @@ module Addic7ed
         status:    extract_status(sub_node),
         url:       extract_url(sub_node),
         source:    extract_source(sub_node),
-        downloads: extract_downloads(sub_node)
+        downloads: extract_downloads(sub_node),
+        comment:   extract_comment(sub_node)
       )
     end
 
@@ -81,6 +82,12 @@ module Addic7ed
       downloads_node = sub_node.css('tr:nth-child(4) td.newsDate').first
       raise Addic7ed::ParsingError unless downloads_node
       /(?<downloads>\d*) Downloads/.match(downloads_node.content)[:downloads]
+    end
+
+    def extract_comment(sub_node)
+        comment_node = sub_node.css('tr:nth-child(2) td.newsDate').first
+        raise Addic7ed::ParsingError unless comment_node
+        comment_node.content.gsub(/<img[^>]+\>/i, "")
     end
 
   end
