@@ -4,11 +4,9 @@
 
 Ruby command-line script to fetch subtitles on Addic7ed
 
-Current version: **0.3.2**
-
 ### Is it working ?
 
-Well, it should...
+Until next time Addic7ed break their HTML/CSS structure, yes :smile:
 
 ### How to use it ?
 
