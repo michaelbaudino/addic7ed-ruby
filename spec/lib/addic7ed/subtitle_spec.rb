@@ -57,7 +57,7 @@ describe Addic7ed::Subtitle, "#to_s" do
 end
 
 describe Addic7ed::Subtitle, "#works_for?" do
-  let(:subtitle) { Addic7ed::Subtitle.new(version: "DIMENSION") }
+  let(:subtitle) { Addic7ed::Subtitle.new(version: "DIMENSION", comment: "Works with IMMERSE") }
 
   context "when it is incomplete" do
     before { allow(subtitle).to receive(:is_completed?).and_return(false) }
@@ -80,6 +80,18 @@ describe Addic7ed::Subtitle, "#works_for?" do
 
     it "returns false given an incompatible version" do
       expect(subtitle.works_for? "EVOLVE").to be false
+    end
+
+    it "returns true given the same version as comment" do
+      expect(subtitle.works_for? "IMMERSE").to be true
+    end
+
+    it "returns true given a compatible version as comment" do
+      expect(subtitle.works_for? "ASAP").to be true
+    end
+
+    it "returns false given an incompatible version as comment" do
+      expect(subtitle.works_for? "KILLERS").to be false
     end
   end
 end
