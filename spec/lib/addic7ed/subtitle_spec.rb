@@ -26,6 +26,10 @@ describe Addic7ed::Subtitle, "#normalize_version!" do
     expect(normalized_version("720P DIMENSION")).to eq 'DIMENSION'
   end
 
+  it "removes '1080p' tag" do
+    expect(normalized_version("1080P DIMENSION")).to eq 'DIMENSION'
+  end
+
   it "removes 'HDTV' tag" do
     expect(normalized_version("HDTV DIMENSION")).to eq 'DIMENSION'
   end
@@ -45,6 +49,10 @@ describe Addic7ed::Subtitle, "#normalize_version!" do
 
   it "removes the 'Version' prefix" do
     expect(normalized_version("Version DIMENSION")).to eq 'DIMENSION'
+  end
+
+  it "removes combined tags" do
+    expect(normalized_version("Version 720P PROPER X264 HDTV DIMENSION")).to eq "DIMENSION"
   end
 end
 
