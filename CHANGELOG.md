@@ -1,6 +1,9 @@
 ## Changelog
 
+* 0.5.0: Add compatibility check from the comment field (thanks to @Pmaene)
+* 0.4.0: Append language code when saving subtitles files (can be disabled with `-u|--untagged`)
 * 0.3.4: Support RERIP in file names
+* 0.3.3: Add detecion of video filenames with double episode number (e.g. `s02e22-23`)
 * 0.3.3: Support double episodes
 * 0.3.2: Support lowercase country codes in filenames
 * 0.3.1: Fix a bug in subtitle version string normalization
