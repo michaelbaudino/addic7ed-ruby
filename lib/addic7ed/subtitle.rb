@@ -5,15 +5,13 @@ module Addic7ed
     attr_accessor :url
 
     def initialize(options = {})
-      @version   = options[:version]
+      @version   = normalize_version(options[:version])
       @language  = options[:language]
       @status    = options[:status]
       @url       = options[:url]
       @via       = options[:via]
       @downloads = options[:downloads].to_i || 0
-      @comment   = options[:comment]
-      normalize_version!
-      normalize_comment!
+      @comment   = normalize_comment(options[:comment])
     end
 
     def to_s
@@ -42,22 +40,21 @@ module Addic7ed
 
   protected
 
-    def normalize_version!
-      @version ||= ""
-      @version.gsub!(/^Version */i, '')
-      @version.gsub!(/720p/i,       '')
-      @version.gsub!(/hdtv/i,       '')
-      @version.gsub!(/proper/i,     '')
-      @version.gsub!(/rerip/i,      '')
-      @version.gsub!(/x\.?264/i,    '')
-      @version.gsub!(/^[- \.]*/,    '')
-      @version.gsub!(/[- \.]*$/,    '')
-      @version.upcase!
+    def normalize_version(version)
+      (version || "").
+        gsub(/^Version */i, '').
+        gsub(/720p/i,       '').
+        gsub(/hdtv/i,       '').
+        gsub(/proper/i,     '').
+        gsub(/rerip/i,      '').
+        gsub(/x\.?264/i,    '').
+        gsub(/^[- \.]*/,    '').
+        gsub(/[- \.]*$/,    '').
+        upcase
     end
 
-    def normalize_comment!
-      @comment ||= ""
-      @comment.downcase!
+    def normalize_comment(comment)
+      (comment || "").downcase
     end
 
     def is_compatible_with?(other_version)
