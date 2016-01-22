@@ -4,17 +4,17 @@ require 'open-uri'
 module Addic7ed
   class Episode
 
-    attr_reader :file, :untagged
+    attr_reader :video_file, :untagged
 
     def initialize(filename, untagged = false)
-      @file  = Addic7ed::VideoFile.new(filename)
+      @video_file  = Addic7ed::VideoFile.new(filename)
       @untagged = untagged
     end
 
     def url(lang = 'fr')
       check_language_availability(lang)
       @localized_urls ||= {}
-      @localized_urls[lang] ||= "http://www.addic7ed.com/serie/#{file.encoded_showname}/#{file.season}/#{file.episode}/#{LANGUAGES[lang][:id]}"
+      @localized_urls[lang] ||= "http://www.addic7ed.com/serie/#{video_file.encoded_showname}/#{video_file.season}/#{video_file.episode}/#{LANGUAGES[lang][:id]}"
     end
 
     def subtitles(lang = 'fr')
@@ -51,7 +51,7 @@ module Addic7ed
     def find_best_subtitle(lang)
       @best_subtitle ||= {}
       subtitles(lang).each do |sub|
-        @best_subtitle[lang] = sub if sub.works_for? file.group and sub.can_replace? @best_subtitle[lang]
+        @best_subtitle[lang] = sub if sub.works_for? video_file.group and sub.can_replace? @best_subtitle[lang]
       end
       raise NoSubtitleFound unless @best_subtitle[lang]
     end
@@ -85,12 +85,11 @@ module Addic7ed
     end
 
     def save_subtitle(content, lang)
-      Kernel.open "#{file}".gsub(/\.\w{3}$/, untagged ? ".srt" : ".#{lang}.srt"), 'w' do |f|
+      Kernel.open "#{video_file}".gsub(/\.\w{3}$/, untagged ? ".srt" : ".#{lang}.srt"), 'w' do |f|
         f << content
       end
     rescue
       raise SubtitleCannotBeSaved
     end
-
   end
 end

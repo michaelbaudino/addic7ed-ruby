@@ -82,12 +82,12 @@ options[:filenames].each do |filename|
 
   begin
     ep = Addic7ed::Episode.new(filename, options[:untagged])
-    puts "Searching subtitles for #{ep.filename.basename}" if options[:verbose]
+    puts "Searching subtitles for #{ep.video_file.basename}" if options[:verbose]
     if File.file?(filename.gsub(/\.\w{3}$/, '.srt')) and not options[:force]
       puts "A subtitle already exists (#{filename.gsub(/\.\w{3}$/, '.srt')}). Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
       next
     end
-    puts ep.filename.inspect.gsub(/^/, '  ') if options[:verbose]
+    puts ep.video_file.inspect.gsub(/^/, '  ') if options[:verbose]
     ep.subtitles(options[:language])
     if options[:all] or options[:verbose]
       puts 'Available subtitles:'.gsub(/^/, options[:verbose] ? '  ' : '')
@@ -109,10 +109,10 @@ options[:filenames].each do |filename|
     puts "#{filename} does not seem to be a valid TV show filename. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     next
   rescue Addic7ed::ShowNotFound
-    puts "Show not found on Addic7ed : #{ep.filename.showname}. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
+    puts "Show not found on Addic7ed : #{ep.video_file.showname}. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     next
   rescue Addic7ed::EpisodeNotFound
-    puts "Episode not found on Addic7ed : #{ep.filename.showname} S#{ep.filename.season}E#{ep.filename.episode}. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
+    puts "Episode not found on Addic7ed : #{ep.video_file.showname} S#{ep.video_file.season}E#{ep.video_file.episode}. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     next
   rescue Addic7ed::LanguageNotSupported
     puts "Addic7ed does not support language '#{options[:language]}'. Exiting.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
