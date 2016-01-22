@@ -61,32 +61,24 @@ module Addic7ed
     end
 
     def is_compatible_with?(other_version)
-      generally_compatible_with?(other_version) ||
-      commented_as_compatible_with?(other_version)
+      generally_compatible_with?(other_version) || commented_as_compatible_with?(other_version)
     end
 
     def generally_compatible_with?(other_version)
-        self.version == other_version ||
-        COMPATIBILITY_720P[self.version] == other_version ||
-        COMPATIBILITY_720P[other_version] == self.version
+      version == other_version || COMPATIBILITY_720P[version] == other_version || COMPATIBILITY_720P[other_version] == version
     end
 
     def commented_as_compatible_with?(other_version)
-        compatibility = COMPATIBILITY_720P[other_version]
-
-        comment_compatible = self.comment.include?(other_version.downcase)
-        if compatibility
-            comment_compatible ||= self.comment.include?(compatibility.downcase)
-        end
-
-        comment_compatible
+      res   = comment.include? other_version.downcase
+      res ||= comment.include? COMPATIBILITY_720P[other_version].downcase if COMPATIBILITY_720P[other_version]
+      res ||= comment.include? COMPATIBILITY_720P[version].downcase       if COMPATIBILITY_720P[version]
+      !!res
     end
 
     def is_more_popular_than?(other_subtitle)
       return true  if other_subtitle.nil?
       return false if other_subtitle.is_featured?
-      return self.downloads > other_subtitle.downloads
+      return downloads > other_subtitle.downloads
     end
-
   end
 end
