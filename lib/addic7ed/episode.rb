@@ -29,7 +29,7 @@ module Addic7ed
       return @best_subtitle[lang]
     end
 
-    def download_best_subtitle!(lang, no_hi, http_redirect_limit = 8)
+    def download_best_subtitle!(lang, no_hi = false, http_redirect_limit = 8)
       raise HTTPError.new('Too many HTTP redirects') unless http_redirect_limit > 0
       uri = URI(best_subtitle(lang, no_hi).url)
       response = get_http_response(uri, url(lang))
@@ -48,7 +48,7 @@ module Addic7ed
       @subtitles[lang] = parser.extract_subtitles
     end
 
-    def find_best_subtitle(lang, no_hi)
+    def find_best_subtitle(lang, no_hi = false)
       @best_subtitle ||= {}
       subtitles(lang).each do |sub|
         @best_subtitle[lang] = sub if sub.works_for?(file.group, no_hi) and sub.can_replace? @best_subtitle[lang]

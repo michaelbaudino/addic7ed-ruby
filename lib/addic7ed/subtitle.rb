@@ -20,11 +20,7 @@ module Addic7ed
     end
 
     def works_for?(version = '', no_hi = false)
-      hi_works = true
-      if @hi and no_hi
-        hi_works = false
-      end
-
+      hi_works = !@hi || !no_hi
       is_completed? and is_compatible_with? version and hi_works
     end
 
