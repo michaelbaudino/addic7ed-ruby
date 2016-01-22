@@ -1,5 +1,6 @@
 ## Changelog
 
+* 0.5.1: Fix a bug in error handling because of bad copypasta from former method rename :spaghetti:
 * 0.5.0: Add compatibility check from the comment field (thanks to @Pmaene)
 * 0.4.0: Append language code when saving subtitles files (can be disabled with `-u|--untagged`)
 * 0.3.4: Support RERIP in file names
