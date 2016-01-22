@@ -7,3 +7,5 @@ rvm:
   - ruby-2.2
   - rbx
   - jruby
+before_install:
+  - gem update bundler
