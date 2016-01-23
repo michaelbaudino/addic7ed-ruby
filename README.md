@@ -1,8 +1,10 @@
 # addic7ed-ruby
-[![Build Status](https://travis-ci.org/michaelbaudino/addic7ed-ruby.png)](https://travis-ci.org/michaelbaudino/addic7ed-ruby)
-[![Dependency Status](https://gemnasium.com/michaelbaudino/addic7ed-ruby.png)](https://gemnasium.com/michaelbaudino/addic7ed-ruby) [![Code Climate](https://codeclimate.com/github/michaelbaudino/addic7ed-ruby.png)](https://codeclimate.com/github/michaelbaudino/addic7ed-ruby)
-[![Coverage Status](https://coveralls.io/repos/michaelbaudino/addic7ed-ruby/badge.png?branch=master)](https://coveralls.io/r/michaelbaudino/addic7ed-ruby)
-[![Gem Version](https://badge.fury.io/rb/addic7ed.png)](http://badge.fury.io/rb/addic7ed)
+
+[![Build Status](https://api.travis-ci.org/michaelbaudino/addic7ed-ruby.svg?branch=master)](https://travis-ci.org/michaelbaudino/addic7ed-ruby)
+[![Dependency Status](https://gemnasium.com/michaelbaudino/addic7ed-ruby.svg?travis)](https://gemnasium.com/michaelbaudino/addic7ed-ruby)
+[![Code Climate](https://codeclimate.com/github/michaelbaudino/addic7ed-ruby.svg)](https://codeclimate.com/github/michaelbaudino/addic7ed-ruby)
+[![Coverage Status](https://coveralls.io/repos/michaelbaudino/addic7ed-ruby/badge.svg?branch=master)](https://coveralls.io/r/michaelbaudino/addic7ed-ruby)
+[![Gem Version](https://badge.fury.io/rb/addic7ed.svg)](http://badge.fury.io/rb/addic7ed)
 [![security](https://hakiri.io/github/michaelbaudino/addic7ed-ruby/master.svg)](https://hakiri.io/github/michaelbaudino/addic7ed-ruby/master)
 
 
