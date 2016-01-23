@@ -51,7 +51,7 @@ module Addic7ed
     def find_best_subtitle(lang, no_hi = false)
       @best_subtitle ||= {}
       subtitles(lang).each do |sub|
-        @best_subtitle[lang] = sub if sub.works_for?(file.group, no_hi) and sub.can_replace? @best_subtitle[lang]
+        @best_subtitle[lang] = sub if sub.works_for?(video_file.group, no_hi) and sub.can_replace? @best_subtitle[lang]
       end
       raise NoSubtitleFound unless @best_subtitle[lang]
     end
