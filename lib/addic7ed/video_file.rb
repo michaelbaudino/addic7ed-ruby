@@ -1,18 +1,19 @@
 module Addic7ed
   class VideoFile
 
-    TVSHOW_REGEX = /\A(?<showname>.*\w)[\[\. ]+S?(?<season>\d{1,2})[-\. ]?[EX]?(?<episode>\d{2})([-\. ]?[EX]?\d{2})*[\]\. ]+(?<tags>.*)-(?<group>\w*)(\.\w{3})?\z/i
+    TVSHOW_REGEX = /\A(?<showname>.*\w)[\[\. ]+S?(?<season>\d{1,2})[-\. ]?[EX]?(?<episode>\d{2})([-\. ]?[EX]?\d{2})*[\]\. ]+(?<tags>.*)-(?<group>\w*)\[?(?<distribution>\w*)\]?(\.\w{3})?\z/i
 
-    attr_reader :filename, :showname, :season, :episode, :tags, :group
+    attr_reader :filename, :showname, :season, :episode, :tags, :group, :distribution
 
     def initialize(filename)
       @filename = filename
       if match = TVSHOW_REGEX.match(basename)
-        @showname = match[:showname].gsub('.', ' ')
-        @season   = match[:season].to_i
-        @episode  = match[:episode].to_i
-        @tags     = match[:tags].upcase.split(/[\. ]/)
-        @group    = match[:group].upcase
+        @showname     = match[:showname].gsub('.', ' ')
+        @season       = match[:season].to_i
+        @episode      = match[:episode].to_i
+        @tags         = match[:tags].upcase.split(/[\. ]/)
+        @group        = match[:group].upcase
+        @distribution = match[:distribution].upcase
       else
         raise InvalidFilename
       end
@@ -49,11 +50,12 @@ module Addic7ed
 
     def inspect
 "Guesses for #{@filename}:
-  show:    #{@showname}
-  season:  #{@season}
-  episode: #{@episode}
-  tags:    #{@tags}
-  group:   #{@group}"
+  show:         #{@showname}
+  season:       #{@season}
+  episode:      #{@episode}
+  tags:         #{@tags}
+  group:        #{@group}
+  distribution: #{@distribution}"
     end
 
   end

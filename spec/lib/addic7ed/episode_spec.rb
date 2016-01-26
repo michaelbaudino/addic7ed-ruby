@@ -3,10 +3,10 @@ require './lib/addic7ed'
 
 describe Addic7ed::Episode do
   before :all do
-    @filename = 'The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.mkv'
-    @filename_show_not_found = 'Show.Not.Found.S03E02.720p.HDTV.x264-EVOLVE.mkv'
-    @filename_episode_not_found = 'The.Walking.Dead.S03E42.720p.HDTV.x264-EVOLVE.mkv'
-    @filename_compatible_group = 'The.Walking.Dead.S03E04.HDTV.XviD-ASAP.mkv'
+    @filename = 'The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE[ettv].mkv'
+    @filename_show_not_found = 'Show.Not.Found.S03E02.720p.HDTV.x264-EVOLVE[ettv].mkv'
+    @filename_episode_not_found = 'The.Walking.Dead.S03E42.720p.HDTV.x264-EVOLVE[ettv].mkv'
+    @filename_compatible_group = 'The.Walking.Dead.S03E04.HDTV.XviD-ASAP[ettv].mkv'
     @episode = Addic7ed::Episode.new(@filename)
   end
 
@@ -133,7 +133,7 @@ describe Addic7ed::Episode do
 
     it 'creates a new file on disk' do
       file = double('file')
-      expect(Kernel).to receive(:open).with('The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.fr.srt', 'w').and_yield(file)
+      expect(Kernel).to receive(:open).with('The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE[ettv].fr.srt', 'w').and_yield(file)
       expect(file).to receive(:<<)
       episode.download_best_subtitle!('fr')
     end
@@ -143,14 +143,14 @@ describe Addic7ed::Episode do
 
       it "does not include language code in subtitle filename" do
         file = double('file')
-        expect(Kernel).to receive(:open).with('The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.srt', 'w').and_yield(file)
+        expect(Kernel).to receive(:open).with('The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE[ettv].srt', 'w').and_yield(file)
         expect(file).to receive(:<<)
         episode.download_best_subtitle!('fr')
       end
     end
 
     it 'raises SubtitleCannotBeSaved when a disk error happens' do
-      expect(Kernel).to receive(:open).with('The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.fr.srt', 'w').and_raise('Persmission denied')
+      expect(Kernel).to receive(:open).with('The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE[ettv].fr.srt', 'w').and_raise('Persmission denied')
       expect{ episode.download_best_subtitle!('fr') }.to raise_error Addic7ed::SubtitleCannotBeSaved
     end
   end
