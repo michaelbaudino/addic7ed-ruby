@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('webmock')
   s.add_development_dependency('pry')
 
-  s.add_runtime_dependency('nokogiri')
+  s.add_runtime_dependency('nokogiri', "~> 1.6.7.2")
 
   s.executables = ['addic7ed']
   s.files       = `git ls-files -- lib/* LICENSE.md`.split("\n")
