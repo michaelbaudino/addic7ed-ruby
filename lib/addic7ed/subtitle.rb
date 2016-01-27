@@ -10,6 +10,7 @@ module Addic7ed
       @status    = options[:status]
       @url       = options[:url]
       @via       = options[:via]
+      @hi        = options[:hi]
       @downloads = options[:downloads].to_i || 0
       @comment   = normalize_comment(options[:comment])
     end
@@ -18,8 +19,9 @@ module Addic7ed
       "#{url}\t->\t#{version} (#{language}, #{status}) [#{downloads} downloads]#{" (via #{via})" if via}"
     end
 
-    def works_for?(version = '')
-      is_completed? and is_compatible_with? version
+    def works_for?(version = '', no_hi = false)
+      hi_works = !@hi || !no_hi
+      is_completed? and is_compatible_with? version and hi_works
     end
 
     def can_replace?(other_subtitle)

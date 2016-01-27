@@ -23,18 +23,18 @@ module Addic7ed
       return @subtitles[lang]
     end
 
-    def best_subtitle(lang = 'fr')
+    def best_subtitle(lang = 'fr', no_hi = false)
       check_language_availability(lang)
-      find_best_subtitle(lang) unless @best_subtitle and @best_subtitle[lang]
+      find_best_subtitle(lang, no_hi) unless @best_subtitle and @best_subtitle[lang]
       return @best_subtitle[lang]
     end
 
-    def download_best_subtitle!(lang, http_redirect_limit = 8)
+    def download_best_subtitle!(lang, no_hi = false, http_redirect_limit = 8)
       raise HTTPError.new('Too many HTTP redirects') unless http_redirect_limit > 0
-      uri = URI(best_subtitle(lang).url)
+      uri = URI(best_subtitle(lang, no_hi).url)
       response = get_http_response(uri, url(lang))
       if response.kind_of?(Net::HTTPRedirection)
-        follow_redirection(lang, response['location'], http_redirect_limit)
+        follow_redirection(lang, no_hi, response['location'], http_redirect_limit)
       else
         save_subtitle(response.body, lang)
       end
@@ -48,10 +48,10 @@ module Addic7ed
       @subtitles[lang] = parser.extract_subtitles
     end
 
-    def find_best_subtitle(lang)
+    def find_best_subtitle(lang, no_hi = false)
       @best_subtitle ||= {}
       subtitles(lang).each do |sub|
-        @best_subtitle[lang] = sub if sub.works_for? video_file.group and sub.can_replace? @best_subtitle[lang]
+        @best_subtitle[lang] = sub if sub.works_for?(video_file.group, no_hi) and sub.can_replace? @best_subtitle[lang]
       end
       raise NoSubtitleFound unless @best_subtitle[lang]
     end
@@ -77,11 +77,11 @@ module Addic7ed
       raise DownloadError
     end
 
-    def follow_redirection(lang, new_uri, http_redirect_limit)
+    def follow_redirection(lang, no_hi, new_uri, http_redirect_limit)
       # Addic7ed is serving redirection URL not-encoded, but Ruby does not support it (see http://bugs.ruby-lang.org/issues/7396)
       best_subtitle(lang).url = URI.escape(new_uri)
       raise DownloadLimitReached if /^\/downloadexceeded.php/.match best_subtitle(lang).url
-      download_best_subtitle!(lang, http_redirect_limit - 1)
+      download_best_subtitle!(lang, no_hi, http_redirect_limit - 1)
     end
 
     def save_subtitle(content, lang)

@@ -21,6 +21,10 @@ OptionParser.new do |opts|
     options[:language] = l
   end
 
+  opts.on("--no-hi", "Only download subtitles without Hearing Impaired lines") do |hi|
+    options[:no_hi] = !hi
+  end
+
   opts.on("-a", "--all-subtitles", "Display all available subtitles") do |a|
     options[:all] = a
   end
@@ -96,13 +100,13 @@ options[:filenames].each do |filename|
       end
       next if options[:all]
     end
-    ep.best_subtitle(options[:language])
+    ep.best_subtitle(options[:language], options[:no_hi])
     if options[:verbose]
       puts '  Best subtitle:'
       puts "    #{ep.best_subtitle(options[:language])}"
     end
     unless options[:nodownload]
-      ep.download_best_subtitle!(options[:language])
+      ep.download_best_subtitle!(options[:language], options[:no_hi])
       puts "New subtitle downloaded for #{filename}.\nEnjoy your show :-)".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     end
   rescue Addic7ed::InvalidFilename

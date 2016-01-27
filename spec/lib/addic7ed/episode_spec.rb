@@ -7,6 +7,7 @@ describe Addic7ed::Episode do
     @filename_show_not_found = 'Show.Not.Found.S03E02.720p.HDTV.x264-EVOLVE.mkv'
     @filename_episode_not_found = 'The.Walking.Dead.S03E42.720p.HDTV.x264-EVOLVE.mkv'
     @filename_compatible_group = 'The.Walking.Dead.S03E04.HDTV.XviD-ASAP.mkv'
+    @filename_no_hi = 'The.Walking.Dead.S03E02.720p.HDTV.x264-KILLERS.mkv'
     @episode = Addic7ed::Episode.new(@filename)
   end
 
@@ -76,6 +77,13 @@ describe Addic7ed::Episode do
         .to_return File.new('spec/responses/walking-dead-3-4-8.http')
       compatible_episode = Addic7ed::Episode.new(@filename_compatible_group)
       expect(compatible_episode.best_subtitle('fr').url).to eq 'http://www.addic7ed.com/updated/8/68508/3'
+    end
+
+    it 'finds the subtitle with status completed, same group name and not hearing impaired' do
+      stub_request(:get, 'http://www.addic7ed.com/serie/The_Walking_Dead/3/2/1')
+        .to_return File.new('spec/responses/walking-dead-3-2-1.http')
+      episode = Addic7ed::Episode.new(@filename_no_hi)
+      expect(episode.best_subtitle('en', true).url).to eq 'http://www.addic7ed.com/updated/1/68018/0'
     end
 
     it 'uses French as default language' do

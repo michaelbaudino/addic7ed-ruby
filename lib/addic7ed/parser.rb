@@ -44,6 +44,7 @@ module Addic7ed
         status:    extract_status(sub_node),
         url:       extract_url(sub_node),
         source:    extract_source(sub_node),
+        hi:        extract_hi(sub_node),
         downloads: extract_downloads(sub_node),
         comment:   extract_comment(sub_node)
       )
@@ -76,6 +77,12 @@ module Addic7ed
     def extract_source(sub_node)
       source_node = sub_node.css('tr:nth-child(3) td:first-child a').first
       source_node['href'] if source_node
+    end
+
+    def extract_hi(sub_node)
+      hi_node = sub_node.css('tr:nth-child(4) td.newsDate').children[1]
+      raise Addic7ed::ParsingError unless hi_node
+      !hi_node.attribute("title").nil?
     end
 
     def extract_downloads(sub_node)
