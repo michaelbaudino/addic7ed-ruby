@@ -37,6 +37,7 @@ Sure !
 $ addic7ed -h
 Usage: addic7ed [options] <file1> [<file2>, <file3>, ...]
     -l, --language [LANGUAGE]        Language code to look subtitles for (default: French)
+        --no-hi                      Only download subtitles without Hearing Impaired lines
     -a, --all-subtitles              Display all available subtitles
     -n, --do-not-download            Do not download the subtitle
     -f, --force                      Overwrite existing subtitle
