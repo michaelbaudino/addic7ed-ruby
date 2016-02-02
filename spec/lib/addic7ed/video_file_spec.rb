@@ -8,11 +8,12 @@ describe Addic7ed::VideoFile do
     let(:filename) { filename }
 
     it "it detects successfully" do
-      expect(file.showname).to eq (expected_show_name || 'Showname')
-      expect(file.season  ).to eq 2
-      expect(file.episode ).to eq 1
-      expect(file.tags    ).to eq ['720P', 'HDTV', 'X264']
-      expect(file.group   ).to eq 'GROUP'
+      expect(file.showname    ).to eq (expected_show_name || 'Showname')
+      expect(file.season      ).to eq 2
+      expect(file.episode     ).to eq 1
+      expect(file.tags        ).to eq ['720P', 'HDTV', 'X264']
+      expect(file.group       ).to eq 'GROUP'
+      expect(file.distribution).to satisfy { |d| ['', 'DISTRIBUTION'].include?(d) }
     end
   end
 
@@ -77,6 +78,10 @@ describe Addic7ed::VideoFile do
       it_behaves_like "a media file", "Showname.2014.S02E01.720p.HDTV.x264-GROUP.mkv", "Showname 2014"
     end
 
+    context "with an optional distribution group name" do
+      it_behaves_like "a media file", "Showname.2014.S02E01.720p.HDTV.x264-GROUP[DISTRIBUTION].mkv", "Showname 2014"
+    end
+
     context "with a full path" do
       it_behaves_like "a media file", "/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv"
     end
@@ -120,6 +125,11 @@ describe Addic7ed::VideoFile do
     context "with no group" do
       it_behaves_like "an unknown file", "Showname.S02E01.720p.HDTV.x264.mkv"
     end
+
+    context "with no distribution" do
+      it_behaves_like "a media file", "Showname.S02E01.720p.HDTV.x264-GROUP.mkv"
+    end
+
   end
 
   describe '#encoded_filename' do
@@ -177,13 +187,14 @@ describe Addic7ed::VideoFile do
 
   describe '#inspect' do
     it 'prints a human-readable detailed version' do
-      expect(Addic7ed::VideoFile.new("Showname.S02E01.720p.HDTV.x264-GROUP.mkv").inspect).to eq(
-'Guesses for Showname.S02E01.720p.HDTV.x264-GROUP.mkv:
-  show:    Showname
-  season:  2
-  episode: 1
-  tags:    ["720P", "HDTV", "X264"]
-  group:   GROUP')
+      expect(Addic7ed::VideoFile.new("Showname.S02E01.720p.HDTV.x264-GROUP[DISTRIBUTION].mkv").inspect).to eq(
+'Guesses for Showname.S02E01.720p.HDTV.x264-GROUP[DISTRIBUTION].mkv:
+  show:         Showname
+  season:       2
+  episode:      1
+  tags:         ["720P", "HDTV", "X264"]
+  group:        GROUP
+  distribution: DISTRIBUTION')
     end
   end
 end
