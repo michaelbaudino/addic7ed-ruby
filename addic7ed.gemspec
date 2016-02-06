@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency("pry")
 
   s.add_runtime_dependency("nokogiri", "~> 1.6.7.2")
-  s.add_runtime_dependency("json",     "~> 1.7.7")
+  s.add_runtime_dependency("json",     "~> 1.8.3")
 
   s.executables = ["addic7ed"]
   s.files       = `git ls-files -- lib/* LICENSE.md`.split("\n")

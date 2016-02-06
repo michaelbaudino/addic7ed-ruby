@@ -11,4 +11,5 @@ platforms :rbx do
   gem 'racc'
   gem 'rubysl'
   gem 'psych'
+  gem 'iconv'
 end
