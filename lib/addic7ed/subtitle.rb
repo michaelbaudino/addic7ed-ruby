@@ -62,6 +62,8 @@ module Addic7ed
     end
 
     def commented_as_compatible_with?(other_version)
+      return false if /(won't|doesn't|not) +work/i.match comment
+      return false if /resync +(from|of)/i.match comment
       res   = comment.include? other_version.downcase
       res ||= comment.include? COMPATIBILITY_720P[other_version].downcase if COMPATIBILITY_720P[other_version]
       res ||= comment.include? COMPATIBILITY_720P[version].downcase       if COMPATIBILITY_720P[version]
