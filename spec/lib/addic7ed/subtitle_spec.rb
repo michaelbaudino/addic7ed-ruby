@@ -65,7 +65,7 @@ describe Addic7ed::Subtitle, "#to_s" do
 end
 
 describe Addic7ed::Subtitle, "#works_for?" do
-  let(:subtitle) { Addic7ed::Subtitle.new(version: "DIMENSION", comment: "Works with IMMERSE") }
+  let(:subtitle) { Addic7ed::Subtitle.new(version: "DIMENSION") }
 
   context "when it is incomplete" do
     before { allow(subtitle).to receive(:is_completed?).and_return(false) }
@@ -90,16 +90,36 @@ describe Addic7ed::Subtitle, "#works_for?" do
       expect(subtitle.works_for? "EVOLVE").to be false
     end
 
-    it "returns true given the same version as comment" do
-      expect(subtitle.works_for? "IMMERSE").to be true
+    context "when is has a compatibility comment" do
+      let(:subtitle) { Addic7ed::Subtitle.new(version: "DIMENSION", comment: "Works with IMMERSE") }
+
+      it "returns true given the same version as comment" do
+        expect(subtitle.works_for? "IMMERSE").to be true
+      end
+
+      it "returns true given a compatible version as comment" do
+        expect(subtitle.works_for? "ASAP").to be true
+      end
+
+      it "returns false given an incompatible version as comment" do
+        expect(subtitle.works_for? "KILLERS").to be false
+      end
     end
 
-    it "returns true given a compatible version as comment" do
-      expect(subtitle.works_for? "ASAP").to be true
+    context "when is has an incompatibility comment" do
+      let(:subtitle) { Addic7ed::Subtitle.new(version: "DIMENSION", comment: "Doesn't work with IMMERSE") }
+
+      it "returns false" do
+        expect(subtitle.works_for? "IMMERSE").to be false
+      end
     end
 
-    it "returns false given an incompatible version as comment" do
-      expect(subtitle.works_for? "KILLERS").to be false
+    context "when is has an ambiguous comment" do
+      let(:subtitle) { Addic7ed::Subtitle.new(version: "DIMENSION", comment: "Resync from IMMERSE") }
+
+      it "returns false" do
+        expect(subtitle.works_for? "IMMERSE").to be false
+      end
     end
   end
 end
