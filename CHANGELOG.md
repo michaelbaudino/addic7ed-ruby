@@ -1,5 +1,6 @@
 ## Changelog
 
+* 0.7.0: Add support for incompatibility comments ('Doesn't work', 'Resync from', ...)
 * 0.6.0: Consider 1080p version from same group as compatible version
 * 0.5.1: Fix a bug in error handling because of bad copypasta from former method rename :spaghetti:
 * 0.5.0: Add compatibility check from the comment field (thanks to @Pmaene)
