@@ -1,31 +1,25 @@
 require "spec_helper"
 require "./lib/addic7ed"
 
-describe Addic7ed::ShowList, "#find" do
+describe Addic7ed::ShowList, ".find" do
   it "changes all spaces to underscores" do
-    expect(Addic7ed::ShowList.find("Show Name")).to eq "Show_Name"
+    expect(Addic7ed::ShowList.find("The Walking Dead")).to eq "The_Walking_Dead"
   end
 
   it "wraps country code with parenthesis" do
-    expect(Addic7ed::ShowList.find("Showname.US")).to eq "Showname_(US)"
+    expect(Addic7ed::ShowList.find("Shameless.US")).to eq "Shameless_(US)"
+    expect(Addic7ed::ShowList.find("Vikings.UK")).to eq "Vikings_(UK)"
   end
 
   it "detects country code even in lowercase" do
-    expect(Addic7ed::ShowList.find("showname.us")).to eq "showname_(us)"
+    expect(Addic7ed::ShowList.find("shameless.us")).to eq "Shameless_(US)"
   end
 
-  it "removes country code for the original show when it's UK" do
-    expect(Addic7ed::ShowList.find("Showname.UK")).to eq "Showname"
-  end
-
-  it "removes production year" do
-    expect(Addic7ed::ShowList.find("Showname.2014")).to eq "Showname"
+  it "sets production year between parenthesis" do
+    expect(Addic7ed::ShowList.find("Vikings.2013")).to eq "Vikings_(2013)"
   end
 
   it "handles when both country code and production year are present" do
-    expect(Addic7ed::ShowList.find("Showname.2014.UK")).to eq "Showname"
-    expect(Addic7ed::ShowList.find("Showname.UK.2014")).to eq "Showname"
-    expect(Addic7ed::ShowList.find("Showname.2014.US")).to eq "Showname_(US)"
-    expect(Addic7ed::ShowList.find("Showname.US.2014")).to eq "Showname_(US)"
+    expect(Addic7ed::ShowList.find("Legacy.2013.UK")).to eq "Legacy_(2013)_(UK)"
   end
 end

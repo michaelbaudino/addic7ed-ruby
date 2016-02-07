@@ -19,4 +19,8 @@ RSpec.configure do |config|
   config.formatter = :documentation # :progress, :html, :textmate
 
   config.raise_errors_for_deprecations!
+
+  config.before(:each) do
+    stub_request(:get, "http://www.addic7ed.com").to_return(File.new("spec/responses/homepage.http"))
+  end
 end
