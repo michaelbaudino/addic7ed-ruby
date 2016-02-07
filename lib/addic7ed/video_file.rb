@@ -36,14 +36,6 @@ module Addic7ed
       @basename ||= ::File.basename(@filename)
     end
 
-    def dirname
-      @dirname ||= ::File.dirname(@filename)
-    end
-
-    def extname
-      @extname ||= ::File.extname(@filename)
-    end
-
     def to_s
       @filename
     end

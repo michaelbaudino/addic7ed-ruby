@@ -167,18 +167,6 @@ describe Addic7ed::VideoFile do
     end
   end
 
-  describe '#dirname' do
-    it 'returns only path given a full path' do
-      expect(Addic7ed::VideoFile.new("/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv").dirname).to eq '/full/path/to'
-    end
-  end
-
-  describe '#extname' do
-    it 'returns only file extension given a full path' do
-      expect(Addic7ed::VideoFile.new("/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv").extname).to eq '.mkv'
-    end
-  end
-
   describe '#to_s' do
     it 'returns file name as a string' do
       expect(Addic7ed::VideoFile.new("/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv").to_s).to eq "/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv"
