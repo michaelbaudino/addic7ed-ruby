@@ -23,6 +23,10 @@ describe Addic7ed::ShowList, ".find" do
     expect(Addic7ed::ShowList.find("Legacy.2013.UK")).to eq "Legacy_(2013)_(UK)"
   end
 
+  it "handles when show name contains a quote" do
+    expect(Addic7ed::ShowList.find("Grey's Anatomy")).to eq "Grey's_Anatomy"
+  end
+
   it "raises a ShowNotFound error when no matching show is found" do
     expect{Addic7ed::ShowList.find("Not an existing show")}.to raise_error Addic7ed::ShowNotFound
   end
