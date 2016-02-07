@@ -22,4 +22,8 @@ describe Addic7ed::ShowList, ".find" do
   it "handles when both country code and production year are present" do
     expect(Addic7ed::ShowList.find("Legacy.2013.UK")).to eq "Legacy_(2013)_(UK)"
   end
+
+  it "raises a ShowNotFound error when no matching show is found" do
+    expect{Addic7ed::ShowList.find("Not an existing show")}.to raise_error Addic7ed::ShowNotFound
+  end
 end
