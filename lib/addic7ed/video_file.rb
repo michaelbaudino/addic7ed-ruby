@@ -8,7 +8,7 @@ module Addic7ed
     def initialize(filename)
       @filename = filename
       if match = TVSHOW_REGEX.match(basename)
-        @showname     = match[:showname].gsub('.', ' ')
+        @showname     = match[:showname]
         @season       = match[:season].to_i
         @episode      = match[:episode].to_i
         @tags         = match[:tags].upcase.split(/[\. ]/)
@@ -18,19 +18,6 @@ module Addic7ed
         raise InvalidFilename
       end
     end
-
-    def encoded_showname
-      @encoded_showname ||= showname.
-        gsub(/ /, '_').
-        gsub(/_(US)$/i, '_(\1)').
-        gsub(/_(US)_/i, '_(\1)_').
-        gsub(/_UK$/i, '').
-        gsub(/_UK_/i, '_').
-        gsub(/_\d{4}$/, '').
-        gsub(/_\d{4}_/, '_')
-    end
-
-    # Lazy getters
 
     def basename
       @basename ||= ::File.basename(@filename)

@@ -63,7 +63,7 @@ describe Addic7ed::VideoFile do
     end
 
     context 'with multiple words in show name' do
-      it_behaves_like "a media file", "Show.Name.S02E01.720p.HDTV.x264-GROUP.mkv", "Show Name"
+      it_behaves_like "a media file", "Show.Name.S02E01.720p.HDTV.x264-GROUP.mkv", "Show.Name"
     end
 
     context 'with multiple words in show name separated by spaces' do
@@ -75,11 +75,11 @@ describe Addic7ed::VideoFile do
     end
 
     context "with production year" do
-      it_behaves_like "a media file", "Showname.2014.S02E01.720p.HDTV.x264-GROUP.mkv", "Showname 2014"
+      it_behaves_like "a media file", "Showname.2014.S02E01.720p.HDTV.x264-GROUP.mkv", "Showname.2014"
     end
 
     context "with an optional distribution group name" do
-      it_behaves_like "a media file", "Showname.2014.S02E01.720p.HDTV.x264-GROUP[DISTRIBUTION].mkv", "Showname 2014"
+      it_behaves_like "a media file", "Showname.2014.S02E01.720p.HDTV.x264-GROUP[DISTRIBUTION].mkv", "Showname.2014"
     end
 
     context "with a full path" do
@@ -130,35 +130,6 @@ describe Addic7ed::VideoFile do
       it_behaves_like "a media file", "Showname.S02E01.720p.HDTV.x264-GROUP.mkv"
     end
 
-  end
-
-  describe '#encoded_filename' do
-    it 'changes all spaces to underscores' do
-      expect(Addic7ed::VideoFile.new("Show Name.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Show_Name'
-    end
-
-    it 'wraps country code with parenthesis' do
-      expect(Addic7ed::VideoFile.new("Showname.US.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Showname_(US)'
-    end
-
-    it 'detects country code even in lowercase' do
-      expect(Addic7ed::VideoFile.new("showname.us.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'showname_(us)'
-    end
-
-    it "removes country code for the original show when it's UK" do
-      expect(Addic7ed::VideoFile.new("Showname.UK.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Showname'
-    end
-
-    it 'removes production year' do
-      expect(Addic7ed::VideoFile.new("Showname.2014.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Showname'
-    end
-
-    it 'handles when both country code and production year are present' do
-      expect(Addic7ed::VideoFile.new("Showname.2014.UK.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Showname'
-      expect(Addic7ed::VideoFile.new("Showname.UK.2014.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Showname'
-      expect(Addic7ed::VideoFile.new("Showname.2014.US.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Showname_(US)'
-      expect(Addic7ed::VideoFile.new("Showname.US.2014.S02E01.720p.HDTV.x264-GROUP.mkv").encoded_showname).to eq 'Showname_(US)'
-    end
   end
 
   describe '#basename' do
