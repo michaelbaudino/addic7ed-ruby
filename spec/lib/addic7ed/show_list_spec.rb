@@ -24,7 +24,7 @@ describe Addic7ed::ShowList, ".find" do
   end
 
   it "handles when show name contains a quote" do
-    expect(Addic7ed::ShowList.find("Grey's Anatomy")).to eq "Grey's_Anatomy"
+    expect(Addic7ed::ShowList.find("Greys.Anatomy")).to eq "Grey's_Anatomy"
   end
 
   it "raises a ShowNotFound error when no matching show is found" do

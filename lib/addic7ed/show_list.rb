@@ -11,7 +11,7 @@ module Addic7ed
     end
 
     def find
-      matching_shows = human_list.select{ |i| [i, human_name].map(&:downcase).reduce(:==) }
+      matching_shows = human_list.select{ |i| [i, human_name].map{ |name| name.downcase.gsub("'", "") }.reduce(:==) }
       raise ShowNotFound if matching_shows.empty?
       matching_shows.first.gsub(' ', '_')
     end
