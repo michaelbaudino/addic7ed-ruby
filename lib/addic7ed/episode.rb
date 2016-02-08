@@ -14,7 +14,7 @@ module Addic7ed
     def url(lang = 'fr')
       check_language_availability(lang)
       @localized_urls ||= {}
-      @localized_urls[lang] ||= "http://www.addic7ed.com/serie/#{ShowList.find(video_file.showname)}/#{video_file.season}/#{video_file.episode}/#{LANGUAGES[lang][:id]}"
+      @localized_urls[lang] ||= "http://www.addic7ed.com/serie/#{ShowList.url_segment_for(video_file.showname)}/#{video_file.season}/#{video_file.episode}/#{LANGUAGES[lang][:id]}"
     end
 
     def subtitles(lang = 'fr')

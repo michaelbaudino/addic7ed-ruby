@@ -6,12 +6,12 @@ module Addic7ed
       @raw_name = raw_name
     end
 
-    def self.find(raw_name)
-      new(raw_name).find
+    def self.url_segment_for(raw_name)
+      new(raw_name).url_segment_for
     end
 
-    def find
-      matching_shows = human_list.select{ |i| [i, human_name].map{ |name| name.downcase.gsub("'", "") }.reduce(:==) }
+    def url_segment_for
+      matching_shows = human_list.select{ |addic7ed_show| [addic7ed_show, human_name].map{ |name| name.downcase.gsub("'", "") }.reduce(:==) }
       raise ShowNotFound if matching_shows.empty?
       matching_shows.first.gsub(' ', '_')
     end
