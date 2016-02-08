@@ -11,26 +11,31 @@ module Addic7ed
     end
 
     def url_segment_for
-      matching_shows = human_list.select{ |addic7ed_show| [addic7ed_show, human_name].map{ |name| name.downcase.gsub("'", "") }.reduce(:==) }
       raise ShowNotFound if matching_shows.empty?
       matching_shows.first.gsub(' ', '_')
     end
 
     private
 
-    def human_name
-      @human_name ||= raw_name.
-                        gsub(/[_\.]+/, ' ').
-                        gsub(/ (US|UK)( |$)/i, ' (\1)\2').
-                        gsub(/ (\d{4})( |$)/i, ' (\1)\2')
+    def humanized_name
+      @humanized_name ||= raw_name.
+                            gsub(/[_\.]+/, ' ').
+                            gsub(/ (US|UK)( |$)/i, ' (\1)\2').
+                            gsub(/ (\d{4})( |$)/i, ' (\1)\2')
     end
 
-    def human_list
-      @@human_list ||= Nokogiri::HTML(addic7ed_homepage.body).css("select#qsShow option:not(:first-child)").map(&:text)
+    def matching_shows
+      @matching_shows ||= addic7ed_shows.select do |addic7ed_show|
+        [addic7ed_show, humanized_name].map{ |showname| showname.downcase.gsub("'", "") }.reduce(:==)
+      end
+    end
+
+    def addic7ed_shows
+      @@addic7ed_shows ||= Nokogiri::HTML(addic7ed_homepage.body).css("select#qsShow option:not(:first-child)").map(&:text)
     end
 
     def addic7ed_homepage
-      Net::HTTP.start("www.addic7ed.com", 80) do |http|
+      Net::HTTP.start("www.addic7ed.com") do |http|
         request = Net::HTTP::Get.new("/")
         request["User-Agent"] = USER_AGENTS.sample
         http.request(request)
