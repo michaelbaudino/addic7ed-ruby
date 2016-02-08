@@ -1,5 +1,6 @@
 ## Changelog
 
+* 2.0.1: Fix show name detection when it contains a quote
 * 2.0.0: Refactor show name detection to properly handle names with country codes or with quotes
 * 1.0.0: Drop support for Ruby 1.9 and add support for Ruby 2.3
 * 0.7.0: Add support for incompatibility comments ('Doesn't work', 'Resync from', ...)
