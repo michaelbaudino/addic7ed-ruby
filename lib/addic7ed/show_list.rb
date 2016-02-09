@@ -19,23 +19,31 @@ module Addic7ed
 
     private
 
+    def shows_matching_exactly
+      @shows_matching_exactly ||= addic7ed_shows.select{ |addic7ed_show| is_matching? addic7ed_show }
+    end
+
+    def shows_matching_without_year
+      @shows_matching_without_year ||= addic7ed_shows.select{ |addic7ed_show| is_matching? addic7ed_show, :comparer_without_year }
+    end
+
+    def default_comparer(showname)
+      showname.downcase.gsub("'", "")
+    end
+
+    def comparer_without_year(showname)
+      default_comparer(showname).gsub(/ \(\d{4}\)( |$)/, '\1')
+    end
+
+    def is_matching?(addic7ed_show, comparer = :default_comparer)
+      [humanized_name, addic7ed_show].map(&method(comparer)).reduce(:==)
+    end
+
     def humanized_name
       @humanized_name ||= raw_name.
                             gsub(/[_\.]+/, ' ').
                             gsub(/ (US|UK)( |$)/i, ' (\1)\2').
                             gsub(/ (\d{4})( |$)/i, ' (\1)\2')
-    end
-
-    def shows_matching_exactly
-      @shows_matching_exactly ||= addic7ed_shows.select do |addic7ed_show|
-        [addic7ed_show, humanized_name].map{ |showname| showname.downcase.gsub("'", "") }.reduce(:==)
-      end
-    end
-
-    def shows_matching_without_year
-      @shows_matching_without_year ||= addic7ed_shows.select do |addic7ed_show|
-        [addic7ed_show, humanized_name].map{ |showname| showname.downcase.gsub("'", "").gsub(/ \(\d{4}\)( |$)/, '\1') }.reduce(:==)
-      end
     end
 
     def addic7ed_shows
