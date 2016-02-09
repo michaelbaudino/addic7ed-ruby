@@ -19,6 +19,11 @@ describe Addic7ed::ShowList, ".url_segment_for" do
     expect(Addic7ed::ShowList.url_segment_for("Vikings.2013")).to eq "Vikings_(2013)"
   end
 
+  it "returns last show when production year is unspecified" do
+    expect(Addic7ed::ShowList.url_segment_for("Empire")).to eq "Empire_(2015)"
+    expect(Addic7ed::ShowList.url_segment_for("American.Crime")).to eq "American_Crime_(2015)"
+  end
+
   it "handles when both country code and production year are present" do
     expect(Addic7ed::ShowList.url_segment_for("Legacy.2013.UK")).to eq "Legacy_(2013)_(UK)"
   end

@@ -11,8 +11,10 @@ module Addic7ed
     end
 
     def url_segment_for
-      raise ShowNotFound if matching_shows.empty?
-      matching_shows.first.gsub(' ', '_')
+      shows_matching = shows_matching_exactly
+      shows_matching = shows_matching_without_year if shows_matching.empty?
+      raise ShowNotFound if shows_matching.empty?
+      shows_matching.last.gsub(' ', '_')
     end
 
     private
@@ -24,9 +26,15 @@ module Addic7ed
                             gsub(/ (\d{4})( |$)/i, ' (\1)\2')
     end
 
-    def matching_shows
-      @matching_shows ||= addic7ed_shows.select do |addic7ed_show|
+    def shows_matching_exactly
+      @shows_matching_exactly ||= addic7ed_shows.select do |addic7ed_show|
         [addic7ed_show, humanized_name].map{ |showname| showname.downcase.gsub("'", "") }.reduce(:==)
+      end
+    end
+
+    def shows_matching_without_year
+      @shows_matching_without_year ||= addic7ed_shows.select do |addic7ed_show|
+        [addic7ed_show, humanized_name].map{ |showname| showname.downcase.gsub("'", "").gsub(/ \(\d{4}\)( |$)/, '\1') }.reduce(:==)
       end
     end
 
