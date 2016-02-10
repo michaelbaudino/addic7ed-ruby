@@ -47,6 +47,10 @@ describe Addic7ed::Subtitle, "#normalize_version!" do
     expect(normalized_version("RERIP DIMENSION")).to eq 'DIMENSION'
   end
 
+  it "removes 'INTERNAL' tag" do
+    expect(normalized_version("INTERNAL DIMENSION")).to eq 'DIMENSION'
+  end
+
   it "removes the 'Version' prefix" do
     expect(normalized_version("Version DIMENSION")).to eq 'DIMENSION'
   end

@@ -44,7 +44,7 @@ module Addic7ed
 
     def normalize_version(version)
       (version || "").
-        gsub(/(^Version *|720p|1080p|hdtv|proper|rerip|x\.?264)/i, '').
+        gsub(/(^Version *|720p|1080p|hdtv|proper|rerip|internal|x\.?264)/i, '').
         gsub(/^[- \.]*/, '').gsub(/[- \.]*$/, '').
         upcase
     end
