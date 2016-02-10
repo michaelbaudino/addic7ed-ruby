@@ -113,10 +113,10 @@ options[:filenames].each do |filename|
     puts "#{filename} does not seem to be a valid TV show filename. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     next
   rescue Addic7ed::ShowNotFound
-    puts "Show not found on Addic7ed : #{ep.video_file.showname}. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
+    puts "Show not found on Addic7ed : #{ep.video_file.filename}. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     next
   rescue Addic7ed::EpisodeNotFound
-    puts "Episode not found on Addic7ed : #{Addic7ed::ShowList.url_segment_for(ep.video_file.showname)} S#{ep.video_file.season}E#{ep.video_file.episode}. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
+    puts "Episode not found on Addic7ed : #{ep.video_file.filename}. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     next
   rescue Addic7ed::LanguageNotSupported
     puts "Addic7ed does not support language '#{options[:language]}'. Exiting.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
