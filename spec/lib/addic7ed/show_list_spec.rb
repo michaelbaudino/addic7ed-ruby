@@ -32,6 +32,10 @@ describe Addic7ed::ShowList, ".url_segment_for" do
     expect(Addic7ed::ShowList.url_segment_for("Greys.Anatomy")).to eq "Grey's_Anatomy"
   end
 
+  it "handles when a show name contains dots" do
+    expect(Addic7ed::ShowList.url_segment_for("The.O.C.")).to eq "The_O.C."
+  end
+
   it "raises a ShowNotFound error when no matching show is found" do
     expect{Addic7ed::ShowList.url_segment_for("Not.an.existing.show")}.to raise_error Addic7ed::ShowNotFound
   end

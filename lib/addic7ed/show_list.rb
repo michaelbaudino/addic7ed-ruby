@@ -28,7 +28,7 @@ module Addic7ed
     end
 
     def default_comparer(showname)
-      showname.downcase.gsub("'", "")
+      showname.downcase.gsub("'", "").gsub(".", " ").strip
     end
 
     def comparer_without_year(showname)
