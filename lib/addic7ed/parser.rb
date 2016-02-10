@@ -20,7 +20,12 @@ module Addic7ed
   protected
 
     def subtitles_page_dom
-      response = Net::HTTP.get_response(URI(@episode.url(@lang)))
+      uri = URI(@episode.url(@lang))
+      response = Net::HTTP.start(uri.hostname, uri.port) do |http|
+        request = Net::HTTP::Get.new(uri.request_uri)
+        request["User-Agent"] = USER_AGENTS.sample
+        http.request(request)
+      end
       raise EpisodeNotFound unless response.body
       Nokogiri::HTML(response.body)
     end
