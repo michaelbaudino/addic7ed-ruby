@@ -1,6 +1,6 @@
 ## Changelog
 
-* 2.0.3: Fix show name detection when it contains a dot and try to avoid HTTP 304 messages we randomly receive back from the server
+* 2.0.4: Nokogiri security update ¯\\\_(ツ)\_/¯
 * 2.0.2: Fix show name detection when it doesn't contain production year but it does on Addic7ed
 * 2.0.1: Fix show name detection when it contains a quote
 * 2.0.0: Refactor show name detection to properly handle names with country codes or with quotes
