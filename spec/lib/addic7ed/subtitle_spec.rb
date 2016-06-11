@@ -1,62 +1,20 @@
 require "spec_helper"
 require "./lib/addic7ed"
 
-describe Addic7ed::Subtitle, "#normalize_version!" do
-  def normalized_version(version)
-    Addic7ed::Subtitle.new(version: version).version
+describe Addic7ed::Subtitle, "#initialize" do
+  let(:version) { "Version DIMENSiON" }
+  let(:comment) { "Works for LOL" }
+
+  subject { described_class.new(version: version, comment: comment) }
+
+  it "normalizes Addic7ed version" do
+    expect(Addic7ed::Addic7edVersionNormalizer).to receive(:call).with(version)
+    subject
   end
 
-  it "upcases everything" do
-    expect(normalized_version("DiMENSiON")).to eq 'DIMENSION'
-  end
-
-  it "removes heading or trailing dots" do
-    expect(normalized_version(".DIMENSION.")).to eq 'DIMENSION'
-  end
-
-  it "removes heading or trailing whitespaces" do
-    expect(normalized_version(" DIMENSION ")).to eq 'DIMENSION'
-  end
-
-  it "removes heading or trailing dashes" do
-    expect(normalized_version("-DIMENSION-")).to eq 'DIMENSION'
-  end
-
-  it "removes '720p' tag" do
-    expect(normalized_version("720P DIMENSION")).to eq 'DIMENSION'
-  end
-
-  it "removes '1080p' tag" do
-    expect(normalized_version("1080P DIMENSION")).to eq 'DIMENSION'
-  end
-
-  it "removes 'HDTV' tag" do
-    expect(normalized_version("HDTV DIMENSION")).to eq 'DIMENSION'
-  end
-
-  it "removes 'x264' tag" do
-    expect(normalized_version("X264 DIMENSION")).to eq 'DIMENSION'
-    expect(normalized_version("X.264 DIMENSION")).to eq 'DIMENSION'
-  end
-
-  it "removes 'PROPER' tag" do
-    expect(normalized_version("PROPER DIMENSION")).to eq 'DIMENSION'
-  end
-
-  it "removes 'RERIP' tag" do
-    expect(normalized_version("RERIP DIMENSION")).to eq 'DIMENSION'
-  end
-
-  it "removes 'INTERNAL' tag" do
-    expect(normalized_version("INTERNAL DIMENSION")).to eq 'DIMENSION'
-  end
-
-  it "removes the 'Version' prefix" do
-    expect(normalized_version("Version DIMENSION")).to eq 'DIMENSION'
-  end
-
-  it "removes combined tags" do
-    expect(normalized_version("Version 720P PROPER X264 HDTV DIMENSION")).to eq "DIMENSION"
+  it "normalizes Addic7ed comment" do
+    expect(Addic7ed::Addic7edCommentNormalizer).to receive(:call).with(comment)
+    subject
   end
 end
 
@@ -123,6 +81,19 @@ describe Addic7ed::Subtitle, "#works_for?" do
 
       it "returns false" do
         expect(subtitle.works_for? "IMMERSE").to be false
+      end
+    end
+
+    context "when it has multiple versions" do
+      let(:subtitle) { Addic7ed::Subtitle.new(version: "FOV,TLA") }
+
+      it "returns true if it works for one of them" do
+        expect(subtitle.works_for? "TLA").to be true
+        expect(subtitle.works_for? "FOV").to be true
+      end
+
+      it "returns false when none of them work" do
+        expect(subtitle.works_for? "LOL").to be false
       end
     end
   end

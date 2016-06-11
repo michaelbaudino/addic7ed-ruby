@@ -5,14 +5,14 @@ module Addic7ed
     attr_accessor :url
 
     def initialize(options = {})
-      @version   = normalize_version(options[:version])
+      @version   = Addic7edVersionNormalizer.call(options[:version])
       @language  = options[:language]
       @status    = options[:status]
       @url       = options[:url]
       @via       = options[:via]
       @hi        = options[:hi]
       @downloads = options[:downloads].to_i || 0
-      @comment   = normalize_comment(options[:comment])
+      @comment   = Addic7edCommentNormalizer.call(options[:comment])
     end
 
     def to_s
@@ -42,23 +42,16 @@ module Addic7ed
 
   protected
 
-    def normalize_version(version)
-      (version || "").
-        gsub(/(^Version *|720p|1080p|hdtv|proper|rerip|internal|x\.?264)/i, '').
-        gsub(/^[- \.]*/, '').gsub(/[- \.]*$/, '').
-        upcase
-    end
-
-    def normalize_comment(comment)
-      (comment || "").downcase
-    end
-
     def is_compatible_with?(other_version)
-      generally_compatible_with?(other_version) || commented_as_compatible_with?(other_version)
+      defined_as_compatible_with(other_version) || generally_compatible_with?(other_version) || commented_as_compatible_with?(other_version)
+    end
+
+    def defined_as_compatible_with(other_version)
+      version.split(",").include? other_version
     end
 
     def generally_compatible_with?(other_version)
-      version == other_version || COMPATIBILITY_720P[version] == other_version || COMPATIBILITY_720P[other_version] == version
+      COMPATIBILITY_720P[version] == other_version || COMPATIBILITY_720P[other_version] == version
     end
 
     def commented_as_compatible_with?(other_version)

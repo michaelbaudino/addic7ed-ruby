@@ -58,7 +58,7 @@ module Addic7ed
     def extract_version(sub_node)
       version_node = sub_node.css('.NewsTitle').first
       raise Addic7ed::ParsingError unless version_node
-      version_node.content.gsub(/ \nVersion /, '').gsub(/,.*/, '')
+      version_node.content
     end
 
     def extract_language(sub_node)
@@ -101,6 +101,5 @@ module Addic7ed
         raise Addic7ed::ParsingError unless comment_node
         comment_node.content.gsub(/<img[^>]+\>/i, "")
     end
-
   end
 end
