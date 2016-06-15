@@ -127,18 +127,11 @@ options[:filenames].each do |filename|
   rescue Addic7ed::NoSubtitleFound
     puts "No (acceptable) subtitle has been found on Addic7ed for #{filename}. Maybe try again later.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     next
-  rescue Addic7ed::DownloadError
-    puts "The subtitle could not be downloaded. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
-    next
-  rescue Addic7ed::DownloadLimitReached
-    puts "You exceeded your daily download count. Exiting.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
+  rescue Addic7ed::DailyLimitExceeded => e
+    puts "#{e.message}. Exiting.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     break
-  rescue Addic7ed::SubtitleCannotBeSaved
-    puts "The downloaded subtitle could not be saved as #{filename.gsub(/\.\w{3}$/, '.srt')}. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
-    next
-  rescue Addic7ed::HTTPError => e
-    puts "Network error: #{e.message}".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
+  rescue Addic7ed::DownloadError => e
+    puts "The subtitle could not be saved: #{e.message}. Skipping.".gsub(/^/, options[:verbose] ? '  ' : '') unless options[:quiet]
     next
   end
-
 end

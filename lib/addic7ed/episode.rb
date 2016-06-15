@@ -29,15 +29,11 @@ module Addic7ed
       return @best_subtitle[lang]
     end
 
-    def download_best_subtitle!(lang, no_hi = false, http_redirect_limit = 8)
-      raise HTTPError.new('Too many HTTP redirects') unless http_redirect_limit > 0
-      uri = URI(best_subtitle(lang, no_hi).url)
-      response = get_http_response(uri, url(lang))
-      if response.kind_of?(Net::HTTPRedirection)
-        follow_redirection(lang, no_hi, response['location'], http_redirect_limit)
-      else
-        save_subtitle(response.body, lang)
-      end
+    def download_best_subtitle!(lang, no_hi = false)
+      subtitle_url      = best_subtitle(lang, no_hi).url
+      subtitle_filename = video_file.basename.gsub(/\.\w{3}$/, untagged ? ".srt" : ".#{lang}.srt")
+      referer           = url(lang)
+      SubtitleDownloader.call(subtitle_url, subtitle_filename, referer)
     end
 
   protected
@@ -63,33 +59,6 @@ module Addic7ed
     def initialize_language(lang)
       @subtitles ||= {}
       @subtitles[lang] ||= []
-    end
-
-    def get_http_response(uri, referer)
-      Net::HTTP.start(uri.hostname, uri.port) do |http|
-        request = Net::HTTP::Get.new(uri.request_uri)
-        # Addic7ed needs the Referer to be correct. User-agent is just here to fake a real browser request.
-        request['Referer'] = referer
-        request['User-Agent'] = USER_AGENTS.sample
-        http.request(request)
-      end
-    rescue
-      raise DownloadError
-    end
-
-    def follow_redirection(lang, no_hi, new_uri, http_redirect_limit)
-      # Addic7ed is serving redirection URL not-encoded, but Ruby does not support it (see http://bugs.ruby-lang.org/issues/7396)
-      best_subtitle(lang).url = URI.escape(new_uri)
-      raise DownloadLimitReached if /^\/downloadexceeded.php/.match best_subtitle(lang).url
-      download_best_subtitle!(lang, no_hi, http_redirect_limit - 1)
-    end
-
-    def save_subtitle(content, lang)
-      Kernel.open "#{video_file}".gsub(/\.\w{3}$/, untagged ? ".srt" : ".#{lang}.srt"), 'w' do |f|
-        f << content
-      end
-    rescue
-      raise SubtitleCannotBeSaved
     end
   end
 end

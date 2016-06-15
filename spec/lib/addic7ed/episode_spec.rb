@@ -102,64 +102,37 @@ describe Addic7ed::Episode do
   end
 
   describe '#download_best_subtitle!' do
-    let(:episode) { Addic7ed::Episode.new(@filename) }
+    let(:videofilename) { "The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.mkv" }
+    let(:lang)          { "fr" }
+    let(:episode)       { Addic7ed::Episode.new(@filename) }
+    let(:best_subtitle) { episode.best_subtitle(lang) }
 
-    before do
-      WebMock.reset!
-      @page_stub = stub_request(:get, 'http://www.addic7ed.com/serie/The_Walking_Dead/3/2/8')
-        .to_return File.new('spec/responses/walking-dead-3-2-8.http')
-      @sub_stub = stub_request(:get, 'http://www.addic7ed.com/original/68018/4')
-        .to_return File.new('spec/responses/walking-dead-3-2-8_best_subtitle.http')
-      # Prevent actual disk writing
-      allow(Kernel).to receive(:open)
+    subject { episode.download_best_subtitle!(lang) }
+
+    before { stub_request(:get, "http://www.addic7ed.com/serie/The_Walking_Dead/3/2/8").to_return File.new("spec/responses/walking-dead-3-2-8.http") }
+
+    it "calls SubtitleDownloader on the best subtitle's URL" do
+      expect(Addic7ed::SubtitleDownloader).to receive(:call).with(episode.best_subtitle("fr").url, anything(), anything())
+      subject
     end
 
-    it 'gets the best subtitle candidate with a network request' do
-      expect(episode).to receive(:best_subtitle).once.and_call_original
-      episode.download_best_subtitle!('fr')
-      expect(@page_stub).to have_been_requested
-      expect(@sub_stub).to have_been_requested
+    it "calls SubtitleDownloader with episode's page as referer" do
+      expect(Addic7ed::SubtitleDownloader).to receive(:call).with(anything(), anything(), episode.url)
+      subject
     end
 
-    it 'raises DownloadError when a network error happens' do
-      stub_request(:get, 'http://www.addic7ed.com/original/68018/4').to_timeout
-      expect{ episode.download_best_subtitle!('fr') }.to raise_error Addic7ed::DownloadError
-    end
-
-    it 'is called recursively' do
-      stub_request(:get, 'http://www.addic7ed.com/original/68018/4').to_return File.new('spec/responses/basic_redirection.http')
-      stub_request(:get, 'http://www.addic7ed.com/original/68018/4.redirected').to_return File.new('spec/responses/walking-dead-3-2-8_best_subtitle.http')
-      expect(episode).to receive(:download_best_subtitle!).twice.and_call_original
-      episode.download_best_subtitle!('fr')
-    end
-
-    it 'raises HTTPError when stuck in a HTTP redirections loop' do
-      stub_request(:get, 'http://www.addic7ed.com/original/68018/4')
-        .to_return File.new('spec/responses/redirection_loop.http')
-      expect{ episode.download_best_subtitle!('fr') }.to raise_error Addic7ed::HTTPError
-    end
-
-    it 'creates a new file on disk' do
-      file = double('file')
-      expect(Kernel).to receive(:open).with('The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.fr.srt', 'w').and_yield(file)
-      expect(file).to receive(:<<)
-      episode.download_best_subtitle!('fr')
+    it "calls SubtitleDownloader with videofile's filename with language-prefixed .srt extension" do
+      expect(Addic7ed::SubtitleDownloader).to receive(:call).with(anything(), File.basename(videofilename, ".*") + ".#{lang}.srt", anything())
+      subject
     end
 
     context "when untagged option is set" do
       let(:episode) { Addic7ed::Episode.new(@filename, true) }
 
-      it "does not include language code in subtitle filename" do
-        file = double('file')
-        expect(Kernel).to receive(:open).with('The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.srt', 'w').and_yield(file)
-        expect(file).to receive(:<<)
-        episode.download_best_subtitle!('fr')
+      it "calls SubtitleDownloader with videofile's filename with .srt extension" do
+        expect(Addic7ed::SubtitleDownloader).to receive(:call).with(anything(), File.basename(videofilename, ".*") + ".srt", anything())
+        subject
       end
-    end
-
-    it 'raises SubtitleCannotBeSaved when a disk error happens' do
-      expect(Kernel).to receive(:open).with('The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.fr.srt', 'w').and_raise('Persmission denied')
-      expect{ episode.download_best_subtitle!('fr') }.to raise_error Addic7ed::SubtitleCannotBeSaved
     end
   end
 end
