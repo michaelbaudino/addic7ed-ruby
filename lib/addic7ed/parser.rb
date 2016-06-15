@@ -20,7 +20,7 @@ module Addic7ed
   protected
 
     def subtitles_page_dom
-      uri = URI(@episode.url(@lang))
+      uri = URI(@episode.localized_url(@lang))
       response = Net::HTTP.start(uri.hostname, uri.port) do |http|
         request = Net::HTTP::Get.new(uri.request_uri)
         request["User-Agent"] = USER_AGENTS.sample

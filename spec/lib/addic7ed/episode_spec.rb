@@ -15,18 +15,18 @@ describe Addic7ed::Episode do
     expect{ Addic7ed::Episode.new(@filename) }.to_not raise_error
   end
 
-  describe '#url' do
+  describe '#localized_url' do
     it 'returns a show localized URL given existing episode' do
-      expect(@episode.url('fr')).to eq 'http://www.addic7ed.com/serie/The_Walking_Dead/3/2/8'
-      expect(@episode.url('es')).to eq 'http://www.addic7ed.com/serie/The_Walking_Dead/3/2/4'
+      expect(@episode.localized_url('fr')).to eq 'http://www.addic7ed.com/serie/The_Walking_Dead/3/2/8'
+      expect(@episode.localized_url('es')).to eq 'http://www.addic7ed.com/serie/The_Walking_Dead/3/2/4'
     end
 
     it 'uses French as default language' do
-      expect(@episode.url).to eq @episode.url('fr')
+      expect(@episode.localized_url).to eq @episode.localized_url('fr')
     end
 
     it 'raises LanguageNotSupported given an unsupported language code' do
-      expect{ @episode.url('aa') }.to raise_error Addic7ed::LanguageNotSupported
+      expect{ @episode.localized_url('aa') }.to raise_error Addic7ed::LanguageNotSupported
     end
   end
 
@@ -117,7 +117,7 @@ describe Addic7ed::Episode do
     end
 
     it "calls SubtitleDownloader with episode's page as referer" do
-      expect(Addic7ed::SubtitleDownloader).to receive(:call).with(anything(), anything(), episode.url)
+      expect(Addic7ed::SubtitleDownloader).to receive(:call).with(anything(), anything(), episode.localized_url)
       subject
     end
 
