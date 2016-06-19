@@ -1,5 +1,5 @@
 module Addic7ed
-  class Addic7edVersionNormalizer
+  class VersionNormalizer
     attr_reader :version
 
     def initialize(version)

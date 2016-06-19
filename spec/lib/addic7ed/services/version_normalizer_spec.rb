@@ -1,7 +1,7 @@
 require "spec_helper"
 require "./lib/addic7ed"
 
-describe Addic7ed::Addic7edVersionNormalizer do
+describe Addic7ed::VersionNormalizer do
   def normalized_version(version)
     described_class.call(version)
   end
