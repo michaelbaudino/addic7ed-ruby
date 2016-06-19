@@ -123,26 +123,26 @@ describe Addic7ed::Episode, "#download_best_subtitle!" do
 
   before { allow(episode).to receive(:best_subtitle).and_return(best_subtitle) }
 
-  it "calls SubtitleDownloader on the best subtitle's URL" do
-    expect(Addic7ed::SubtitleDownloader).to receive(:call).with(best_subtitle.url, anything(), anything())
+  it "calls DownloadSubtitle on the best subtitle's URL" do
+    expect(Addic7ed::DownloadSubtitle).to receive(:call).with(best_subtitle.url, anything(), anything())
     subject
   end
 
-  it "calls SubtitleDownloader with episode's page as referer" do
-    expect(Addic7ed::SubtitleDownloader).to receive(:call).with(anything(), anything(), episode.send(:localized_urls)[lang])
+  it "calls DownloadSubtitle with episode's page as referer" do
+    expect(Addic7ed::DownloadSubtitle).to receive(:call).with(anything(), anything(), episode.send(:localized_urls)[lang])
     subject
   end
 
-  it "calls SubtitleDownloader with videofile's filename with language-prefixed .srt extension" do
-    expect(Addic7ed::SubtitleDownloader).to receive(:call).with(anything(), File.basename(filename, ".*") + ".#{lang}.srt", anything())
+  it "calls DownloadSubtitle with videofile's filename with language-prefixed .srt extension" do
+    expect(Addic7ed::DownloadSubtitle).to receive(:call).with(anything(), File.basename(filename, ".*") + ".#{lang}.srt", anything())
     subject
   end
 
   context "when untagged option is set" do
     let(:episode) { described_class.new(filename, true) }
 
-    it "calls SubtitleDownloader with videofile's filename with .srt extension" do
-      expect(Addic7ed::SubtitleDownloader).to receive(:call).with(anything(), File.basename(filename, ".*") + ".srt", anything())
+    it "calls DownloadSubtitle with videofile's filename with .srt extension" do
+      expect(Addic7ed::DownloadSubtitle).to receive(:call).with(anything(), File.basename(filename, ".*") + ".srt", anything())
       subject
     end
   end

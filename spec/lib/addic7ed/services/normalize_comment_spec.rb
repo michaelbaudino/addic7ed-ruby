@@ -1,7 +1,7 @@
 require "spec_helper"
 require "./lib/addic7ed"
 
-describe Addic7ed::CommentNormalizer do
+describe Addic7ed::NormalizeComment do
   def normalized_comment(comment)
     described_class.call(comment)
   end

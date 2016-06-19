@@ -1,7 +1,7 @@
 require 'nokogiri'
 
 module Addic7ed
-  class SubtitleParser
+  class ParseSubtitle
 
     attr_reader :subtitle_node
 

@@ -14,7 +14,7 @@ module Addic7ed
     end
 
     def subtitles(lang = "en")
-      @subtitles[lang] ||= Addic7ed::PageParser.call(localized_urls[lang])
+      @subtitles[lang] ||= Addic7ed::ParsePage.call(localized_urls[lang])
     end
 
     def best_subtitle(lang = "en", no_hi = false)
@@ -25,7 +25,7 @@ module Addic7ed
       subtitle_url      = best_subtitle(lang, no_hi).url
       subtitle_filename = video_file.basename.gsub(/\.\w{3}$/, untagged ? ".srt" : ".#{lang}.srt")
       referer           = localized_urls[lang]
-      SubtitleDownloader.call(subtitle_url, subtitle_filename, referer)
+      DownloadSubtitle.call(subtitle_url, subtitle_filename, referer)
     end
 
   protected

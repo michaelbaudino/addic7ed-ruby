@@ -1,5 +1,5 @@
 module Addic7ed
-  class CommentNormalizer
+  class NormalizeComment
     attr_reader :comment
 
     def initialize(comment)

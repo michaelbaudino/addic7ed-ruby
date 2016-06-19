@@ -3,7 +3,7 @@ require 'net/http'
 require 'open-uri'
 
 module Addic7ed
-  class PageParser
+  class ParsePage
 
     attr_reader :uri
 
@@ -17,7 +17,7 @@ module Addic7ed
 
     def call
       check_subtitles_presence!
-      subtitles_nodes.map { |subtitle_node| Addic7ed::SubtitleParser.call(subtitle_node) }
+      subtitles_nodes.map { |subtitle_node| Addic7ed::ParseSubtitle.call(subtitle_node) }
     end
 
   private

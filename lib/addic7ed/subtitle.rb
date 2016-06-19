@@ -5,14 +5,14 @@ module Addic7ed
     attr_accessor :url
 
     def initialize(options = {})
-      @version   = VersionNormalizer.call(options[:version])
+      @version   = NormalizeVersion.call(options[:version])
       @language  = options[:language]
       @status    = options[:status]
       @url       = options[:url]
       @via       = options[:via]
       @hi        = options[:hi]
       @downloads = options[:downloads].to_i || 0
-      @comment   = CommentNormalizer.call(options[:comment])
+      @comment   = NormalizeComment.call(options[:comment])
     end
 
     def to_s

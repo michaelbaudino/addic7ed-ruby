@@ -1,5 +1,5 @@
 module Addic7ed
-  class SubtitleDownloader
+  class DownloadSubtitle
     HTTP_REDIRECT_LIMIT = 8
 
     attr_reader :url, :filename, :referer, :http_redirect_count
@@ -20,7 +20,7 @@ module Addic7ed
       raise DailyLimitExceeded.new("Daily limit exceeded")  if /^\/downloadexceeded.php/.match url
       if response.kind_of? Net::HTTPRedirection
         new_url = URI.escape(response["location"]) # Addic7ed is serving redirection URL not-encoded, but Ruby does not support it (see http://bugs.ruby-lang.org/issues/7396)
-        SubtitleDownloader.call(new_url, filename, url, http_redirect_count + 1)
+        DownloadSubtitle.call(new_url, filename, url, http_redirect_count + 1)
       else
         write(response.body)
       end

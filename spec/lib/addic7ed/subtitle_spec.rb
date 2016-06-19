@@ -8,12 +8,12 @@ describe Addic7ed::Subtitle, "#initialize" do
   subject { described_class.new(version: version, comment: comment) }
 
   it "normalizes Addic7ed version" do
-    expect(Addic7ed::VersionNormalizer).to receive(:call).with(version)
+    expect(Addic7ed::NormalizeVersion).to receive(:call).with(version)
     subject
   end
 
   it "normalizes Addic7ed comment" do
-    expect(Addic7ed::CommentNormalizer).to receive(:call).with(comment)
+    expect(Addic7ed::NormalizeComment).to receive(:call).with(comment)
     subject
   end
 end

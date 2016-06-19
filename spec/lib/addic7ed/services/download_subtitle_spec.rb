@@ -1,7 +1,7 @@
 require "spec_helper"
 require "./lib/addic7ed"
 
-describe Addic7ed::SubtitleDownloader do
+describe Addic7ed::DownloadSubtitle do
   let(:url)      { "http://www.addic7ed.com/original/68018/4" }
   let(:referer)  { "http://www.addic7ed.com/serie/The_Walking_Dead/3/2/8" }
   let(:filename) { "The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.fr.srt" }
