@@ -13,12 +13,16 @@ Ruby command-line script to fetch subtitles on Addic7ed
 ### Refactoring TODO list
 
 * [x] move download logic to a service object
-* [ ] move compatibility logic to a service object
+* [ ] add a new `SubtitleSearch` entry class (that holds lang and search options like hi)
+* [ ] move compatibility logic to a `CheckCompatibility` service object
 * [ ] move best subtitle logic to a service object
 * [x] refactor how `Episode` holds `Subtitle`s
+* [ ] rename `ShowList` and make it a service object
 * [ ] refactor errors (to match Ruby errors hierarchy and maybe allow both bang-erroring and not-erroring versions of public API methods)
 * [ ] refactor how HI works (allow both "no HI", "force HI" and "don't care")
-* [ ] write documentation
+* [ ] write code documentation
+* [ ] Update README
+* [ ] add specs for parsing
 * [ ] move CLI to a separate gem (and use Thor or similar)
 
 ### Is it working ?
