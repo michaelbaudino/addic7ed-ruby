@@ -7,43 +7,31 @@ module Addic7ed
     attr_reader :video_file, :untagged
 
     def initialize(filename, untagged = false)
-      @video_file     = Addic7ed::VideoFile.new(filename)
-      @untagged       = untagged
-      @subtitles      = {}
-      @best_subtitle  = {}
-      @localized_urls = {}
+      @video_file    = Addic7ed::VideoFile.new(filename)
+      @untagged      = untagged
+      @subtitles     = languages_hash { |code, _| {code => nil} }
+      @best_subtitle = languages_hash { |code, _| {code => nil} }
     end
 
-    def localized_url(lang = 'fr')
-      check_language_availability(lang)
-      @localized_urls[lang] ||= "http://www.addic7ed.com/serie/#{ShowList.url_segment_for(video_file.showname)}/#{video_file.season}/#{video_file.episode}/#{LANGUAGES[lang][:id]}"
+    def subtitles(lang = "en")
+      @subtitles[lang] ||= Addic7ed::PageParser.call(localized_urls[lang])
     end
 
-    def subtitles(lang = 'fr')
-      check_language_availability(lang)
-      find_subtitles(lang) unless @subtitles && @subtitles[lang]
-      return @subtitles[lang]
-    end
-
-    def best_subtitle(lang = 'fr', no_hi = false)
-      check_language_availability(lang)
-      find_best_subtitle(lang, no_hi) unless @best_subtitle && @best_subtitle[lang]
-      return @best_subtitle[lang]
+    def best_subtitle(lang = "en", no_hi = false)
+      @best_subtitle[lang] ||= find_best_subtitle(lang, no_hi)
     end
 
     def download_best_subtitle!(lang, no_hi = false)
       subtitle_url      = best_subtitle(lang, no_hi).url
       subtitle_filename = video_file.basename.gsub(/\.\w{3}$/, untagged ? ".srt" : ".#{lang}.srt")
-      referer           = localized_url(lang)
+      referer           = localized_urls[lang]
       SubtitleDownloader.call(subtitle_url, subtitle_filename, referer)
     end
 
   protected
 
-    def find_subtitles(lang)
-      @subtitles[lang] ||= []
-      parser = Addic7ed::Parser.new(self, lang)
-      @subtitles[lang] = parser.extract_subtitles
+    def localized_urls
+      @localized_urls ||= languages_hash { |code, lang| {code => localized_url(lang[:id])} }
     end
 
     def find_best_subtitle(lang, no_hi = false)
@@ -53,8 +41,16 @@ module Addic7ed
       raise NoSubtitleFound unless @best_subtitle[lang]
     end
 
-    def check_language_availability(lang)
-      raise LanguageNotSupported unless LANGUAGES[lang]
+    def url_segment
+      @url_segment ||= ShowList.url_segment_for(video_file.showname)
+    end
+
+    def localized_url(lang)
+      "http://www.addic7ed.com/serie/#{url_segment}/#{video_file.season}/#{video_file.episode}/#{lang}"
+    end
+
+    def languages_hash(&block)
+      Hash.new { raise LanguageNotSupported }.merge(LANGUAGES.map(&block).reduce(&:merge))
     end
   end
 end
