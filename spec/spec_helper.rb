@@ -24,3 +24,5 @@ RSpec.configure do |config|
     stub_request(:get, "http://www.addic7ed.com").to_return(File.new("spec/responses/homepage.http"))
   end
 end
+
+require "./lib/addic7ed"

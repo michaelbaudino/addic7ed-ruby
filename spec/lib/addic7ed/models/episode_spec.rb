@@ -1,5 +1,4 @@
 require "spec_helper"
-require "./lib/addic7ed"
 
 describe Addic7ed::Episode, "#localized_urls" do
   let(:filename) { "The.Walking.Dead.S03E02.720p.HDTV.x264-EVOLVE.mkv" }

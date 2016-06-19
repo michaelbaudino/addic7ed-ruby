@@ -1,5 +1,4 @@
 require "spec_helper"
-require "./lib/addic7ed"
 
 describe Addic7ed::Subtitle, "#initialize" do
   let(:version) { "Version DIMENSiON" }

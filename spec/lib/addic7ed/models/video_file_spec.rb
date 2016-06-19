@@ -1,5 +1,4 @@
 require 'spec_helper'
-require './lib/addic7ed'
 
 describe Addic7ed::VideoFile do
   let(:file) { Addic7ed::VideoFile.new(filename) }

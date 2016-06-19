@@ -1,5 +1,4 @@
 require "spec_helper"
-require "./lib/addic7ed"
 
 describe Addic7ed::DownloadSubtitle do
   let(:url)      { "http://www.addic7ed.com/original/68018/4" }
