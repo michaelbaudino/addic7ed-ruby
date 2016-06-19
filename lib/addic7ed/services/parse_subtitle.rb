@@ -2,15 +2,12 @@ require 'nokogiri'
 
 module Addic7ed
   class ParseSubtitle
+    include Service
 
     attr_reader :subtitle_node
 
     def initialize(subtitle_node)
       @subtitle_node = subtitle_node
-    end
-
-    def self.call(subtitle_node)
-      new(subtitle_node).call
     end
 
     def call

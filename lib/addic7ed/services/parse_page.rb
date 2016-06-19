@@ -4,15 +4,12 @@ require 'open-uri'
 
 module Addic7ed
   class ParsePage
+    include Service
 
     attr_reader :uri
 
     def initialize(url)
       @uri = URI(url)
-    end
-
-    def self.call(url)
-      new(url).call
     end
 
     def call

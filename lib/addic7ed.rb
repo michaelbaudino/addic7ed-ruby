@@ -1,5 +1,6 @@
 require 'addic7ed/version'
 require 'addic7ed/common'
+require 'addic7ed/service'
 require 'addic7ed/services/normalize_version'
 require 'addic7ed/services/normalize_comment'
 require 'addic7ed/services/parse_subtitle'

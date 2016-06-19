@@ -1,13 +1,11 @@
 module Addic7ed
   class NormalizeVersion
+    include Service
+
     attr_reader :version
 
     def initialize(version)
       @version = version || ""
-    end
-
-    def self.call(version)
-      new(version).call
     end
 
     def call
@@ -19,6 +17,4 @@ module Addic7ed
         gsub(/[- \.]/, '')
     end
   end
-
-private
 end

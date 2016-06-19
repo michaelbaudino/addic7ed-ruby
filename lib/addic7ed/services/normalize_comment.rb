@@ -1,19 +1,15 @@
 module Addic7ed
   class NormalizeComment
+    include Service
+
     attr_reader :comment
 
     def initialize(comment)
       @comment = comment || ""
     end
 
-    def self.call(comment)
-      new(comment).call
-    end
-
     def call
       comment.downcase
     end
   end
-
-private
 end

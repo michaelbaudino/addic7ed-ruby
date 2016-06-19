@@ -1,18 +1,16 @@
 module Addic7ed
   class DownloadSubtitle
+    include Service
+
     HTTP_REDIRECT_LIMIT = 8
 
     attr_reader :url, :filename, :referer, :http_redirect_count
 
-    def initialize(url, filename, referer, http_redirect_count)
+    def initialize(url, filename, referer, http_redirect_count = 0)
       @url                 = url
       @filename            = filename
       @referer             = referer
       @http_redirect_count = http_redirect_count
-    end
-
-    def self.call(url, filename, referer, http_redirect_count = 0)
-      new(url, filename, referer, http_redirect_count).call
     end
 
     def call
