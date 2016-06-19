@@ -42,7 +42,7 @@ module Addic7ed
     end
 
     def url_segment
-      @url_segment ||= ShowList.url_segment_for(video_file.showname)
+      @url_segment ||= URLEncodeShowName.call(video_file.showname)
     end
 
     def localized_url(lang)
