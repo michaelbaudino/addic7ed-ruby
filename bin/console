@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+Bundler.require(:default, ENV["RACK_ENV"] || :development)
+
+APP_ROOT = File.expand_path(File.join(File.dirname(__FILE__), ".."))
+
+$LOAD_PATH.unshift File.expand_path('lib', APP_ROOT)
+
+require "addic7ed"
+
+Pry.start
