@@ -45,9 +45,7 @@ module Addic7ed
     end
 
     def write(content)
-      Kernel.open(filename, "w") do |f|
-        f << content
-      end
+      Kernel.open(filename, "w") { |f| f << content }
     rescue
       raise DownloadError, "Cannot write to disk"
     end
