@@ -6,8 +6,10 @@ engines:
       languages:
       - ruby
   fixme:
-    enabled: true
+    enabled: false
   rubocop:
+    enabled: true
+  brakeman:
     enabled: true
 ratings:
   paths:
