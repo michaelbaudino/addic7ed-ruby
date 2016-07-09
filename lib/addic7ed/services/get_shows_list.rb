@@ -1,3 +1,5 @@
+require "singleton"
+
 module Addic7ed
   class GetShowsList
     include Singleton

@@ -20,10 +20,11 @@ Ruby command-line script to fetch subtitles on Addic7ed
 * [x] rename `ShowList` and make it a service object
 * [ ] refactor errors (to match Ruby errors hierarchy and maybe allow both bang-erroring and not-erroring versions of public API methods)
 * [ ] refactor how HI works (allow both "no HI", "force HI" and "don't care")
-* [ ] allow language to be specified both by string or by symbol
+* [x] use symbols rather than strings for languages
 * [ ] write code documentation
 * [ ] update README
 * [x] add Rubocop
+* [x] move user agents and languages to a config file
 * [ ] add specs for parsing
 * [ ] move CLI to a separate gem (and use Thor or similar)
 
