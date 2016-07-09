@@ -4,28 +4,21 @@ require 'open-uri'
 module Addic7ed
   class Episode
 
-    attr_reader :video_file, :untagged
+    attr_reader :showname, :season, :episode
 
-    def initialize(filename, untagged = false)
-      @video_file    = Addic7ed::VideoFile.new(filename)
-      @untagged      = untagged
-      @subtitles     = languages_hash { |code, _| {code => nil} }
-      @best_subtitle = languages_hash { |code, _| {code => nil} }
+    def initialize(showname, season, episode)
+      @showname  = showname
+      @season    = season
+      @episode   = episode
+      @subtitles = languages_hash { |code, _| {code => nil} }
     end
 
-    def subtitles(lang = "en")
-      @subtitles[lang] ||= Addic7ed::ParsePage.call(localized_urls[lang])
+    def subtitles(lang)
+      @subtitles[lang] ||= Addic7ed::ParsePage.call(page_url(lang))
     end
 
-    def best_subtitle(lang = "en", no_hi = false)
-      @best_subtitle[lang] ||= find_best_subtitle(lang, no_hi)
-    end
-
-    def download_best_subtitle!(lang, no_hi = false)
-      subtitle_url      = best_subtitle(lang, no_hi).url
-      subtitle_filename = video_file.basename.gsub(/\.\w{3}$/, untagged ? ".srt" : ".#{lang}.srt")
-      referer           = localized_urls[lang]
-      DownloadSubtitle.call(subtitle_url, subtitle_filename, referer)
+    def page_url(lang)
+      localized_urls[lang]
     end
 
   protected
@@ -34,19 +27,12 @@ module Addic7ed
       @localized_urls ||= languages_hash { |code, lang| {code => localized_url(lang[:id])} }
     end
 
-    def find_best_subtitle(lang, no_hi = false)
-      subtitles(lang).each do |sub|
-        @best_subtitle[lang] = sub if sub.works_for?(video_file.group, no_hi) && sub.can_replace?(@best_subtitle[lang])
-      end
-      raise NoSubtitleFound unless @best_subtitle[lang]
-    end
-
-    def url_segment
-      @url_segment ||= URLEncodeShowName.call(video_file.showname)
+    def url_encoded_showname
+      @url_encoded_showname ||= URLEncodeShowName.call(showname)
     end
 
     def localized_url(lang)
-      "http://www.addic7ed.com/serie/#{url_segment}/#{video_file.season}/#{video_file.episode}/#{lang}"
+      "http://www.addic7ed.com/serie/#{url_encoded_showname}/#{season}/#{episode}/#{lang}"
     end
 
     def languages_hash(&block)
