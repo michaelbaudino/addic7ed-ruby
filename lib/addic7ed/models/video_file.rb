@@ -1,6 +1,6 @@
 module Addic7ed
   class VideoFile
-    TVSHOW_REGEX = /\A(?<showname>.*\w)[\[\. ]+S?(?<season>\d{1,2})[-\. ]?[EX]?(?<episode>\d{2})([-\. ]?[EX]?\d{2})*[\]\. ]+(?<tags>.*)-(?<group>\w*)\[?(?<distribution>\w*)\]?(\.\w{3})?\z/i # rubocop:disable Style/LineLength
+    TVSHOW_REGEX = /\A(?<showname>.*\w)[\[\. ]+S?(?<season>\d{1,2})[-\. ]?[EX]?(?<episode>\d{2})([-\. ]?[EX]?\d{2})*[\]\. ]+(?<tags>.*)-(?<group>\w*)\[?(?<distribution>\w*)\]?(\.\w{3})?\z/i # rubocop:disable Metrics/LineLength
 
     attr_reader :filename, :regexp_matches
 
