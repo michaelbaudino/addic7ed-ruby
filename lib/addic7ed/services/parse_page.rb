@@ -1,6 +1,6 @@
-require 'nokogiri'
-require 'net/http'
-require 'open-uri'
+require "nokogiri"
+require "net/http"
+require "open-uri"
 
 module Addic7ed
   class ParsePage
@@ -13,7 +13,7 @@ module Addic7ed
     end
 
     def call
-      check_subtitles_presence!
+      raise NoSubtitleFound unless subtitles_found?
       subtitles_nodes.map { |subtitle_node| Addic7ed::ParseSubtitle.call(subtitle_node) }
     end
 
@@ -25,7 +25,7 @@ module Addic7ed
     end
 
     def subtitles_nodes
-      @subtitles_nodes ||= page_dom.css('#container95m table.tabel95 table.tabel95')
+      @subtitles_nodes ||= page_dom.css("#container95m table.tabel95 table.tabel95")
     end
 
     def server_response
@@ -36,8 +36,8 @@ module Addic7ed
       end
     end
 
-    def check_subtitles_presence!
-      raise NoSubtitleFound unless page_dom.css('select#filterlang ~ font[color="yellow"]').empty? && subtitles_nodes.size > 0
+    def subtitles_found?
+      page_dom.css("select#filterlang ~ font[color='yellow']").empty? && !subtitles_nodes.empty?
     end
   end
 end

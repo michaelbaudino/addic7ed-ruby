@@ -15,27 +15,27 @@ module Addic7ed
       matching_shows = matching_shows(ignore_year: false)
       matching_shows = matching_shows(ignore_year: true) if matching_shows.empty?
       raise ShowNotFound if matching_shows.empty?
-      matching_shows.last.gsub(' ', '_')
+      matching_shows.last.tr(" ", "_")
     end
 
   private
 
     def matching_shows(opts)
-      addic7ed_shows.select{ |show_name| is_matching?(show_name, opts) }
+      addic7ed_shows.select { |show_name| matching?(show_name, opts) }
     end
 
     def normalize(show_name, opts)
       show_name
         .downcase
-        .gsub("'", "")
-        .gsub(/[_\.]+/, ' ')
-        .gsub(/ (US|UK)( |$)/i, ' (\1)\2')
-        .gsub(/ (\d{4})( |$)/i, ' (\1)\2')
+        .delete("'")
+        .gsub(/[_\.]+/, " ")
+        .gsub(/ (US|UK)( |$)/i, " (\\1)\\2")
+        .gsub(/ (\d{4})( |$)/i, " (\\1)\\2")
         .strip
-        .tap { |show_name| show_name.gsub!(/ \(\d{4}\)( |$)/, '\1') if opts[:ignore_year] }
+        .tap { |showname| showname.gsub!(/ \(\d{4}\)( |$)/, '\1') if opts[:ignore_year] }
     end
 
-    def is_matching?(addic7ed_show, opts)
+    def matching?(addic7ed_show, opts)
       normalize(addic7ed_show, opts) == normalize(filename, opts)
     end
 

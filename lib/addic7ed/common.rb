@@ -1,66 +1,66 @@
 # encoding: UTF-8
 
-module Addic7ed
-
-  SHOWS_URL            = 'http://www.addic7ed.com/ajax_getShows.php'
-  EPISODES_URL         = 'http://www.addic7ed.com/ajax_getEpisodes.php'
-  EPISODE_REDIRECT_URL = 'http://www.addic7ed.com/re_episode.php'
+module Addic7ed # rubocop:disable Metrics/ModuleLength
+  SHOWS_URL            = "http://www.addic7ed.com/ajax_getShows.php".freeze
+  EPISODES_URL         = "http://www.addic7ed.com/ajax_getEpisodes.php".freeze
+  EPISODE_REDIRECT_URL = "http://www.addic7ed.com/re_episode.php".freeze
 
   COMPATIBILITY_720P = {
-    'LOL'  => 'DIMENSION',
-    'SYS'  => 'DIMENSION',
-    'XII'  => 'IMMERSE',
-    'ASAP' => 'IMMERSE'
-  }
+    "LOL"  => "DIMENSION",
+    "SYS"  => "DIMENSION",
+    "XII"  => "IMMERSE",
+    "ASAP" => "IMMERSE"
+  }.freeze
 
   LANGUAGES = {
-    'ar'    => {name: 'Arabic', id: 38},
-    'az'    => {name: 'Azerbaijani', id: 48},
-    'bn'    => {name: 'Bengali', id: 47},
-    'bs'    => {name: 'Bosnian', id: 44},
-    'bg'    => {name: 'Bulgarian', id: 35},
-    'ca'    => {name: 'Català', id: 12},
-    'cn'    => {name: 'Chinese (Simplified)', id: 41},
-    'zh'    => {name: 'Chinese (Traditional)', id: 24},
-    'hr'    => {name: 'Croatian', id: 31},
-    'cs'    => {name: 'Czech', id: 14},
-    'da'    => {name: 'Danish', id: 30},
-    'nl'    => {name: 'Dutch', id: 17},
-    'en'    => {name: 'English', id: 1},
-    'eu'    => {name: 'Euskera', id: 13},
-    'fi'    => {name: 'Finnish', id: 28},
-    'fr'    => {name: 'French', id: 8},
-    'gl'    => {name: 'Galego', id: 15},
-    'de'    => {name: 'German', id: 11},
-    'el'    => {name: 'Greek', id: 27},
-    'he'    => {name: 'Hebrew', id: 23},
-    'hu'    => {name: 'Hungarian', id: 20},
-    'id'    => {name: 'Indonesian', id: 37},
-    'it'    => {name: 'Italian', id: 7},
-    'ja'    => {name: 'Japanese', id: 32},
-    'ko'    => {name: 'Korean', id: 42},
-    'mk'    => {name: 'Macedonian', id: 49},
-    'ms'    => {name: 'Malay', id: 40},
-    'no'    => {name: 'Norwegian', id: 29},
-    'fa'    => {name: 'Persian', id: 43},
-    'pl'    => {name: 'Polish', id: 21},
-    'pt'    => {name: 'Portuguese', id: 9},
-    'pt-br' => {name: 'Portuguese (Brazilian)', id: 10},
-    'ro'    => {name: 'Romanian', id: 26},
-    'ru'    => {name: 'Russian', id: 19},
-    'sr'    => {name: 'Serbian (Cyrillic)', id: 39},
-    'sr-la' => {name: 'Serbian (Latin)', id: 36},
-    'sk'    => {name: 'Slovak', id: 25},
-    'sl'    => {name: 'Slovenian', id: 22},
-    'es'    => {name: 'Spanish', id: 4},
-    'es-la' => {name: 'Spanish (Latin America)', id: 6},
-    'es-es' => {name: 'Spanish (Spain)', id: 5},
-    'sv'    => {name: 'Swedish', id: 18},
-    'th'    => {name: 'Thai', id: 46},
-    'tr'    => {name: 'Turkish', id: 16},
-    'vi'    => {name: 'Vietnamese', id: 45}
-  }
+    "ar"    => { name: "Arabic", id: 38 },
+    "az"    => { name: "Azerbaijani", id: 48 },
+    "bn"    => { name: "Bengali", id: 47 },
+    "bs"    => { name: "Bosnian", id: 44 },
+    "bg"    => { name: "Bulgarian", id: 35 },
+    "ca"    => { name: "Català", id: 12 },
+    "cn"    => { name: "Chinese (Simplified)", id: 41 },
+    "zh"    => { name: "Chinese (Traditional)", id: 24 },
+    "hr"    => { name: "Croatian", id: 31 },
+    "cs"    => { name: "Czech", id: 14 },
+    "da"    => { name: "Danish", id: 30 },
+    "nl"    => { name: "Dutch", id: 17 },
+    "en"    => { name: "English", id: 1 },
+    "eu"    => { name: "Euskera", id: 13 },
+    "fi"    => { name: "Finnish", id: 28 },
+    "fr"    => { name: "French", id: 8 },
+    "gl"    => { name: "Galego", id: 15 },
+    "de"    => { name: "German", id: 11 },
+    "el"    => { name: "Greek", id: 27 },
+    "he"    => { name: "Hebrew", id: 23 },
+    "hu"    => { name: "Hungarian", id: 20 },
+    "id"    => { name: "Indonesian", id: 37 },
+    "it"    => { name: "Italian", id: 7 },
+    "ja"    => { name: "Japanese", id: 32 },
+    "ko"    => { name: "Korean", id: 42 },
+    "mk"    => { name: "Macedonian", id: 49 },
+    "ms"    => { name: "Malay", id: 40 },
+    "no"    => { name: "Norwegian", id: 29 },
+    "fa"    => { name: "Persian", id: 43 },
+    "pl"    => { name: "Polish", id: 21 },
+    "pt"    => { name: "Portuguese", id: 9 },
+    "pt-br" => { name: "Portuguese (Brazilian)", id: 10 },
+    "ro"    => { name: "Romanian", id: 26 },
+    "ru"    => { name: "Russian", id: 19 },
+    "sr"    => { name: "Serbian (Cyrillic)", id: 39 },
+    "sr-la" => { name: "Serbian (Latin)", id: 36 },
+    "sk"    => { name: "Slovak", id: 25 },
+    "sl"    => { name: "Slovenian", id: 22 },
+    "es"    => { name: "Spanish", id: 4 },
+    "es-la" => { name: "Spanish (Latin America)", id: 6 },
+    "es-es" => { name: "Spanish (Spain)", id: 5 },
+    "sv"    => { name: "Swedish", id: 18 },
+    "th"    => { name: "Thai", id: 46 },
+    "tr"    => { name: "Turkish", id: 16 },
+    "vi"    => { name: "Viet namese", id: 45 }
+  }.freeze
 
+  # rubocop:disable Metrics/LineLength
   USER_AGENTS = [
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0a2) Gecko/20111101 Firefox/9.0a2",
     "Mozilla/5.0 (Windows NT 6.2; rv:9.0.1) Gecko/20100101 Firefox/9.0.1",
@@ -1285,5 +1285,6 @@ module Addic7ed
     "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/534.13 (KHTML, like Gecko) Chrome/9.0.597.0 Safari/534.13",
     "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_5; en-US) AppleWebKit/534.13 (KHTML, like Gecko) Chrome/9.0.597.0 Safari/534.13",
     "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_4; en-US) AppleWebKit/534.13 (KHTML, like Gecko) Chrome/9.0.597.0 Safari/534.13"
-  ]
+  ].freeze
+  # rubocop:enable Metrics/LineLength
 end

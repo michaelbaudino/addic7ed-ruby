@@ -4,11 +4,11 @@ describe Addic7ed::Search do
   let(:video_filename) { "Game.of.Thrones.S06E09.720p.HDTV.x264-AVS.mkv" }
   let(:language)       { "fr" }
   let(:options)        { {} }
-
   let(:subtitles_fr)   { [] }
-
-  let(:video_file)     { double(:video_file, showname: "Game.of.Thrones", season: 6, episode: 9, group: "AVS") }
   let(:episode)        { double(:episode) }
+  let(:video_file) do
+    double(:video_file, showname: "Game.of.Thrones", season: 6, episode: 9, group: "AVS")
+  end
 
   before do
     allow(Addic7ed::VideoFile).to receive(:new).and_return(video_file)
@@ -37,6 +37,7 @@ describe Addic7ed::Search do
     end
   end
 
+# rubocop:disable all
   ####
   #### THE FOLLOWING WILL BE MOVED TO A NEW SERVICE OBJECT AND REWRITTEN
   ####
@@ -80,4 +81,5 @@ describe Addic7ed::Search do
   #     expect{ episode.best_subtitle("az") }.to raise_error Addic7ed::NoSubtitleFound
   #   end
   # end
+# rubocop:enable:all
 end

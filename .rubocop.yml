@@ -1,0 +1,11 @@
+Style/DoubleNegation:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Metrics/LineLength:
+  Max: 100
+
+Style/AccessModifierIndentation:
+  EnforcedStyle: outdent

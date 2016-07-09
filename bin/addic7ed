@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+# rubocop:disable all
 def require_dependencies
   require 'optparse'
   require 'nokogiri'
@@ -135,3 +136,4 @@ options[:filenames].each do |filename|
     next
   end
 end
+# rubocop:enable all

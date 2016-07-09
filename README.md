@@ -22,7 +22,8 @@ Ruby command-line script to fetch subtitles on Addic7ed
 * [ ] refactor how HI works (allow both "no HI", "force HI" and "don't care")
 * [ ] allow language to be specified both by string or by symbol
 * [ ] write code documentation
-* [ ] Update README
+* [ ] update README
+* [x] add Rubocop
 * [ ] add specs for parsing
 * [ ] move CLI to a separate gem (and use Thor or similar)
 

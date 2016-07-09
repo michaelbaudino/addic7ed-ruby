@@ -7,7 +7,7 @@ describe Addic7ed::Episode, "#subtitles" do
   let(:episode)     { described_class.new(showname, season, episode_nbr) }
 
   before do
-    %w{fr en it}.each do |lang|
+    %w(fr en it).each do |lang|
       lang_id = Addic7ed::LANGUAGES[lang][:id]
       stub_request(:get, "http://www.addic7ed.com/serie/The_Walking_Dead/3/2/#{lang_id}")
         .to_return File.new("spec/responses/walking-dead-3-2-#{lang_id}.http")
@@ -21,29 +21,43 @@ describe Addic7ed::Episode, "#subtitles" do
   end
 
   it "raises LanguageNotSupported given an unsupported language code" do
-    expect{ episode.subtitles("aa") }.to raise_error Addic7ed::LanguageNotSupported
+    expect { episode.subtitles("aa") }.to raise_error Addic7ed::LanguageNotSupported
   end
 
   it "memoizes results to minimize network requests" do
     2.times { episode.subtitles("en") }
-    expect(a_request(:get, "http://www.addic7ed.com/serie/The_Walking_Dead/3/2/1")).to have_been_made.times(1)
+    expect(
+      a_request(:get, "http://www.addic7ed.com/serie/The_Walking_Dead/3/2/1")
+    ).to have_been_made.times(1)
   end
 
   context "when episode does not exist" do
     let(:episode_nbr) { 42 }
 
-    before { stub_request(:get, "http://www.addic7ed.com/serie/The_Walking_Dead/3/42/8").to_return File.new("spec/responses/walking-dead-3-42-8.http") }
+    before do
+      stub_request(
+        :get,
+        "http://www.addic7ed.com/serie/The_Walking_Dead/3/42/8"
+      ).to_return File.new("spec/responses/walking-dead-3-42-8.http")
+    end
 
     it "raises EpisodeNotFound" do
-      expect{ described_class.new(showname, season, episode_nbr).subtitles("fr") }.to raise_error Addic7ed::EpisodeNotFound
+      expect do
+        described_class.new(showname, season, episode_nbr).subtitles("fr")
+      end.to raise_error Addic7ed::EpisodeNotFound
     end
   end
 
   context "when episode exists but has no subtitles" do
-    before { stub_request(:get, "http://www.addic7ed.com/serie/The_Walking_Dead/3/2/48").to_return File.new("spec/responses/walking-dead-3-2-48.http") }
+    before do
+      stub_request(
+        :get,
+        "http://www.addic7ed.com/serie/The_Walking_Dead/3/2/48"
+      ).to_return File.new("spec/responses/walking-dead-3-2-48.http")
+    end
 
     it "raises NoSubtitleFound" do
-      expect{ episode.subtitles("az") }.to raise_error Addic7ed::NoSubtitleFound
+      expect { episode.subtitles("az") }.to raise_error Addic7ed::NoSubtitleFound
     end
   end
 end
@@ -60,11 +74,13 @@ describe Addic7ed::Episode, "#page_url(lang)" do
   end
 
   it "uses URLEncodeShowName to generate the localized URLs" do
-    expect(Addic7ed::URLEncodeShowName).to receive(:call).with(showname).and_return("The_Walking_Dead")
+    expect(
+      Addic7ed::URLEncodeShowName
+    ).to receive(:call).with(showname).and_return("The_Walking_Dead")
     episode.page_url("fr")
   end
 
   it "raises LanguageNotSupported given an unsupported language code" do
-    expect{ episode.page_url("aa") }.to raise_error Addic7ed::LanguageNotSupported
+    expect { episode.page_url("aa") }.to raise_error Addic7ed::LanguageNotSupported
   end
 end

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Addic7ed::VideoFile do
   let(:file) { Addic7ed::VideoFile.new(filename) }
@@ -7,12 +7,12 @@ describe Addic7ed::VideoFile do
     let(:filename) { filename }
 
     it "it detects successfully" do
-      expect(file.showname    ).to eq (expected_show_name || 'Showname')
-      expect(file.season      ).to eq 2
-      expect(file.episode     ).to eq 1
-      expect(file.tags        ).to eq ['720P', 'HDTV', 'X264']
-      expect(file.group       ).to eq 'GROUP'
-      expect(file.distribution).to satisfy { |d| ['', 'DISTRIBUTION'].include?(d) }
+      expect(file.showname).to eq(expected_show_name || "Showname")
+      expect(file.season).to eq 2
+      expect(file.episode).to eq 1
+      expect(file.tags).to eq %w(720P HDTV X264)
+      expect(file.group).to eq "GROUP"
+      expect(file.distribution).to satisfy { |d| ["", "DISTRIBUTION"].include?(d) }
     end
   end
 
@@ -20,7 +20,7 @@ describe Addic7ed::VideoFile do
     let(:filename) { filename }
 
     it "raises an error" do
-      expect{file}.to raise_error Addic7ed::InvalidFilename
+      expect { file }.to raise_error Addic7ed::InvalidFilename
     end
   end
 
@@ -33,52 +33,56 @@ describe Addic7ed::VideoFile do
       it_behaves_like "a media file", "Showname.02x01.720p.HDTV.x264-GROUP.mkv"
     end
 
-    context 'with 3-digits notation' do
+    context "with 3-digits notation" do
       it_behaves_like "a media file", "Showname.201.720p.HDTV.x264-GROUP.mkv"
     end
 
-    context 'with brackets notation' do
+    context "with brackets notation" do
       it_behaves_like "a media file", "Showname.[S02E01].720p.HDTV.x264-GROUP.mkv"
     end
 
-    context 'with brackets and x notation' do
+    context "with brackets and x notation" do
       it_behaves_like "a media file", "Showname.[2x01].720p.HDTV.x264-GROUP.mkv"
     end
 
-    context 'with brackets and 3-digits notation' do
+    context "with brackets and 3-digits notation" do
       it_behaves_like "a media file", "Showname.[201].720p.HDTV.x264-GROUP.mkv"
     end
 
-    context 'with brackets and x notation and space separator' do
+    context "with brackets and x notation and space separator" do
       it_behaves_like "a media file", "Showname [2x01] 720p.HDTV.x264-GROUP.mkv"
     end
 
-    context 'with brackets and 3-digits notation and space separator' do
+    context "with brackets and 3-digits notation and space separator" do
       it_behaves_like "a media file", "Showname [201] 720p.HDTV.x264-GROUP.mkv"
     end
 
-    context 'with lowercase filename' do
+    context "with lowercase filename" do
       it_behaves_like "a media file", "showname.s02e01.720p.HDTV.x264-group.mkv", "showname"
     end
 
-    context 'with multiple words in show name' do
+    context "with multiple words in show name" do
       it_behaves_like "a media file", "Show.Name.S02E01.720p.HDTV.x264-GROUP.mkv", "Show.Name"
     end
 
-    context 'with multiple words in show name separated by spaces' do
+    context "with multiple words in show name separated by spaces" do
       it_behaves_like "a media file", "Show Name.S02E01.720p.HDTV.x264-GROUP.mkv", "Show Name"
     end
 
-    context 'with only numbers in show name' do
+    context "with only numbers in show name" do
       it_behaves_like "a media file", "42.S02E01.720p.HDTV.x264-GROUP.mkv", "42"
     end
 
     context "with production year" do
-      it_behaves_like "a media file", "Showname.2014.S02E01.720p.HDTV.x264-GROUP.mkv", "Showname.2014"
+      it_behaves_like "a media file",
+                      "Showname.2014.S02E01.720p.HDTV.x264-GROUP.mkv",
+                      "Showname.2014"
     end
 
     context "with an optional distribution group name" do
-      it_behaves_like "a media file", "Showname.2014.S02E01.720p.HDTV.x264-GROUP[DISTRIBUTION].mkv", "Showname.2014"
+      it_behaves_like "a media file",
+                      "Showname.2014.S02E01.720p.HDTV.x264-GROUP[DISTRIBUTION].mkv",
+                      "Showname.2014"
     end
 
     context "with a full path" do
@@ -128,31 +132,41 @@ describe Addic7ed::VideoFile do
     context "with no distribution" do
       it_behaves_like "a media file", "Showname.S02E01.720p.HDTV.x264-GROUP.mkv"
     end
-
   end
 
-  describe '#basename' do
-    it 'returns only file name given a full path' do
-      expect(Addic7ed::VideoFile.new("/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv").basename).to eq "Showname.S02E01.720p.HDTV.x264-GROUP.mkv"
+  describe "#basename" do
+    subject { Addic7ed::VideoFile.new("/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv") }
+
+    it "returns only file name given a full path" do
+      expect(subject.basename).to eq "Showname.S02E01.720p.HDTV.x264-GROUP.mkv"
     end
   end
 
-  describe '#to_s' do
-    it 'returns file name as a string' do
-      expect(Addic7ed::VideoFile.new("/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv").to_s).to eq "/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv"
+  describe "#to_s" do
+    subject { Addic7ed::VideoFile.new("/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv") }
+
+    it "returns file name as a string" do
+      expect(subject.to_s).to eq "/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv"
     end
   end
 
-  describe '#inspect' do
-    it 'prints a human-readable detailed version' do
-      expect(Addic7ed::VideoFile.new("Showname.S02E01.720p.HDTV.x264-GROUP[DISTRIBUTION].mkv").inspect).to eq(
-'Guesses for Showname.S02E01.720p.HDTV.x264-GROUP[DISTRIBUTION].mkv:
+  describe "#inspect" do
+    let(:expected) do
+      <<-EOS
+Guesses for Showname.S02E01.720p.HDTV.x264-GROUP[DISTRIBUTION].mkv:
   show:         Showname
   season:       2
   episode:      1
   tags:         ["720P", "HDTV", "X264"]
   group:        GROUP
-  distribution: DISTRIBUTION')
+  distribution: DISTRIBUTION
+EOS
+    end
+
+    subject { Addic7ed::VideoFile.new("Showname.S02E01.720p.HDTV.x264-GROUP[DISTRIBUTION].mkv") }
+
+    it "prints a human-readable detailed version" do
+      expect(subject.inspect).to eq expected.strip
     end
   end
 end

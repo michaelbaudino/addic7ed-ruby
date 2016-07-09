@@ -1,16 +1,15 @@
-require 'net/http'
-require 'open-uri'
+require "net/http"
+require "open-uri"
 
 module Addic7ed
   class Episode
-
     attr_reader :showname, :season, :episode
 
     def initialize(showname, season, episode)
       @showname  = showname
       @season    = season
       @episode   = episode
-      @subtitles = languages_hash { |code, _| {code => nil} }
+      @subtitles = languages_hash { |code, _| { code => nil } }
     end
 
     def subtitles(lang)
@@ -24,7 +23,7 @@ module Addic7ed
   protected
 
     def localized_urls
-      @localized_urls ||= languages_hash { |code, lang| {code => localized_url(lang[:id])} }
+      @localized_urls ||= languages_hash { |code, lang| { code => localized_url(lang[:id]) } }
     end
 
     def url_encoded_showname

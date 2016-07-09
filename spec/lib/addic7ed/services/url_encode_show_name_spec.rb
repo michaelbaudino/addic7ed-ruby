@@ -36,6 +36,6 @@ describe Addic7ed::URLEncodeShowName do
   end
 
   it "raises a ShowNotFound error when no matching show is found" do
-    expect{described_class.call("Not.an.existing.show")}.to raise_error Addic7ed::ShowNotFound
+    expect { described_class.call("Not.an.existing.show") }.to raise_error Addic7ed::ShowNotFound
   end
 end

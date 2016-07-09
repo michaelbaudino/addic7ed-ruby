@@ -18,15 +18,20 @@ module Addic7ed
 
     def best_subtitle
       episode.subtitles(language).each do |subtitle|
-        @best_subtitle = subtitle if subtitle.works_for?(video_file.group, options[:no_hi]) && subtitle.can_replace?(@best_subtitle)
+        @best_subtitle = subtitle if better_than_best_subtitle?(subtitle)
       end
       @best_subtitle || raise(NoSubtitleFound)
     end
 
   private
 
+    def better_than_best_subtitle?(subtitle)
+      subtitle.works_for?(video_file.group, options[:no_hi]) &&
+        subtitle.can_replace?(@best_subtitle)
+    end
+
     def default_options
-      {no_hi: false}
+      { no_hi: false }
     end
   end
 end

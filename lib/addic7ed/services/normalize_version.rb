@@ -9,12 +9,12 @@ module Addic7ed
     end
 
     def call
-      version.
-        gsub(/[[:space:]]/, "").
-        upcase.
-        gsub(/,[\d\. ]+MBS$/, '').
-        gsub(/(^VERSION *|720P|1080P|HDTV|PROPER|RERIP|INTERNAL|X\.?264)/, '').
-        gsub(/[- \.]/, '')
+      version
+        .gsub(/[[:space:]]/, "")
+        .upcase
+        .gsub(/,[\d\. ]+MBS$/, "")
+        .gsub(/(^VERSION *|720P|1080P|HDTV|PROPER|RERIP|INTERNAL|X\.?264)/, "")
+        .gsub(/[- \.]/, "")
     end
   end
 end
