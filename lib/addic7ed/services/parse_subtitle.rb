@@ -6,7 +6,7 @@ module Addic7ed
 
     attr_reader :subtitle_node
 
-    FIELDS = %i(version language status url source hi downloads comment).freeze
+    FIELDS = [:version, :language, :status, :url, :source, :hi, :downloads, :comment].freeze
 
     def initialize(subtitle_node)
       @subtitle_node = subtitle_node
