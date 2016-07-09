@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
-module Addic7ed # rubocop:disable Metrics/ModuleLength
+# rubocop:disable Metrics/ModuleLength
+module Addic7ed
   SHOWS_URL            = "http://www.addic7ed.com/ajax_getShows.php".freeze
   EPISODES_URL         = "http://www.addic7ed.com/ajax_getEpisodes.php".freeze
   EPISODE_REDIRECT_URL = "http://www.addic7ed.com/re_episode.php".freeze
@@ -1288,3 +1289,4 @@ module Addic7ed # rubocop:disable Metrics/ModuleLength
   ].freeze
   # rubocop:enable Metrics/LineLength
 end
+# rubocop:enable Metrics/ModuleLength
