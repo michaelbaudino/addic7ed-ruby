@@ -1,6 +1,6 @@
 module Addic7ed
   class Subtitle
-    attr_reader :version, :language, :status, :via, :downloads, :comment
+    attr_reader :version, :language, :status, :source, :downloads, :comment
     attr_accessor :url
 
     def initialize(options = {})
@@ -8,7 +8,7 @@ module Addic7ed
       @language  = options[:language]
       @status    = options[:status]
       @url       = options[:url]
-      @via       = options[:via]
+      @source    = options[:source]
       @hi        = options[:hi]
       @downloads = options[:downloads].to_i || 0
       @comment   = NormalizeComment.call(options[:comment])
@@ -16,7 +16,7 @@ module Addic7ed
 
     def to_s
       str = "#{url}\t->\t#{version} (#{language}, #{status}) [#{downloads} downloads]"
-      str += " (via #{via})" if via
+      str += " (source #{source})" if source
       str
     end
 

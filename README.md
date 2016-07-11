@@ -17,8 +17,7 @@ Ruby command-line script to fetch subtitles on Addic7ed
 * [x] move compatibility logic to a `CheckCompatibility` service object
 * [x] create a `SubtitlesCollection` class to hold and filter subtitles
 * [x] move best subtitle logic to `SubtitlesCollection`
-* [ ] rename `Subtitle#via` to `Subtitle#source`
-* [ ] rename `Subtitle#version` to `Subtitle#group`
+* [x] rename `Subtitle#via` to `Subtitle#source`
 * [x] refactor how `Episode` holds `Subtitle`s
 * [x] rename `ShowList` and make it a service object
 * [ ] write code documentation

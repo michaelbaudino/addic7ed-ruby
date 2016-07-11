@@ -24,12 +24,12 @@ describe Addic7ed::Subtitle, "#to_s" do
       language:  "fr",
       status:    "Completed",
       url:       "http://some.fancy.url",
-      via:       "http://addic7ed.com",
+      source:    "http://addic7ed.com",
       downloads: "42"
     )
   end
   let(:expected) do
-    "http://some.fancy.url\t->\tDIMENSION (fr, Completed) [42 downloads] (via http://addic7ed.com)"
+    "http://some.fancy.url\t->\tDIMENSION (fr, Completed) [42 downloads] (source http://addic7ed.com)" # rubocop:disable Metrics/LineLength
   end
 
   it "prints a human readable version" do
