@@ -1,11 +1,11 @@
 module Addic7ed
   class Search
-    attr_reader :video_filename, :language,  :options
+    attr_reader :video_filename, :language,  :criterias
 
-    def initialize(video_filename, language, options = {})
+    def initialize(video_filename, language, criterias = {})
       @video_filename = video_filename
       @language       = language
-      @options        = default_options.merge(options)
+      @criterias      = default_criterias.merge(criterias)
     end
 
     def video_file
@@ -16,22 +16,24 @@ module Addic7ed
       @episode ||= Episode.new(video_file.showname, video_file.season, video_file.episode)
     end
 
+    def all_subtitles
+      @all_subtitles ||= SubtitlesCollection.new(episode.subtitles(language))
+    end
+
+    def matching_subtitles
+      @matching_subtitles ||= all_subtitles.completed.compatible_with(video_file.group)
+    end
+
     def best_subtitle
-      episode.subtitles(language).each do |subtitle|
-        @best_subtitle = subtitle if better_than_best_subtitle?(subtitle)
-      end
-      @best_subtitle || raise(NoSubtitleFound)
+      @best_subtitle ||= matching_subtitles.most_popular
     end
 
   private
 
-    def better_than_best_subtitle?(subtitle)
-      subtitle.works_for?(video_file.group, options[:no_hi]) &&
-        subtitle.can_replace?(@best_subtitle)
-    end
-
-    def default_options
-      { no_hi: false }
+    def default_criterias
+      {
+        no_hi: false
+      }
     end
   end
 end
