@@ -14,7 +14,9 @@ module Addic7ed
         .upcase
         .gsub(/,[\d\. ]+MBS$/, "")
         .gsub(/(^VERSION *|720P|1080P|HDTV|PROPER|RERIP|INTERNAL|X\.?264)/, "")
-        .gsub(/[- \.]/, "")
+        .gsub(/[- \.\,]/, " ")
+        .strip
+        .gsub(/ +/, ",")
     end
   end
 end

@@ -66,7 +66,11 @@ describe Addic7ed::NormalizeVersion do
     expect(normalized_version("Version 720P PROPER X264 HDTV DIMENSION")).to eq "DIMENSION"
   end
 
-  it "supports multiple concatenated versions" do
+  it "supports comma-separated multiple concatenated versions" do
     expect(normalized_version("-TLA, -FoV")).to eq "TLA,FOV"
+  end
+
+  it "supports dash-separated multiple concatenated versions" do
+    expect(normalized_version("KILLERS - AVS")).to eq "KILLERS,AVS"
   end
 end
