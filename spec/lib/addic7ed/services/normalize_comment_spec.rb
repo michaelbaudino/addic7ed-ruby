@@ -8,4 +8,8 @@ describe Addic7ed::NormalizeComment do
   it "downcases everything" do
     expect(normalized_comment("DiMENSiON")).to eq "dimension"
   end
+
+  it "removes extra heading and trailing whitespaces" do
+    expect(normalized_comment(" \t AVS\t\r\n ")).to eq "avs"
+  end
 end

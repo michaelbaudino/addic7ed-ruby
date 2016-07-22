@@ -9,7 +9,7 @@ module Addic7ed
     end
 
     def call
-      comment.downcase
+      comment.downcase.strip
     end
   end
 end
