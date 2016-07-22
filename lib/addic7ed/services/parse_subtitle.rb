@@ -36,7 +36,7 @@ module Addic7ed
 
     def extract_language
       extract_field(".language") do |node|
-        node.content.gsub(/\A\W*/, ").gsub(/[^\w\)]*\z/, ")
+        node.content.gsub(/\A\W*/, "").gsub(/[^\w\)]*\z/, "")
       end
     end
 
