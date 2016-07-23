@@ -22,7 +22,7 @@ Ruby command-line script to fetch subtitles on Addic7ed
 * [x] refactor how `Episode` holds `Subtitle`s
 * [x] rename `ShowList` and make it a service object
 * [x] write code documentation
-* [ ] Configure GitHub hook for [RubyDoc](http://www.rubydoc.info)
+* [x] Configure GitHub hook for [RubyDoc](http://www.rubydoc.info)
 * [ ] move CLI to a separate gem (and use Thor or similar)
 * [ ] update README to include only API stuff
 * [x] add `bin/console`
