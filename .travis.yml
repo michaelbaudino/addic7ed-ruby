@@ -9,3 +9,6 @@ rvm:
   - jruby
 before_install:
   - gem update bundler
+notifications:
+  email: change
+
