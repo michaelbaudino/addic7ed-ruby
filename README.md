@@ -6,7 +6,7 @@
 [![Coverage Status](https://coveralls.io/repos/michaelbaudino/addic7ed-ruby/badge.svg?branch=master)](https://coveralls.io/r/michaelbaudino/addic7ed-ruby)
 [![Gem Version](https://badge.fury.io/rb/addic7ed.svg)](http://badge.fury.io/rb/addic7ed)
 [![security](https://hakiri.io/github/michaelbaudino/addic7ed-ruby/master.svg)](https://hakiri.io/github/michaelbaudino/addic7ed-ruby/master)
-[![Inline docs](http://inch-ci.org/github/michaelbaudino/addic7ed-ruby.svg?branch=api-refactor)](http://inch-ci.org/github/michaelbaudino/addic7ed-ruby?branch=api-refactor)
+[![Inline docs](http://inch-ci.org/github/michaelbaudino/addic7ed-ruby.svg?branch=v3)](http://inch-ci.org/github/michaelbaudino/addic7ed-ruby?branch=v3)
 
 
 Ruby command-line script to fetch subtitles on Addic7ed
