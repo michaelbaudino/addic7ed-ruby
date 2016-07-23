@@ -16,9 +16,34 @@
 [![Coverage Status](https://coveralls.io/repos/michaelbaudino/addic7ed-ruby/badge.svg?branch=master)](https://coveralls.io/r/michaelbaudino/addic7ed-ruby)
 [![Gem Version](https://badge.fury.io/rb/addic7ed.svg)](http://badge.fury.io/rb/addic7ed)
 [![security](https://hakiri.io/github/michaelbaudino/addic7ed-ruby/master.svg)](https://hakiri.io/github/michaelbaudino/addic7ed-ruby/master)
+[![Inline docs](http://inch-ci.org/github/michaelbaudino/addic7ed-ruby.svg?branch=api-refactor)](http://inch-ci.org/github/michaelbaudino/addic7ed-ruby?branch=api-refactor)
 
 
 Ruby command-line script to fetch subtitles on Addic7ed
+
+### Refactoring TODO list
+
+* [x] move download logic to a service object
+* [x] add a new `Search` model
+* [x] move compatibility logic to a `CheckCompatibility` service object
+* [x] create a `SubtitlesCollection` class to hold and filter subtitles
+* [x] move best subtitle logic to `SubtitlesCollection`
+* [x] rename `Subtitle#via` to `Subtitle#source`
+* [x] refactor how `Episode` holds `Subtitle`s
+* [x] rename `ShowList` and make it a service object
+* [x] write code documentation
+* [ ] Configure GitHub hook for [RubyDoc](http://www.rubydoc.info)
+* [ ] move CLI to a separate gem (and use Thor or similar)
+* [ ] update README to include only API stuff
+* [x] add `bin/console`
+* [ ] remove `bin/addic7ed`
+* [ ] move all `to_s` and `to_inspect` methods to the CLI
+* [ ] refactor errors (to match Ruby errors hierarchy and maybe allow both bang-erroring and not-erroring versions of public API methods)
+* [ ] refactor how HI works (allow both "no HI", "force HI" and "don't care")
+* [x] use symbols rather than strings for languages
+* [x] add Rubocop
+* [x] move user agents and languages to a config file
+* [ ] add specs for parsing
 
 ### Is it working ?
 
@@ -74,7 +99,7 @@ Don't get mad, they have to pay for their servers, you know.
 
 Ho, and by the way, please, **please**: do not hammer their servers, play fair !
 
-### Roadmap
+### Contribution ideas
 
 There's some work remaining:
 - Support registered users

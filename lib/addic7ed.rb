@@ -1,10 +1,5 @@
-require 'addic7ed/version'
-require 'addic7ed/common'
-require 'addic7ed/services/addic7ed_version_normalizer'
-require 'addic7ed/services/addic7ed_comment_normalizer'
-require 'addic7ed/errors'
-require 'addic7ed/show_list'
-require 'addic7ed/video_file'
-require 'addic7ed/episode'
-require 'addic7ed/subtitle'
-require 'addic7ed/parser'
+Dir[
+  File.expand_path("lib/addic7ed/*.rb"),
+  File.expand_path("lib/addic7ed/services/**/*.rb"),
+  File.expand_path("lib/addic7ed/models/**/*.rb")
+].each { |file| require file }
