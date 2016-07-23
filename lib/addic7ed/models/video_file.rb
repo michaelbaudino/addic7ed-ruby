@@ -16,6 +16,9 @@ module Addic7ed
     # It expects a video file name, either with or without path and
     # either absolute or relative.
     #
+    # @param filename [String] File name of the video file on disk
+    #   (either relative or absolute).
+    #
     # @return [String] Distribution group name
     #
     # @example
