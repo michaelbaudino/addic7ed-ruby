@@ -91,7 +91,7 @@ module Addic7ed
       localized_urls[language]
     end
 
-  protected
+  private
 
     def localized_urls
       @localized_urls ||= languages_hash { |code, lang| { code => localized_url(lang[:id]) } }
