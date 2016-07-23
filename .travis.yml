@@ -10,5 +10,6 @@ rvm:
 before_install:
   - gem update bundler
 notifications:
-  email: change
-
+  email:
+    on_success: change
+    on_failure: change
