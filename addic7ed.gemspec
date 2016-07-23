@@ -17,6 +17,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency("webmock")
   s.add_development_dependency("pry")
   s.add_development_dependency("rubocop")
+  s.add_development_dependency("inch")
+  s.add_development_dependency("yard")
 
   s.add_runtime_dependency("nokogiri", "~> 1.6.8")
   s.add_runtime_dependency("json",     "~> 1.8.3")

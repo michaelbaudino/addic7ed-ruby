@@ -30,3 +30,7 @@ pkg
 
 # Ignore built gems
 /*.gem
+
+# YARD doc stuff
+/.yardoc
+/doc/
