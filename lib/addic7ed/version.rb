@@ -1,3 +1,3 @@
 module Addic7ed
-  VERSION = "2.1.0".freeze
+  VERSION = "3.0.0-beta.1".freeze
 end
