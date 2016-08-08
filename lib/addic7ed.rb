@@ -1,5 +1,5 @@
 Dir[
-  File.expand_path("lib/addic7ed/*.rb"),
-  File.expand_path("lib/addic7ed/services/**/*.rb"),
-  File.expand_path("lib/addic7ed/models/**/*.rb")
+  File.join(File.dirname(__FILE__), "addic7ed/*.rb"),
+  File.join(File.dirname(__FILE__), "addic7ed/services/**/*.rb"),
+  File.join(File.dirname(__FILE__), "addic7ed/models/**/*.rb")
 ].each { |file| require file }
