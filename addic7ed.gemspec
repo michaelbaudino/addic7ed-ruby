@@ -23,9 +23,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("nokogiri", "~> 1.6.8")
   s.add_runtime_dependency("json",     "~> 1.8.3")
 
-  s.executables   = ["addic7ed"]
-  s.files         = `git ls-files -- lib/* LICENSE.md`.split("\n")
-  s.test_files    = `git ls-files -- spec/*`.split("\n")
+  s.files         = `git ls-files -z lib LICENSE.md`.split("\x0")
   s.require_paths = ["lib"]
   s.license       = "MIT"
 end

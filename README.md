@@ -26,7 +26,7 @@ Ruby command-line script to fetch subtitles on Addic7ed
 * [ ] move CLI to a separate gem (and use Thor or similar)
 * [ ] update README to include only API stuff
 * [x] add `bin/console`
-* [ ] remove `bin/addic7ed`
+* [x] remove `bin/addic7ed`
 * [ ] move all `to_s` and `to_inspect` methods to the CLI
 * [ ] refactor errors (to match Ruby errors hierarchy and maybe allow both bang-erroring and not-erroring versions of public API methods)
 * [ ] refactor how HI works (allow both "no HI", "force HI" and "don't care")
