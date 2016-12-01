@@ -2,7 +2,7 @@ require "net/http"
 require "open-uri"
 
 module Addic7ed
-  # Represents a TV sho episode.
+  # Represents a TV show episode.
   #
   # @attr showname [String] TV show name.
   # @attr season [Numeric] Season number.
