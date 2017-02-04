@@ -1,3 +1,13 @@
+> ## :information_source: Upcoming Design Breaking Changes
+>
+> I'm [currently working on a full rewrite](https://github.com/michaelbaudino/addic7ed-ruby/pull/30) which will introduce some heavily breaking changes, including:
+>
+>  * a complete API refactor (almost a full rewrite) to enforce code quality, maintainability and single responsability principle
+>  * documentation!
+>  * the removal of any CLI feature (they will be moved to a separate `addic7ed-ruby-cli` gem)
+>
+> I'll publish some beta versions of the gem before merging the PR into `master` and releasing a final version (remember that the gem will no longer include a CLI tool). I'd love to receive some feedback about it, so feel free to [send me an email](mailto:michael.baudino@alpine-lab.com).
+
 # addic7ed-ruby
 
 [![Build Status](https://api.travis-ci.org/michaelbaudino/addic7ed-ruby.svg?branch=master)](https://travis-ci.org/michaelbaudino/addic7ed-ruby)

@@ -1,4 +1,4 @@
-require "nokogiri"
+require "oga"
 
 module Addic7ed
   class ParseSubtitle
@@ -31,18 +31,18 @@ module Addic7ed
     end
 
     def extract_version
-      extract_field(".NewsTitle", &:content)
+      extract_field(".NewsTitle", &:text)
     end
 
     def extract_language
       extract_field(".language") do |node|
-        node.content.gsub(/\A\W*/, "").gsub(/[^\w\)]*\z/, "")
+        node.text.gsub(/\A\W*/, "").gsub(/[^\w\)]*\z/, "")
       end
     end
 
     def extract_status
       extract_field("tr:nth-child(3) td:nth-child(4) b") do |node|
-        node.content.strip
+        node.text.strip
       end
     end
 
@@ -66,13 +66,13 @@ module Addic7ed
 
     def extract_downloads
       extract_field("tr:nth-child(4) td.newsDate") do |node|
-        /(?<downloads>\d*) Downloads/.match(node.content)[:downloads]
+        /(?<downloads>\d*) Downloads/.match(node.text)[:downloads]
       end
     end
 
     def extract_comment
       extract_field("tr:nth-child(2) td.newsDate") do |node|
-        node.content.gsub(/<img[^>]+\>/i, "")
+        node.text.gsub(/<img[^>]+\>/i, "")
       end
     end
   end

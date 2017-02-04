@@ -20,8 +20,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency("inch")
   s.add_development_dependency("yard")
 
-  s.add_runtime_dependency("nokogiri", "~> 1.6.8")
-  s.add_runtime_dependency("json",     "~> 1.8.3")
+  s.add_runtime_dependency("oga",  "~> 2.7")
+  s.add_runtime_dependency("json", "~> 1.8.3")
 
   s.files         = `git ls-files -z lib LICENSE.md`.split("\x0")
   s.require_paths = ["lib"]

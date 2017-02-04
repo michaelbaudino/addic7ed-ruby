@@ -1,4 +1,4 @@
-require "nokogiri"
+require "oga"
 require "net/http"
 require "open-uri"
 
@@ -21,7 +21,7 @@ module Addic7ed
 
     def page_dom
       raise EpisodeNotFound if server_response.body.nil? || server_response.body.empty?
-      @page_dom ||= Nokogiri::HTML(server_response.body)
+      @page_dom ||= Oga.parse_html(server_response.body)
     end
 
     def subtitles_nodes

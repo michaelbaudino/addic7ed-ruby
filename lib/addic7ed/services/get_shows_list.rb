@@ -15,7 +15,7 @@ module Addic7ed
   private
 
     def homepage_body
-      @homepage_body ||= Nokogiri::HTML(addic7ed_homepage.body)
+      @homepage_body ||= Oga.parse_html(addic7ed_homepage.body)
     end
 
     def addic7ed_homepage
