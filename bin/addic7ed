@@ -2,7 +2,7 @@
 
 def require_dependencies
   require 'optparse'
-  require 'nokogiri'
+  require 'oga'
   require 'addic7ed'
 end
 

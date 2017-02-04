@@ -47,7 +47,7 @@ module Addic7ed
     end
 
     def addic7ed_shows
-      @@addic7ed_shows ||= Nokogiri::HTML(addic7ed_homepage.body).css("select#qsShow option:not(:first-child)").map(&:text)
+      @@addic7ed_shows ||= Oga.parse_html(addic7ed_homepage.body).css("select#qsShow option:not(:first-child)").map(&:text)
     end
 
     def addic7ed_homepage

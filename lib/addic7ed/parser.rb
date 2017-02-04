@@ -1,4 +1,4 @@
-require 'nokogiri'
+require 'oga'
 require 'net/http'
 require 'open-uri'
 
@@ -27,7 +27,7 @@ module Addic7ed
         http.request(request)
       end
       raise EpisodeNotFound unless response.body
-      Nokogiri::HTML(response.body)
+      Oga.parse_html(response.body)
     end
 
     def check_subtitles_presence
@@ -58,19 +58,19 @@ module Addic7ed
     def extract_version(sub_node)
       version_node = sub_node.css('.NewsTitle').first
       raise Addic7ed::ParsingError unless version_node
-      version_node.content
+      version_node.text
     end
 
     def extract_language(sub_node)
       language_node = sub_node.css('.language').first
       raise Addic7ed::ParsingError unless language_node
-      language_node.content.gsub(/\A\W*/, '').gsub(/[^\w\)]*\z/, '')
+      language_node.text.gsub(/\A\W*/, '').gsub(/[^\w\)]*\z/, '')
     end
 
     def extract_status(sub_node)
       status_node = sub_node.css('tr:nth-child(3) td:nth-child(4) b').first
       raise Addic7ed::ParsingError unless status_node
-      status_node.content.strip
+      status_node.text.strip
     end
 
     def extract_url(sub_node)
@@ -85,7 +85,7 @@ module Addic7ed
     end
 
     def extract_hi(sub_node)
-      hi_node = sub_node.css('tr:nth-child(4) td.newsDate').children[1]
+      hi_node = sub_node.css('tr:nth-child(4) td.newsDate img').last
       raise Addic7ed::ParsingError unless hi_node
       !hi_node.attribute("title").nil?
     end
@@ -93,13 +93,13 @@ module Addic7ed
     def extract_downloads(sub_node)
       downloads_node = sub_node.css('tr:nth-child(4) td.newsDate').first
       raise Addic7ed::ParsingError unless downloads_node
-      /(?<downloads>\d*) Downloads/.match(downloads_node.content)[:downloads]
+      /(?<downloads>\d*) Downloads/.match(downloads_node.text)[:downloads]
     end
 
     def extract_comment(sub_node)
         comment_node = sub_node.css('tr:nth-child(2) td.newsDate').first
         raise Addic7ed::ParsingError unless comment_node
-        comment_node.content.gsub(/<img[^>]+\>/i, "")
+        comment_node.text.gsub(/<img[^>]+\>/i, "")
     end
   end
 end
