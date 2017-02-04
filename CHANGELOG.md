@@ -1,6 +1,6 @@
 ## Changelog
 
-* 2.1.1: Replace Nokogiri with Oga for HTML parsing
+* 3.0.0: Replace Nokogiri with Oga for HTML parsing (thanks to @syntaxTerr0r)
 * 2.1.0: Add support for Addic7ed defining multiple versions compatibility of a subtitle
 * 2.0.4: Nokogiri security update ¯\\\_(ツ)\_/¯
 * 2.0.3: Fix show name detection when it contains a dot and try to avoid HTTP 304 messages we randomly receive back from the server

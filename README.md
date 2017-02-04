@@ -1,6 +1,6 @@
 > ## :information_source: Upcoming Design Breaking Changes
 >
-> I'm working on a [version 3](https://github.com/michaelbaudino/addic7ed-ruby/pull/26) for [addic7ed-ruby](https://github.com/michaelbaudino/addic7ed-ruby) which will introduce some heavily breaking changes, including:
+> I'm [currently working on a full rewrite](https://github.com/michaelbaudino/addic7ed-ruby/pull/30) which will introduce some heavily breaking changes, including:
 >
 >  * a complete API refactor (almost a full rewrite) to enforce code quality, maintainability and single responsability principle
 >  * documentation!

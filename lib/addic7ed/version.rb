@@ -1,3 +1,3 @@
 module Addic7ed
-  VERSION = "2.1.1"
+  VERSION = "3.0.0"
 end
