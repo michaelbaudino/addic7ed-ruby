@@ -10,6 +10,7 @@ rvm:
   - rbx
   - jruby
 before_install:
+  - gem update --system
   - gem update bundler
 notifications:
   email:
