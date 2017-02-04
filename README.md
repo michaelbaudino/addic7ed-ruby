@@ -10,14 +10,13 @@
 
 # addic7ed-ruby
 
-[![Build Status](https://api.travis-ci.org/michaelbaudino/addic7ed-ruby.svg?branch=master)](https://travis-ci.org/michaelbaudino/addic7ed-ruby)
+[![Build Status](https://api.travis-ci.org/michaelbaudino/addic7ed-ruby.svg?branch=full-rewrite)](https://travis-ci.org/michaelbaudino/addic7ed-ruby)
 [![Dependency Status](https://gemnasium.com/michaelbaudino/addic7ed-ruby.svg?travis)](https://gemnasium.com/michaelbaudino/addic7ed-ruby)
 [![Code Climate](https://codeclimate.com/github/michaelbaudino/addic7ed-ruby.svg)](https://codeclimate.com/github/michaelbaudino/addic7ed-ruby)
 [![Coverage Status](https://coveralls.io/repos/michaelbaudino/addic7ed-ruby/badge.svg?branch=master)](https://coveralls.io/r/michaelbaudino/addic7ed-ruby)
 [![Gem Version](https://badge.fury.io/rb/addic7ed.svg)](http://badge.fury.io/rb/addic7ed)
 [![security](https://hakiri.io/github/michaelbaudino/addic7ed-ruby/master.svg)](https://hakiri.io/github/michaelbaudino/addic7ed-ruby/master)
-[![Inline docs](http://inch-ci.org/github/michaelbaudino/addic7ed-ruby.svg?branch=v3)](http://inch-ci.org/github/michaelbaudino/addic7ed-ruby?branch=v3)
-
+[![Inline docs](http://inch-ci.org/github/michaelbaudino/addic7ed-ruby.svg?branch=full-rewrite)](http://inch-ci.org/github/michaelbaudino/addic7ed-ruby?branch=full-rewrite)
 
 Fetch TV shows subtitles on Addic7ed using Ruby.
 
