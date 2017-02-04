@@ -19,7 +19,7 @@
 [![Inline docs](http://inch-ci.org/github/michaelbaudino/addic7ed-ruby.svg?branch=v3)](http://inch-ci.org/github/michaelbaudino/addic7ed-ruby?branch=v3)
 
 
-Ruby command-line script to fetch subtitles on Addic7ed
+Fetch TV shows subtitles on Addic7ed using Ruby.
 
 ### Refactoring TODO list
 
@@ -44,10 +44,11 @@ Ruby command-line script to fetch subtitles on Addic7ed
 * [x] add Rubocop
 * [x] move user agents and languages to a config file
 * [ ] add specs for parsing
+* [ ] Create a `Dockerfile` for the CLI
 
 ### Is it working ?
 
-Until next time Addic7ed break their HTML/CSS structure, yes :smile:
+As long as Addic7ed HTML/CSS structure remains the same: yes :smile:
 
 ### How to use it ?
 
