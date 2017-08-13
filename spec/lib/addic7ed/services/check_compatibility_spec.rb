@@ -12,7 +12,7 @@ describe Addic7ed::CheckCompatibility, "#call(subtitle, group)" do
     let(:group) { subtitle.version }
 
     it "returns true" do
-      expect(subject).to be true
+      expect(subject).to be_truthy
     end
   end
 
@@ -21,7 +21,7 @@ describe Addic7ed::CheckCompatibility, "#call(subtitle, group)" do
     let(:group)    { "FOV" }
 
     it "returns true" do
-      expect(subject).to be true
+      expect(subject).to be_truthy
     end
   end
 
@@ -29,7 +29,7 @@ describe Addic7ed::CheckCompatibility, "#call(subtitle, group)" do
     let(:group) { "LOL" }
 
     it "returns true" do
-      expect(subject).to be true
+      expect(subject).to be_truthy
     end
   end
 
@@ -38,7 +38,7 @@ describe Addic7ed::CheckCompatibility, "#call(subtitle, group)" do
     let(:group)    { "DIMENSION" }
 
     it "returns true" do
-      expect(subject).to be true
+      expect(subject).to be_truthy
     end
   end
 
@@ -46,7 +46,7 @@ describe Addic7ed::CheckCompatibility, "#call(subtitle, group)" do
     let(:group) { "EVOLVE" }
 
     it "returns false" do
-      expect(subject).to be false
+      expect(subject).to be_falsey
     end
   end
 
@@ -57,7 +57,7 @@ describe Addic7ed::CheckCompatibility, "#call(subtitle, group)" do
       let(:group) { "FOV" }
 
       it "returns true" do
-        expect(subject).to be true
+        expect(subject).to be_truthy
       end
     end
 
@@ -65,7 +65,7 @@ describe Addic7ed::CheckCompatibility, "#call(subtitle, group)" do
       let(:group) { "EVOLVE" }
 
       it "returns false" do
-        expect(subject).to be false
+        expect(subject).to be_falsey
       end
     end
   end
@@ -75,7 +75,7 @@ describe Addic7ed::CheckCompatibility, "#call(subtitle, group)" do
     let(:group)    { "FOV" }
 
     it "returns false" do
-      expect(subject).to be false
+      expect(subject).to be_falsey
     end
   end
 
@@ -84,7 +84,7 @@ describe Addic7ed::CheckCompatibility, "#call(subtitle, group)" do
     let(:group)    { "FOV" }
 
     it "returns false" do
-      expect(subject).to be false
+      expect(subject).to be_falsey
     end
   end
 end

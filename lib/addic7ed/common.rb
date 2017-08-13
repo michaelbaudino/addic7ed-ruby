@@ -4,7 +4,7 @@ require "json"
 
 module Addic7ed
   CONFIG_FILE  = File.join(File.dirname(__FILE__), "config.json").freeze
-  CONFIG       = JSON.parse(File.open(CONFIG_FILE), nil, symbolize_names: true).freeze
+  CONFIG       = JSON.parse(File.read(CONFIG_FILE), symbolize_names: true).freeze
   LANGUAGES    = CONFIG[:languages].freeze
   USER_AGENTS  = CONFIG[:user_agents].freeze
   SHOWS_URL    = CONFIG[:urls][:shows].freeze
