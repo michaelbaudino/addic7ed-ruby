@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Addic7ed
   # Represents a subtitle on Addic7ed.
   #

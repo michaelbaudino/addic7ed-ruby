@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 unless RUBY_ENGINE == "rbx"
   require "coveralls"
   Coveralls.wear!

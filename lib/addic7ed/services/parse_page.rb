@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "oga"
 require "net/http"
 require "open-uri"
@@ -17,7 +19,7 @@ module Addic7ed
       subtitles_nodes.map { |subtitle_node| Addic7ed::ParseSubtitle.call(subtitle_node) }
     end
 
-  private
+    private
 
     def page_dom
       raise EpisodeNotFound if server_response.body.nil? || server_response.body.empty?

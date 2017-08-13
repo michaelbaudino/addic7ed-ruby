@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "net/http"
 require "open-uri"
 
@@ -91,7 +93,7 @@ module Addic7ed
       localized_urls[language]
     end
 
-  private
+    private
 
     def localized_urls
       @localized_urls ||= languages_hash { |code, lang| { code => localized_url(lang[:id]) } }

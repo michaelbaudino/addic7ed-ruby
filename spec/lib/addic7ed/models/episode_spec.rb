@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 describe Addic7ed::Episode, "#subtitles" do
@@ -7,7 +9,7 @@ describe Addic7ed::Episode, "#subtitles" do
   let(:episode)     { described_class.new(showname, season, episode_nbr) }
 
   before do
-    [:fr, :en, :it].each do |lang|
+    %i[fr en it].each do |lang|
       lang_id = Addic7ed::LANGUAGES[lang][:id]
       stub_request(:get, "http://www.addic7ed.com/serie/The_Walking_Dead/3/2/#{lang_id}")
         .to_return File.new("spec/responses/walking-dead-3-2-#{lang_id}.http")

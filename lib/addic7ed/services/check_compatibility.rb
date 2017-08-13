@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Addic7ed
   class CheckCompatibility
     include Service
@@ -13,7 +15,7 @@ module Addic7ed
       defined_as_compatible? || generally_compatible? || commented_as_compatible?
     end
 
-  private
+    private
 
     def defined_as_compatible?
       subtitle.version.split(",").include? group
@@ -24,13 +26,13 @@ module Addic7ed
     end
 
     def commented_as_compatible?
-      return false if /(won'?t|doesn'?t|not) +work/i =~ subtitle.comment
-      return false if /resync +(from|of|for)/i =~ subtitle.comment
-      !!comment_matches_a_compatible_group?
+      return false if /(won'?t|doesn'?t|not) +work/i.match?(subtitle.comment)
+      return false if /resync +(from|of|for)/i.match?(subtitle.comment)
+      comment_matches_a_compatible_group?
     end
 
     def comment_matches_a_compatible_group?
-      Regexp.new("(#{compatible_groups.join('|')})", "i") =~ subtitle.comment
+      Regexp.new("(#{compatible_groups.join("|")})", "i") =~ subtitle.comment
     end
 
     def compatible_groups

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "oga"
 
 module Addic7ed
@@ -6,7 +8,7 @@ module Addic7ed
 
     attr_reader :subtitle_node
 
-    FIELDS = [:version, :language, :status, :url, :source, :hi, :downloads, :comment].freeze
+    FIELDS = %i[version language status url source hi downloads comment].freeze
 
     def initialize(subtitle_node)
       @subtitle_node = subtitle_node
@@ -16,7 +18,7 @@ module Addic7ed
       Addic7ed::Subtitle.new(extract_fields)
     end
 
-  private
+    private
 
     def extract_fields
       FIELDS.map do |field|
@@ -48,7 +50,7 @@ module Addic7ed
 
     def extract_url
       extract_field("a.buttonDownload:last-of-type") do |node|
-        "http://www.addic7ed.com#{node['href']}"
+        "http://www.addic7ed.com#{node["href"]}"
       end
     end
 

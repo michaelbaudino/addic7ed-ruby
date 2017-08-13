@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Addic7ed
   # Represents the video file you're looking a subtitle for.
   #

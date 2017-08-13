@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Addic7ed
   class URLEncodeShowName
     include Service
@@ -18,7 +20,7 @@ module Addic7ed
       matching_shows.last.tr(" ", "_")
     end
 
-  private
+    private
 
     def matching_shows(opts)
       addic7ed_shows.select { |show_name| matching?(show_name, opts) }

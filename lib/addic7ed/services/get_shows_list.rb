@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "singleton"
 
 module Addic7ed
@@ -12,7 +14,7 @@ module Addic7ed
       @shows ||= homepage_body.css("select#qsShow option:not(:first-child)").map(&:text)
     end
 
-  private
+    private
 
     def homepage_body
       @homepage_body ||= Oga.parse_html(addic7ed_homepage.body)

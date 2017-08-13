@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Addic7ed
   # Represents a subtitle search for a +video_filename+ in a +language+ with
   # multiple search +criterias+.
@@ -79,7 +81,7 @@ module Addic7ed
       @best_subtitle ||= matching_subtitles.most_popular
     end
 
-  private
+    private
 
     def default_criterias
       {

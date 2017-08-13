@@ -27,6 +27,7 @@ pkg
 
 # Ignore Bundler config
 /.bundle
+/vendor/bundle/
 
 # Ignore built gems
 /*.gem

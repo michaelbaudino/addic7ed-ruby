@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 describe Addic7ed::VideoFile do
@@ -10,9 +12,9 @@ describe Addic7ed::VideoFile do
       expect(file.showname).to eq(expected_show_name || "Showname")
       expect(file.season).to eq 2
       expect(file.episode).to eq 1
-      expect(file.tags).to eq %w(720P HDTV X264)
+      expect(file.tags).to eq %w[720P HDTV X264]
       expect(file.group).to eq "GROUP"
-      expect(file.distribution).to satisfy { |d| ["", "DISTRIBUTION"].include?(d) }
+      expect(file.distribution).to(satisfy { |d| ["", "DISTRIBUTION"].include?(d) })
     end
   end
 
@@ -152,14 +154,14 @@ describe Addic7ed::VideoFile do
 
   describe "#inspect" do
     let(:expected) do
-      <<-EOS
-Guesses for Showname.S02E01.720p.HDTV.x264-GROUP[DISTRIBUTION].mkv:
-  show:         Showname
-  season:       2
-  episode:      1
-  tags:         ["720P", "HDTV", "X264"]
-  group:        GROUP
-  distribution: DISTRIBUTION
+      <<~EOS
+        Guesses for Showname.S02E01.720p.HDTV.x264-GROUP[DISTRIBUTION].mkv:
+          show:         Showname
+          season:       2
+          episode:      1
+          tags:         ["720P", "HDTV", "X264"]
+          group:        GROUP
+          distribution: DISTRIBUTION
 EOS
     end
 

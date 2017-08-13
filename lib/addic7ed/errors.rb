@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Addic7ed
   class InvalidFilename       < StandardError; end
   class ShowNotFound          < StandardError; end

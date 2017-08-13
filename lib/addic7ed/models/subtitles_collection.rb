@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Addic7ed
   # Represents a collection of {Subtitle} objects.
   #
@@ -54,7 +56,7 @@ module Addic7ed
       sort_by(&:downloads).last
     end
 
-  private
+    private
 
     def select
       SubtitlesCollection.new(super)
