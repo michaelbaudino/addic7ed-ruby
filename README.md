@@ -44,6 +44,7 @@ Fetch TV shows subtitles on Addic7ed using Ruby.
 * [x] move user agents and languages to a config file
 * [ ] add specs for parsing
 * [ ] Create a `Dockerfile` for the CLI
+* [ ] Add a Bundler after-install hook to notify users that this gem is no longer providing a CLI
 
 ### Is it working ?
 
@@ -119,6 +120,7 @@ This projet supports the following Ruby versions/implementations:
 * Ruby 2.1 (MRI)
 * Ruby 2.2 (MRI)
 * Ruby 2.3 (MRI)
+* Ruby 2.4 (MRI)
 * Rubinius
 * JRuby
 
