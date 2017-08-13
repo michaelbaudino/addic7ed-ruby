@@ -11,13 +11,13 @@ module Addic7ed
     end
 
     def call
-      @shows ||= homepage_body.css("select#qsShow option:not(:first-child)").map(&:text)
+      @shows ||= homepage_body.css("select#qsShow option").to_a[1..-1].map(&:text)
     end
 
     private
 
     def homepage_body
-      @homepage_body ||= Oga.parse_html(addic7ed_homepage.body)
+      Oga.parse_html(addic7ed_homepage.body)
     end
 
     def addic7ed_homepage
