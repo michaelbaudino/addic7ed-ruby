@@ -10,6 +10,4 @@ $LOAD_PATH.unshift File.expand_path("lib", APP_ROOT)
 
 require "addic7ed"
 
-WebMock.allow_net_connect!
-
 Pry.start
