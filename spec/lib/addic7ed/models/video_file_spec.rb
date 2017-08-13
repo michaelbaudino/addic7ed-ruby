@@ -154,14 +154,14 @@ describe Addic7ed::VideoFile do
 
   describe "#inspect" do
     let(:expected) do
-      <<~EOS
+      <<-EOS
         Guesses for Showname.S02E01.720p.HDTV.x264-GROUP[DISTRIBUTION].mkv:
-          show:         Showname
-          season:       2
-          episode:      1
-          tags:         ["720P", "HDTV", "X264"]
-          group:        GROUP
-          distribution: DISTRIBUTION
+  show:         Showname
+  season:       2
+  episode:      1
+  tags:         ["720P", "HDTV", "X264"]
+  group:        GROUP
+  distribution: DISTRIBUTION
 EOS
     end
 
