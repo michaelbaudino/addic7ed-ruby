@@ -17,7 +17,7 @@ module Addic7ed
 
     def call
       raise DownloadError, "Too many HTTP redirections" if redirect_count >= HTTP_REDIRECT_LIMIT
-      raise DailyLimitExceeded, "Daily limit exceeded"  if %r{^/downloadexceeded.php}.match?(url)
+      raise DailyLimitExceeded, "Daily limit exceeded"  if download_limit_exceeded?
       return follow_redirection(response["location"])   if response.is_a? Net::HTTPRedirection
       write(response.body)
     end
@@ -26,6 +26,10 @@ module Addic7ed
 
     def uri
       @uri ||= URI(url)
+    end
+
+    def download_limit_exceeded?
+      !%r{^/downloadexceeded.php}.match(url).nil?
     end
 
     def response

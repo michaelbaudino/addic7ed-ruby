@@ -26,13 +26,21 @@ module Addic7ed
     end
 
     def commented_as_compatible?
-      return false if /(won'?t|doesn'?t|not) +work/i.match?(subtitle.comment)
-      return false if /resync +(from|of|for)/i.match?(subtitle.comment)
+      return false if comment_explicitely_wont_work?
+      return false if comment_is_a_resync?
       comment_matches_a_compatible_group?
     end
 
     def comment_matches_a_compatible_group?
-      Regexp.new("(#{compatible_groups.join("|")})", "i") =~ subtitle.comment
+      !Regexp.new("(#{compatible_groups.join("|")})", "i").match(subtitle.comment).nil?
+    end
+
+    def comment_explicitely_wont_work?
+      !/(won'?t|doesn'?t|not) +work/i.match(subtitle.comment).nil?
+    end
+
+    def comment_is_a_resync?
+      !/resync +(from|of|for)/i.match(subtitle.comment).nil?
     end
 
     def compatible_groups
