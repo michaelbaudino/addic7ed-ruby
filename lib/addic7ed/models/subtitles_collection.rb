@@ -3,9 +3,25 @@
 module Addic7ed
   # Represents a collection of {Subtitle} objects.
   #
-  # This collection inherits from {Array} so it behaves exaclty like it,
-  # but it also provides some methods to filter, order and choose the best subtitle.
-  class SubtitlesCollection < Array
+  # This collection is a custom {Enumerable} which provides
+  # some methods to filter, order and choose the best subtitle.
+  class SubtitlesCollection
+    include Enumerable
+
+    # @!visibility private
+    def each(&block)
+      @subtitles.each(&block)
+    end
+
+    # Creates a filterable, sortable collection of subtitles
+    # @param subtitles [Enumerable] List of subtitles to initialize the collection with
+    #
+    # @return [SubtitleCollection] the initialized subtitles collection
+
+    def initialize(subtitles = [])
+      @subtitles = subtitles
+    end
+
     # Returns only subtitles that are compatible with +group+.
     # @param group [String] Release group we want the returned subtitles to be compatible with
     #
@@ -54,12 +70,6 @@ module Addic7ed
 
     def most_popular
       sort_by(&:downloads).last
-    end
-
-    private
-
-    def select
-      SubtitlesCollection.new(super)
     end
   end
 end

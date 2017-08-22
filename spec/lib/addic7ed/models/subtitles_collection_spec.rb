@@ -3,8 +3,8 @@
 require "spec_helper"
 
 describe Addic7ed::SubtitlesCollection do
-  it "inherits from Array" do
-    expect(described_class.superclass).to eq Array
+  it "is an Enumerable" do
+    expect(subject).to be_a Enumerable
   end
 end
 
