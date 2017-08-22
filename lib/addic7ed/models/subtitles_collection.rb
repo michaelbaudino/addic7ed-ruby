@@ -71,5 +71,11 @@ module Addic7ed
     def most_popular
       sort_by(&:downloads).last
     end
+
+    private
+
+    def select
+      self.class.new(super)
+    end
   end
 end

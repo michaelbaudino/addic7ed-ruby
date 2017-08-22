@@ -23,6 +23,10 @@ describe Addic7ed::SubtitlesCollection, "#compatible_with(group)" do
 
   subject { described_class.new([compatible_subtitle, incompatible_subtitle]) }
 
+  it "returns an Addic7ed::SubtitlesCollection" do
+    expect(subject.compatible_with("group")).to be_a described_class
+  end
+
   it "uses Addic7ed::CheckCompatibility" do
     subject.compatible_with("group")
     expect(Addic7ed::CheckCompatibility).to have_received(:call).twice
@@ -42,6 +46,10 @@ describe Addic7ed::SubtitlesCollection, "#completed" do
   let(:incomplete_subtitle) { double(:incomplete_subtitle, completed?: false) }
 
   subject { described_class.new([completed_subtitle, incomplete_subtitle]) }
+
+  it "returns an Addic7ed::SubtitlesCollection" do
+    expect(subject.completed).to be_a described_class
+  end
 
   it "keeps completed subtitles" do
     expect(subject.completed).to include completed_subtitle
