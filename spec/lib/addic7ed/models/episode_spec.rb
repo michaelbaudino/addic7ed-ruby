@@ -82,7 +82,15 @@ describe Addic7ed::Episode, "#page_url(lang)" do
     episode.page_url(:fr)
   end
 
-  it "raises LanguageNotSupported given an unsupported language code" do
-    expect { episode.page_url(:aa) }.to raise_error Addic7ed::LanguageNotSupported
+  context "when given an unsupported language code" do
+    it "raises LanguageNotSupported" do
+      expect { episode.page_url(:aa) }.to raise_error Addic7ed::LanguageNotSupported
+    end
+  end
+
+  context "when not given a language code" do
+    it "returns the URL of the page with subtitles from all languages" do
+      expect(episode.page_url).to eq "http://www.addic7ed.com/serie/The_Walking_Dead/3/2/0"
+    end
   end
 end

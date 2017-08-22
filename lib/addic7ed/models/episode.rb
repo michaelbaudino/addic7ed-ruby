@@ -78,8 +78,8 @@ module Addic7ed
       @subtitles[language] ||= Addic7ed::ParsePage.call(page_url(language))
     end
 
-    # Returns the URL of the Addic7ed webpage listing subtitles for this {Episode}
-    # in the given +language+.
+    # Returns the URL of the Addic7ed webpage listing subtitles for this {Episode}.
+    # If +language+ is given, it returns the URL of the page with subtitles for this language only.
     #
     # @param language [String] Language code we want the webpage to list subtitles in.
     #
@@ -89,7 +89,8 @@ module Addic7ed
     #   Addic7ed::Episode.new("Game of Thrones", 6, 9).page_url
     #   #=> "http://www.addic7ed.com/serie/Game_of_Thrones/6/9/8"
 
-    def page_url(language)
+    def page_url(language = nil)
+      return localized_url(0) if language.nil?
       localized_urls[language]
     end
 
@@ -103,8 +104,8 @@ module Addic7ed
       @url_encoded_showname ||= URLEncodeShowName.call(showname)
     end
 
-    def localized_url(lang)
-      "http://www.addic7ed.com/serie/#{url_encoded_showname}/#{season}/#{episode}/#{lang}"
+    def localized_url(lang_id)
+      "http://www.addic7ed.com/serie/#{url_encoded_showname}/#{season}/#{episode}/#{lang_id}"
     end
 
     def languages_hash(&block)
