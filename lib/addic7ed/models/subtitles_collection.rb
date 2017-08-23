@@ -37,7 +37,7 @@ module Addic7ed
     #   #=> [#<Addic7ed::Subtitle @version="LOL">, #<Addic7ed::Subtitle @version="DIMENSION">]
 
     def compatible_with(group)
-      select { |subtitle| CheckCompatibility.call(subtitle, group) }
+      chainable(select { |subtitle| CheckCompatibility.call(subtitle, group) })
     end
 
     # Returns only completed subtitles.
@@ -53,7 +53,7 @@ module Addic7ed
     #   #=> [#<Addic7ed::Subtitle @status="Completed">]
 
     def completed
-      select(&:completed?)
+      chainable(select(&:completed?))
     end
 
     # Returns the most downloaded subtitle.
@@ -74,8 +74,8 @@ module Addic7ed
 
     private
 
-    def select
-      self.class.new(super)
+    def chainable(array)
+      self.class.new(array)
     end
   end
 end

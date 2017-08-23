@@ -23,7 +23,7 @@ describe Addic7ed::SubtitlesCollection, "#compatible_with(group)" do
 
   subject { described_class.new([compatible_subtitle, incompatible_subtitle]) }
 
-  it "returns an Addic7ed::SubtitlesCollection" do
+  it "is chainable" do
     expect(subject.compatible_with("group")).to be_a described_class
   end
 
@@ -47,7 +47,7 @@ describe Addic7ed::SubtitlesCollection, "#completed" do
 
   subject { described_class.new([completed_subtitle, incomplete_subtitle]) }
 
-  it "returns an Addic7ed::SubtitlesCollection" do
+  it "is chainable" do
     expect(subject.completed).to be_a described_class
   end
 
