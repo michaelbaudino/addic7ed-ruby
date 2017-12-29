@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# TODO: move to the CLI codebase and use HTTParty
+
 module Addic7ed
   class DownloadSubtitle
     include Service

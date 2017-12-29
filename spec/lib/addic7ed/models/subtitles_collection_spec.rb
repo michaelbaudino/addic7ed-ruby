@@ -60,6 +60,28 @@ describe Addic7ed::SubtitlesCollection, "#completed" do
   end
 end
 
+describe Addic7ed::SubtitlesCollection, "#for_language(language)" do
+  let(:english_subtitle) { double(:english_subtitle, language: "English") }
+  let(:french_subtitle)  { double(:french_subtitle, language: "French") }
+  let(:spanish_subtitle) { double(:spanish_subtitle, language: "Spanish") }
+  let(:collection)       { described_class.new([english_subtitle, french_subtitle, spanish_subtitle]) }
+
+  subject { collection.for_language(:en) }
+
+  it "is chainable" do
+    expect(subject).to be_a described_class
+  end
+
+  it "keeps requested language subtitles" do
+    expect(subject).to include english_subtitle
+  end
+
+  it "filters out other languages subtitles" do
+    expect(subject).to_not include french_subtitle
+    expect(subject).to_not include spanish_subtitle
+  end
+end
+
 describe Addic7ed::SubtitlesCollection, "#most_popular" do
   let(:popular_subtitle)   { double(:popular_subtitle, downloads: 100) }
   let(:unpopular_subtitle) { double(:popular_subtitle, downloads: 20) }

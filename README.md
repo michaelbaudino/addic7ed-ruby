@@ -10,9 +10,83 @@
 
 A Ruby API for [Addic7ed](http://www.addic7ed.com), the best TV subtitles community in the world.
 
-## Usage
+## Installation
 
-> :books: This needs to be written...
+Add this line to your application's `Gemfile`:
+
+```ruby
+gem "addic7ed"
+```
+
+Then execute:
+
+```shell
+$ bundle
+```
+
+## Usage examples
+
+> :books: Check out the [API reference](http://www.rubydoc.info/github/michaelbaudino/addic7ed-ruby) for full documentation :books:
+
+### `Addic7ed::Episode`
+
+An `Episode` object represents an episode with a show name, season number and episode number:
+
+```ruby
+episode = Addic7ed::Episode.new(show: "Game of Thrones", season: 6, number: 9)
+#=> #<Addic7ed::Episode @number=9, @season=6, @show="Game of Thrones">
+```
+
+It provides a `subtitles` method that returns all available subtitles for this episode:
+
+```ruby
+episode.subtitles
+#=> #<Addic7ed::SubtitlesCollection
+#     @subtitles=[
+#       #<Addic7ed::Subtitle ... >,
+#       #<Addic7ed::Subtitle ... >,
+#       #<Addic7ed::Subtitle ... >
+#     ]
+```
+
+### `Addic7ed::SubtitlesCollection`
+
+A `SubtitlesCollection` is an enumerable class that provides several filtering methods:
+* `compatible_with(group)` which returns only subtitles compatible with the given `group` releases
+* `completed` which returns only completed subtitles
+* `for_language(language)` which returns only subtitles in the given `language`
+* `most_popular` which returns the most downloaded subtitle
+
+Those methods are chainable, which lets you, for example:
+
+* select subtitles completed and compatible with a given release group:
+
+    ```ruby
+    good_subtitles = episode.subtitles.completed.compatible_with("KILLERS")
+    ```
+
+* find the most popular subtitle among those:
+
+    ```ruby
+    best_subtitle = good_subtitles.most_popular
+    ```
+
+A `SubtitlesCollection` instance can be filtered using any method from `Enumerable`, including your good friends `each`, `map`, `select`, `reject`, `find`, `group_by`, `any?`, `count`, `inject`, `sort`, `reduce`, ...
+
+### `Addic7ed::VideoFile`
+
+The `VideoFile` class lets you extract and guess relevant information from a video file name:
+
+```ruby
+video = Addic7ed::VideoFile.new("~/Downloads/Game.of.Thrones.S06E09.720p.HDTV.x264-AVS[eztv].mkv")
+#=> Guesses for ~/Downloads/Game.of.Thrones.S06E09.720p.HDTV.x264-AVS[eztv].mkv:
+#  show:         Game.of.Thrones
+#  season:       6
+#  episode:      9
+#  tags:         ["720P", "HDTV", "X264"]
+#  group:        AVS
+#  distribution: EZTV
+```
 
 ## Notes
 

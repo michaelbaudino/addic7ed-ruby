@@ -16,7 +16,9 @@ module Addic7ed
 
     def call
       raise NoSubtitleFound unless subtitles_found?
-      subtitles_nodes.map { |subtitle_node| Addic7ed::ParseSubtitle.call(subtitle_node) }
+      subtitles_nodes.map do |subtitle_node|
+        Addic7ed::ParseSubtitleNode.call(subtitle_node)
+      end.flatten
     end
 
     private

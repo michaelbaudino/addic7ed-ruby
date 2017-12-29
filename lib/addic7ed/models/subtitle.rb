@@ -16,13 +16,14 @@ module Addic7ed
   # @attr downloads [Numeric] Number of times this subtitle has been downloaded.
   # @attr comment [String] Comment manually added by the subtitle author/publisher
   #   (usually related to extra-compatibilities or resync source).
-  # @attr hi [Boolean] Hearing-impaired support.
+  # @attr corrected [Boolean] Indicates if the subtitle has been corrected.
+  # @attr hi [Boolean] Indicates if the subtitle embeds hearing-impaired sequences.
   # @attr url [String] Download URL of actual subtitle file (warning: Addic7ed servers
   #   won't serve a subtite file without a proper +Referer+ HTTP header which can be
   #   retrieved from +episode.page_url+).
 
   class Subtitle
-    attr_reader :version, :language, :status, :source, :downloads, :comment, :hi
+    attr_reader :version, :language, :status, :source, :downloads, :comment, :corrected, :hi
     attr_accessor :url
 
     # Creates a new instance of {Subtitle} created using +options+,
@@ -35,7 +36,8 @@ module Addic7ed
     # * +source+: URL of website the subtitle was originally published on
     # * +downloads+: number of times the subtitle has been downloaded
     # * +comment+: manually added comment from the author or publisher
-    # * +hi+: hearing-impaired support
+    # * +corrected+: indicates if subtitle has been corrected
+    # * +hi+: indicates if subtitle embeds hearing-impaired sequences
     # * +url+: download URL for the subtitle file
     #
     # @param options [Hash] subtitle information as a {Hash}
@@ -48,17 +50,19 @@ module Addic7ed
     #     source:    "http://sous-titres.eu",
     #     downloads: 10335,
     #     comment:   "works with 1080p.BATV",
+    #     corrected: true,
     #     hi:        false,
     #     url:       "http://www.addic7ed.com/original/113643/4"
     #   )
     #   #=> #<Addic7ed::Subtitle
     #   #       @version="KILLERS,AVS",
-    #   #       @language="French"
-    #   #       @status="Completed"
-    #   #       @url="http://www.addic7ed.com/original/113643/4"
-    #   #       @source="http://sous-titres.eu"
-    #   #       @hi=false
-    #   #       @downloads=10335
+    #   #       @language="French",
+    #   #       @status="Completed",
+    #   #       @url="http://www.addic7ed.com/original/113643/4",
+    #   #       @source="http://sous-titres.eu",
+    #   #       @corrected=true,
+    #   #       @hi=false,
+    #   #       @downloads=10335,
     #   #       @comment="works with 1080p.batv"
     #   #   >
 
@@ -68,6 +72,7 @@ module Addic7ed
       @status    = options[:status]
       @url       = options[:url]
       @source    = options[:source]
+      @corrected = options[:corrected]
       @hi        = options[:hi]
       @downloads = options[:downloads].to_i || 0
       @comment   = NormalizeComment.call(options[:comment])

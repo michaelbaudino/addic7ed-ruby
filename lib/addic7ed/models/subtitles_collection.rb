@@ -56,6 +56,23 @@ module Addic7ed
       chainable(select(&:completed?))
     end
 
+    # Returns only subtitles for given +language_code+.
+    #
+    # @return [SubtitleCollection] Copy of collection filtered by +language+
+    #
+    # @example
+    #   english_subtitle = Addic7ed::Subtitle.new(language: "English")
+    #   french_subtitle  = Addic7ed::Subtitle.new(language: "French")
+    #   collection = Addic7ed::SubtitlesCollection.new([english_subtitle, french_subtitle])
+    #
+    #   collection.for_language(:en)
+    #   #=> [#<Addic7ed::Subtitle @language="English">]
+
+    def for_language(language_code)
+      raise LanguageNotSupported unless LANGUAGES.key? language_code.to_sym
+      chainable(select { |subtitle| subtitle.language == LANGUAGES[language_code.to_sym][:name] })
+    end
+
     # Returns the most downloaded subtitle.
     #
     # @return [Subtitle] Subtitle of the collection with the more downloads

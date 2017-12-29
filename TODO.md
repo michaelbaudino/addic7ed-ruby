@@ -15,15 +15,18 @@ Here is a list of future features I'd like to implement.
 * [x] refactor how `Episode` holds `Subtitle`s
 * [x] rename `ShowList` and make it a service object
 * [x] write code documentation
-* [x] Configure GitHub hook for [RubyDoc](http://www.rubydoc.info)
+* [x] configure GitHub hook for [RubyDoc](http://www.rubydoc.info)
 * [x] add `bin/console`
 * [x] remove `bin/addic7ed`
 * [x] use symbols rather than strings for languages
 * [x] add Rubocop
 * [x] move user agents and languages to a config file
-* [x] Add a Bundler post-install message to notify users that this gem is no longer providing a CLI
-* [ ] update README to include only API stuff
-* [ ] move CLI to a separate gem (and use Thor or similar)
+* [x] add a Bundler post-install message to notify users that this gem is no longer providing a CLI
+* [x] switch to using the language-neutral page
+* [x] update README to include only API stuff
+* [ ] add support for MRI 2.5
+* [ ] move CLI to a separate gem (including `DownloadSubtitle`) using Thor
+* [ ] Use `HTTParty` or `Faraday` instead of custom HTTP  download code
 * [ ] move all `to_s` and `to_inspect` methods to the CLI
 * [ ] update links/badges to the `full-rewrite` branch in `README.md` to use `master`
 * [ ] release `4.0` :champagne:
