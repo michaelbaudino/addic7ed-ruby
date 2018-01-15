@@ -26,7 +26,7 @@ Here is a list of future features I'd like to implement.
 * [x] update README to include only API stuff
 * [ ] maybe remove `SHOWS_URL` and `EPISODES_URL`
 * [ ] mention documentation generation in `README`
-* [ ] add support for MRI 2.5
+* [x] add support for MRI 2.5
 * [ ] move CLI to a separate gem (including `DownloadSubtitle`) using Thor
 * [ ] Use `HTTParty` or `Faraday` instead of custom HTTP  download code
 * [ ] move all `to_s` and `to_inspect` methods to the CLI
