@@ -64,9 +64,9 @@ describe Addic7ed::SubtitlesCollection, "#for_language(language)" do
   let(:english_subtitle) { double(:english_subtitle, language: "English") }
   let(:french_subtitle)  { double(:french_subtitle, language: "French") }
   let(:spanish_subtitle) { double(:spanish_subtitle, language: "Spanish") }
-  let(:collection)       { described_class.new([english_subtitle, french_subtitle, spanish_subtitle]) }
+  let(:all_subtitles)    { [english_subtitle, french_subtitle, spanish_subtitle] }
 
-  subject { collection.for_language(:en) }
+  subject { described_class.new(all_subtitles).for_language(:en) }
 
   it "is chainable" do
     expect(subject).to be_a described_class

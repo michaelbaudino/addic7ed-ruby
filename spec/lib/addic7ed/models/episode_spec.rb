@@ -8,7 +8,6 @@ describe Addic7ed::Episode do
   let(:episode_nbr) { 2 }
   let(:episode)     { described_class.new(show: showname, season: season, number: episode_nbr) }
 
-
   describe "#page_url(lang)" do
     it "returns an episode page URL for given language" do
       expect(episode.page_url(:fr)).to eq "http://www.addic7ed.com/serie/The_Walking_Dead/3/2/8"

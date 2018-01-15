@@ -154,7 +154,7 @@ describe Addic7ed::VideoFile do
 
   describe "#inspect" do
     let(:expected) do
-      <<-EOS
+      <<-EXPECTED_OUTPUT
         Guesses for Showname.S02E01.720p.HDTV.x264-GROUP[DISTRIBUTION].mkv:
   show:         Showname
   season:       2
@@ -162,7 +162,7 @@ describe Addic7ed::VideoFile do
   tags:         ["720P", "HDTV", "X264"]
   group:        GROUP
   distribution: DISTRIBUTION
-EOS
+EXPECTED_OUTPUT
     end
 
     subject { Addic7ed::VideoFile.new("Showname.S02E01.720p.HDTV.x264-GROUP[DISTRIBUTION].mkv") }
