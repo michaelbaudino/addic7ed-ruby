@@ -36,6 +36,6 @@ Here is a list of future features I'd like to implement.
 ## More features
 
 * [ ] refactor errors (to match Ruby errors hierarchy and maybe allow both bang-erroring and not-erroring versions of public API methods)
-* [ ] refactor how HI works (allow both "no HI", "force HI" and "don't care")
+* [x] refactor how HI works (allow both "no HI", "force HI" and "don't care")
 * [ ] add specs for HTML parsing
 * [ ] support registered users (to avoid download throttle)

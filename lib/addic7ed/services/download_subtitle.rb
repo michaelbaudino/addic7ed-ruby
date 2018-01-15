@@ -41,20 +41,20 @@ module Addic7ed
         request["User-Agent"] = USER_AGENTS.sample
         http.request(request)
       end
-    rescue
+    rescue StandardError
       raise DownloadError, "A network error occured"
     end
 
     def follow_redirection(location_header)
       # Addic7ed is serving redirection URL not-encoded,
       # but Ruby does not support it (see http://bugs.ruby-lang.org/issues/7396)
-      new_url = URI.escape(location_header)
+      new_url = CGI.escape(location_header)
       DownloadSubtitle.call(new_url, filename, url, redirect_count + 1)
     end
 
     def write(content)
       Kernel.open(filename, "w") { |f| f << content }
-    rescue
+    rescue StandardError
       raise DownloadError, "Cannot write to disk"
     end
   end

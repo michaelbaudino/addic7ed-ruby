@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.files                = `git ls-files -z lib LICENSE.md`.split("\x0")
   s.require_paths        = ["lib"]
   s.license              = "MIT"
-  s.post_install_message = <<-EOS
+  s.post_install_message = <<-POST_INSTALL_MESSAGE
 
   Important update if you're upgrading from 3.x to 4.x:
 
@@ -24,14 +24,14 @@ Gem::Specification.new do |s|
       If you're using it as a Ruby API for Addic7ed, you're all good, ignore this message.
       If you're expecting the `addic7ed` binary, we've moved it to the `addic7ed-cli` gem.
 
-  EOS
+  POST_INSTALL_MESSAGE
 
-  s.add_development_dependency("rspec")
-  s.add_development_dependency("rake")
-  s.add_development_dependency("webmock")
-  s.add_development_dependency("pry")
-  s.add_development_dependency("rubocop")
   s.add_development_dependency("inch")
+  s.add_development_dependency("pry")
+  s.add_development_dependency("rake")
+  s.add_development_dependency("rspec")
+  s.add_development_dependency("rubocop")
+  s.add_development_dependency("webmock")
   s.add_development_dependency("yard")
 
   s.add_runtime_dependency("oga", "~> 2.7")
