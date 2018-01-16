@@ -27,9 +27,9 @@ Here is a list of future features I'd like to implement.
 * [x] remove `SHOWS_URL` and `EPISODES_URL`
 * [x] mention documentation generation in `README`
 * [x] add support for MRI 2.5
-* [ ] move CLI to a separate gem (including `DownloadSubtitle`) using Thor
-* [ ] Use `HTTParty` or `Faraday` instead of custom HTTP  download code
+* [x] remove `DownloadSubtitle`
 * [x] remove all `to_s` and `to_inspect` methods
+* [ ] add tools to develop offline (at least, without relying on Addic7ed website)
 * [ ] update links/badges to the `full-rewrite` branch in `README.md` to use `master`
 * [ ] release `4.0` :champagne:
 
