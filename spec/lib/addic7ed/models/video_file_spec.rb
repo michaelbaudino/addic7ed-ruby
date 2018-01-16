@@ -143,32 +143,4 @@ describe Addic7ed::VideoFile do
       expect(subject.basename).to eq "Showname.S02E01.720p.HDTV.x264-GROUP.mkv"
     end
   end
-
-  describe "#to_s" do
-    subject { Addic7ed::VideoFile.new("/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv") }
-
-    it "returns file name as a string" do
-      expect(subject.to_s).to eq "/full/path/to/Showname.S02E01.720p.HDTV.x264-GROUP.mkv"
-    end
-  end
-
-  describe "#inspect" do
-    let(:expected) do
-      <<-EXPECTED_OUTPUT
-        Guesses for Showname.S02E01.720p.HDTV.x264-GROUP[DISTRIBUTION].mkv:
-  show:         Showname
-  season:       2
-  episode:      1
-  tags:         ["720P", "HDTV", "X264"]
-  group:        GROUP
-  distribution: DISTRIBUTION
-EXPECTED_OUTPUT
-    end
-
-    subject { Addic7ed::VideoFile.new("Showname.S02E01.720p.HDTV.x264-GROUP[DISTRIBUTION].mkv") }
-
-    it "prints a human-readable detailed version" do
-      expect(subject.inspect).to eq expected.strip
-    end
-  end
 end

@@ -19,26 +19,6 @@ describe Addic7ed::Subtitle, "#initialize" do
   end
 end
 
-describe Addic7ed::Subtitle, "#to_s" do
-  let(:subtitle) do
-    Addic7ed::Subtitle.new(
-      version:   "DIMENSION",
-      language:  "fr",
-      status:    "Completed",
-      url:       "http://some.fancy.url",
-      source:    "http://addic7ed.com",
-      downloads: "42"
-    )
-  end
-  let(:expected) do
-    "http://some.fancy.url\t->\tDIMENSION (fr, Completed) [42 downloads] (source http://addic7ed.com)" # rubocop:disable Metrics/LineLength
-  end
-
-  it "prints a human readable version" do
-    expect(subtitle.to_s).to eq(expected)
-  end
-end
-
 describe Addic7ed::Subtitle, "#completed?" do
   it "returns true when 'status' is 'Completed'" do
     expect(Addic7ed::Subtitle.new(status: "Completed").completed?).to be true
