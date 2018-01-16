@@ -67,14 +67,11 @@ module Addic7ed
     #   #   >
 
     def initialize(options = {})
-      @version   = NormalizeVersion.call(options[:version])
-      @language  = options[:language]
-      @status    = options[:status]
-      @url       = options[:url]
-      @source    = options[:source]
-      @corrected = options[:corrected]
-      @hi        = options[:hi]
+      %i[language status url source corrected hi].each do |opt|
+        instance_variable_set(:"@#{opt}", options[opt])
+      end
       @downloads = options[:downloads].to_i || 0
+      @version   = NormalizeVersion.call(options[:version])
       @comment   = NormalizeComment.call(options[:comment])
     end
 
