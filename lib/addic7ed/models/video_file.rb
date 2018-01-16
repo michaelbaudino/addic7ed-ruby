@@ -118,32 +118,5 @@ module Addic7ed
     def basename
       @basename ||= File.basename(filename)
     end
-
-    # Returns the video file name as passed to {#initialize}.
-    #
-    # @return [String] File name
-    #
-    # @example
-    #   video_file = Addic7ed::VideoFile.new("../Game.of.Thrones.S06E09.720p.HDTV.x264-AVS.mkv")
-    #   video_file.to_s #=> "../Game.of.Thrones.S06E09.720p.HDTV.x264-AVS.mkv"
-
-    def to_s
-      filename
-    end
-
-    # Returns a multiline, human-readable breakdown of the file name
-    # including all detected attributes (show name, season, episode, tags, ...).
-    #
-    # @return [String] a human-readable breakdown of the file name
-
-    def inspect
-      "Guesses for #{filename}:\n"      \
-      "  show:         #{showname}\n"   \
-      "  season:       #{season}\n"     \
-      "  episode:      #{episode}\n"    \
-      "  tags:         #{tags}\n"       \
-      "  group:        #{group}\n"      \
-      "  distribution: #{distribution}"
-    end
   end
 end

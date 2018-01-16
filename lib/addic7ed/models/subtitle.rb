@@ -78,28 +78,6 @@ module Addic7ed
       @comment   = NormalizeComment.call(options[:comment])
     end
 
-    # Returns a human-friendly readable string representing the {Subtitle}
-    #
-    # TODO: move to the CLI codebase
-    #
-    # @return [String]
-    #
-    # @example
-    #   Addic7ed::Subtitle.new(
-    #     version:   "Version 720p AVS, 0.00 MBs",
-    #     language:  "French",
-    #     status:    "Completed",
-    #     downloads: 42,
-    #     url:       "http://www.addic7ed.com/original/113643/4"
-    #   ).to_s
-    #   #=> "http://www.addic7ed.com/original/113643/4\t->\tAVS (French, Completed) [42 downloads]"
-
-    def to_s
-      str = "#{url}\t->\t#{version} (#{language}, #{status}) [#{downloads} downloads]"
-      str += " (source #{source})" if source
-      str
-    end
-
     # Completeness status of the {Subtitle}.
     #
     # @return [Boolean] Returns +true+ if {Subtitle} is complete,
