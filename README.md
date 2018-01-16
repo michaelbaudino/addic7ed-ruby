@@ -10,7 +10,7 @@
 
 A Ruby API for [Addic7ed](http://www.addic7ed.com), the best TV subtitles community in the world.
 
-> :information_source: This is a Ruby wrapper only: if you're looking for the CLI tool, please see [addic7ed-cli](michaelbaudino/addic7ed-cli).
+> ℹ️ This is a Ruby wrapper only: if you're looking for the CLI tool, please see [addic7ed-cli](michaelbaudino/addic7ed-cli).
 
 ## Installation
 
@@ -28,7 +28,7 @@ $ bundle
 
 ## Usage
 
-> :books: Check out the [API reference](http://www.rubydoc.info/github/michaelbaudino/addic7ed-ruby) for full documentation :books:
+> 📚 Check out the [API reference](http://www.rubydoc.info/github/michaelbaudino/addic7ed-ruby) for full documentation.
 
 ### `Addic7ed::Episode`
 
@@ -58,9 +58,9 @@ episode.page_url       #=> "http://www.addic7ed.com/serie/Game_of_Thrones/6/9/0"
 episode.page_url(:fr)  #=> "http://www.addic7ed.com/serie/Game_of_Thrones/6/9/8"
 ```
 
-> :information_source: This is used internally to list available subtitles (see `subtitles` method above) but is also useful when later downloading a subtitle file because it can be used as a referrer (which is a required HTTP header to download subtitle files).
+> ℹ️ This is used internally to list available subtitles (see `subtitles` method above) but is also useful when later downloading a subtitle file because it can be used as a referrer (which is a required HTTP header to download subtitle files).
 
-> :boom: It raises `Addic7ed::LanguageNotSupported` if an unknown language code is passed to `page_url`.
+> 💥 It raises `Addic7ed::LanguageNotSupported` if an unknown language code is passed to `page_url`.
 
 ### `Addic7ed::SubtitlesCollection`
 
@@ -85,9 +85,9 @@ Those methods are chainable, which lets you, for example:
     best_subtitle = good_subtitles.most_popular
     ```
 
-> :boom: It raises `LanguageNotSupported` when `for_language` is called with an unknown/unsupported language code.
+> 💥 It raises `LanguageNotSupported` when `for_language` is called with an unknown/unsupported language code.
 
-> :bulb: A `SubtitlesCollection` instance can be filtered using any method from `Enumerable` (including your well-known friends `each`, `map`, `select`, `reject`, `find`, `group_by`, `any?`, `count`, `inject`, `sort`, `reduce`, ...).
+> 💡 A `SubtitlesCollection` instance can be filtered using any method from `Enumerable` (including your well-known friends `each`, `map`, `select`, `reject`, `find`, `group_by`, `any?`, `count`, `inject`, `sort`, `reduce`, ...).
 
 ### `Addic7ed::Subtitle`
 
@@ -139,19 +139,13 @@ video.distribution  #=> "EZTV"
 video.basename      #=> "Game.of.Thrones.S06E09.720p.HDTV.x264-AVS[eztv].mkv"
 ```
 
-> :boom: It raises `InvalidFilename` when it fails to infer any information from the file name :cry:
+> 💥 It raises `InvalidFilename` when it fails to infer any information from the file name 😢
 
-## Notes
+## Fair use
 
 Addic7ed restricts the number of subtitles downloads to 15 per 24h (30 per 24h for registered users, and 55 for VIP users). Don't get mad, they have to pay for their servers, you know. Ho, and by the way, please, **please**: do not hammer their servers, play fair!
 
-## Contribute
-
-Feel free to submit a [pull request](michaelbaudino/addic7ed-ruby/pulls), I'd be glad to review/merge it.
-
-Also, if you like the awesome work done by the Addic7ed team, please consider [donating to them](http://www.addic7ed.com) :moneybag:
-
-### Supported Ruby versions
+## Supported Ruby versions
 
 This project [supports](https://github.com/michaelbaudino/addic7ed-ruby/blob/full-rewrite/.travis.yml) the following Ruby versions/implementations:
 
@@ -164,15 +158,29 @@ This project [supports](https://github.com/michaelbaudino/addic7ed-ruby/blob/ful
 * Rubinius
 * JRuby
 
-:warning: Rubinius users may have to manually install [RubySL](https://github.com/RubySL) before they can use `addic7ed-ruby`:
+⚠️ Rubinius users may have to manually install [RubySL](https://github.com/RubySL) before they can use `addic7ed-ruby`:
 
 ```shell
 $ gem install rubysl
 ```
 
+## Documentation
+
+The API reference can be generated locally using Yard:
+
+```shell
+bundle exec yard
+```
+
+It is then available as static HTML files in the `doc` directory of this codebase (point your browser to `doc/index.html`).
+
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/michaelbaudino/addic7ed-ruby. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct (see `CODE_OF_CONDUCT.md` file).
+[Bug reports](michaelbaudino/addic7ed-ruby/issues) and [pull requests](michaelbaudino/addic7ed-ruby/pulls) are welcome on GitHub.
+
+This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct (see `CODE_OF_CONDUCT.md` file) 🤗
+
+Also, if you like the awesome work done by the Addic7ed team, please consider [donating to them](http://www.addic7ed.com) 💰
 
 ## License
 
