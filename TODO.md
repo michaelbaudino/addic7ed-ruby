@@ -24,7 +24,7 @@ Here is a list of future features I'd like to implement.
 * [x] add a Bundler post-install message to notify users that this gem is no longer providing a CLI
 * [x] switch to using the language-neutral page
 * [x] update README to include only API stuff
-* [ ] maybe remove `SHOWS_URL` and `EPISODES_URL`
+* [x] remove `SHOWS_URL` and `EPISODES_URL`
 * [x] mention documentation generation in `README`
 * [x] add support for MRI 2.5
 * [ ] move CLI to a separate gem (including `DownloadSubtitle`) using Thor

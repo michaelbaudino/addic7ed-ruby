@@ -1,8 +1,4 @@
 {
-  "urls": {
-    "shows": "http://www.addic7ed.com/ajax_getShows.php",
-    "episodes": "http://www.addic7ed.com/ajax_getEpisodes.php"
-  },
   "languages": {
     "fr": {
       "id": 8,

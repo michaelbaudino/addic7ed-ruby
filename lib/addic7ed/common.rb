@@ -7,8 +7,6 @@ module Addic7ed
   CONFIG       = JSON.parse(File.read(CONFIG_FILE), symbolize_names: true).freeze
   LANGUAGES    = CONFIG[:languages].freeze
   USER_AGENTS  = CONFIG[:user_agents].freeze
-  SHOWS_URL    = CONFIG[:urls][:shows].freeze
-  EPISODES_URL = CONFIG[:urls][:episodes].freeze
 
   COMPATIBILITY_720P = {
     "LOL"  => "DIMENSION",
