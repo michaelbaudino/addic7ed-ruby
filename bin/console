@@ -10,4 +10,8 @@ $LOAD_PATH.unshift File.expand_path("lib", APP_ROOT)
 
 require "addic7ed"
 
+if ARGV.delete "--mock"
+  Dir[File.join(__dir__, "..", "mocks", "mocks.rb")].each { |file| require file }
+end
+
 Pry.start

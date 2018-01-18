@@ -164,7 +164,29 @@ This project [supports](https://github.com/michaelbaudino/addic7ed-ruby/blob/ful
 $ gem install rubysl
 ```
 
-## Documentation
+## Contributing
+
+[Bug reports](michaelbaudino/addic7ed-ruby/issues) and [pull requests](michaelbaudino/addic7ed-ruby/pulls) are welcome on GitHub.
+
+This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct (see `CODE_OF_CONDUCT.md` file) 🤗
+
+Also, if you like the awesome work done by the Addic7ed team, please consider [donating to them](http://www.addic7ed.com) 💰
+
+### Local development
+
+When developing locally, we provide a handy REPL console with all the code already loaded:
+
+```shell
+bin/console
+```
+
+There's even a mode where you don't rely on Addic7ed to be reachable (all network connections are blocked, and a page is mocked to work on):
+
+```shell
+bin/console --mock
+```
+
+### Documentation
 
 The API reference can be generated locally using Yard:
 
@@ -173,14 +195,6 @@ bundle exec yard
 ```
 
 It is then available as static HTML files in the `doc` directory of this codebase (point your browser to `doc/index.html`).
-
-## Contributing
-
-[Bug reports](michaelbaudino/addic7ed-ruby/issues) and [pull requests](michaelbaudino/addic7ed-ruby/pulls) are welcome on GitHub.
-
-This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct (see `CODE_OF_CONDUCT.md` file) 🤗
-
-Also, if you like the awesome work done by the Addic7ed team, please consider [donating to them](http://www.addic7ed.com) 💰
 
 ## License
 
