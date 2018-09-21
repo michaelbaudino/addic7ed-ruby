@@ -1,7 +1,8 @@
-require "spec_helper"
-require "./lib/addic7ed"
+# frozen_string_literal: true
 
-describe Addic7ed::Addic7edVersionNormalizer do
+require "spec_helper"
+
+describe Addic7ed::NormalizeVersion do
   def normalized_version(version)
     described_class.call(version)
   end
@@ -67,7 +68,11 @@ describe Addic7ed::Addic7edVersionNormalizer do
     expect(normalized_version("Version 720P PROPER X264 HDTV DIMENSION")).to eq "DIMENSION"
   end
 
-  it "supports multiple concatenated versions" do
+  it "supports comma-separated multiple concatenated versions" do
     expect(normalized_version("-TLA, -FoV")).to eq "TLA,FOV"
+  end
+
+  it "supports dash-separated multiple concatenated versions" do
+    expect(normalized_version("KILLERS - AVS")).to eq "KILLERS,AVS"
   end
 end

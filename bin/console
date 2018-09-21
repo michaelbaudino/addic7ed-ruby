@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/setup"
+Bundler.require(:default, ENV["RACK_ENV"] || :development)
+
+APP_ROOT = File.expand_path(File.join(File.dirname(__FILE__), ".."))
+
+$LOAD_PATH.unshift File.expand_path("lib", APP_ROOT)
+
+require "addic7ed"
+
+if ARGV.delete "--mock"
+  Dir[File.join(__dir__, "..", "mocks", "mocks.rb")].each { |file| require file }
+end
+
+Pry.start

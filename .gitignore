@@ -27,6 +27,11 @@ pkg
 
 # Ignore Bundler config
 /.bundle
+/vendor/bundle/
 
 # Ignore built gems
 /*.gem
+
+# YARD doc stuff
+/.yardoc
+/doc/

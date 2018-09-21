@@ -1,9 +1,12 @@
-module Addic7ed
-  exceptions = [
-    :InvalidFilename,       :ShowNotFound,    :EpisodeNotFound, :LanguageNotSupported,
-    :ParsingError,          :NoSubtitleFound, :DownloadError,   :DownloadLimitReached,
-    :SubtitleCannotBeSaved, :HTTPError
-  ]
+# frozen_string_literal: true
 
-  exceptions.each { |e| const_set(e, Class.new(StandardError)) }
+module Addic7ed
+  class InvalidFilename       < StandardError; end
+  class ShowNotFound          < StandardError; end
+  class EpisodeNotFound       < StandardError; end
+  class LanguageNotSupported  < StandardError; end
+  class ParsingError          < StandardError; end
+  class NoSubtitleFound       < StandardError; end
+  class DownloadError         < StandardError; end
+  class DailyLimitExceeded    < DownloadError; end
 end

@@ -1,19 +1,17 @@
+# frozen_string_literal: true
+
 module Addic7ed
-  class Addic7edCommentNormalizer
+  class NormalizeComment
+    include Service
+
     attr_reader :comment
 
     def initialize(comment)
       @comment = comment || ""
     end
 
-    def self.call(comment)
-      new(comment).call
-    end
-
     def call
-      comment.downcase
+      comment.downcase.strip
     end
   end
-
-private
 end

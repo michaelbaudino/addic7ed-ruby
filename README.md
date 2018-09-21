@@ -1,109 +1,201 @@
-> ## :information_source: Upcoming Design Breaking Changes
->
-> I'm [currently working on a full rewrite](https://github.com/michaelbaudino/addic7ed-ruby/pull/30) which will introduce some heavily breaking changes, including:
->
->  * a complete API refactor (almost a full rewrite) to enforce code quality, maintainability and single responsability principle
->  * documentation!
->  * the removal of any CLI feature (they will be moved to a separate `addic7ed-ruby-cli` gem)
->
-> I'll publish some beta versions of the gem before merging the PR into `master` and releasing a final version (remember that the gem will no longer include a CLI tool). I'd love to receive some feedback about it, so feel free to [send me an email](mailto:michael.baudino@alpine-lab.com).
-
 # addic7ed-ruby
 
-[![Build Status](https://api.travis-ci.org/michaelbaudino/addic7ed-ruby.svg?branch=master)](https://travis-ci.org/michaelbaudino/addic7ed-ruby)
+[![Build Status](https://api.travis-ci.org/michaelbaudino/addic7ed-ruby.svg?branch=full-rewrite)](https://travis-ci.org/michaelbaudino/addic7ed-ruby)
 [![Dependency Status](https://gemnasium.com/michaelbaudino/addic7ed-ruby.svg?travis)](https://gemnasium.com/michaelbaudino/addic7ed-ruby)
 [![Code Climate](https://codeclimate.com/github/michaelbaudino/addic7ed-ruby.svg)](https://codeclimate.com/github/michaelbaudino/addic7ed-ruby)
 [![Coverage Status](https://coveralls.io/repos/michaelbaudino/addic7ed-ruby/badge.svg?branch=master)](https://coveralls.io/r/michaelbaudino/addic7ed-ruby)
 [![Gem Version](https://badge.fury.io/rb/addic7ed.svg)](http://badge.fury.io/rb/addic7ed)
 [![security](https://hakiri.io/github/michaelbaudino/addic7ed-ruby/master.svg)](https://hakiri.io/github/michaelbaudino/addic7ed-ruby/master)
+[![Inline docs](http://inch-ci.org/github/michaelbaudino/addic7ed-ruby.svg?branch=full-rewrite)](http://inch-ci.org/github/michaelbaudino/addic7ed-ruby?branch=full-rewrite)
 
+A Ruby API for [Addic7ed](http://www.addic7ed.com), the best TV subtitles community in the world.
 
-Ruby command-line script to fetch subtitles on Addic7ed
+> ℹ️ This is a Ruby wrapper only: if you're looking for the CLI tool, please see [addic7ed-cli](michaelbaudino/addic7ed-cli).
 
-### Is it working ?
+## Installation
 
-Until next time Addic7ed break their HTML/CSS structure, yes :smile:
+Add this line to your application's `Gemfile`:
 
-### How to use it ?
-
-1. Install it:
-
-    ```bash
-    $ gem install addic7ed
-    ```
-2. Use it (e.g. to download a French subtitle for a "Californication" episode):
-
-    ```bash
-    $ addic7ed -l fr /path/to/Californication.S06E07.720p.HDTV.x264-2HD.mkv
-    ```
-3. A wild `Californication.S06E07.720p.HDTV.x264-2HD.fr.srt` file appears
-4. Enjoy your show :tv:
-
-### Are there any options ?
-
-Sure !
-
-```bash
-$ addic7ed -h
-Usage: addic7ed [options] <file1> [<file2>, <file3>, ...]
-    -l, --language [LANGUAGE]        Language code to look subtitles for (default: French)
-        --no-hi                      Only download subtitles without Hearing Impaired lines
-    -a, --all-subtitles              Display all available subtitles
-    -n, --do-not-download            Do not download the subtitle
-    -f, --force                      Overwrite existing subtitle
-    -u, --untagged                   Do not include language code in subtitle filename
-    -v, --[no-]verbose               Run verbosely
-    -q, --quiet                      Run without output (cron-mode)
-    -d, --debug                      Debug mode [do not use]
-    -h, --help                       Show this message
-    -L, --list-languages             List all available languages
-    -V, --version                    Show version number
+```ruby
+gem "addic7ed"
 ```
 
-### How to contribute ?
+Then execute:
 
-Feel free to submit a Pull Request, I'd be glad to review/merge it.
+```shell
+$ bundle
+```
 
-Also, if you like the awesome work done by the Addic7ed team, please consider [donating to them](http://www.addic7ed.com) !
+## Usage
 
-### Notes
+> 📚 Check out the [API reference](http://www.rubydoc.info/github/michaelbaudino/addic7ed-ruby) for full documentation.
 
-Addic7ed restricts the number of subtitle download to 15 per 24h (30 per 24h for registered users, and 55 for VIP users).
+### `Addic7ed::Episode`
 
-Don't get mad, they have to pay for their servers, you know.
+An `Episode` object represents an episode with a show name, season number and episode number:
 
-Ho, and by the way, please, **please**: do not hammer their servers, play fair !
+```ruby
+episode = Addic7ed::Episode.new(show: "Game of Thrones", season: 6, number: 9)
+#=> #<Addic7ed::Episode @number=9, @season=6, @show="Game of Thrones">
+```
 
-### Roadmap
+It provides a `subtitles` instance method that returns all available subtitles for this episode:
 
-There's some work remaining:
-- Support registered users
-- Support directory parsing
-- Support "hearing impaired" versions
-- Document code
-- Test cli behaviour
-- Colorize output
-- Write doc for cron usage
-- Write doc for iwatch usage
+```ruby
+episode.subtitles
+#=> #<Addic7ed::SubtitlesCollection
+#     @subtitles=[
+#       #<Addic7ed::Subtitle ... >,
+#       #<Addic7ed::Subtitle ... >,
+#       #<Addic7ed::Subtitle ... >
+#     ]
+```
 
-### Supported Ruby versions
+It also provides a `page_url` instance method that returns the URL of the page listing all subtitles (or all those for a given `language`, if passed as argument) on Addic7ed:
 
-This projet supports the following Ruby versions/implementations:
+```ruby
+episode.page_url       #=> "http://www.addic7ed.com/serie/Game_of_Thrones/6/9/0"
+episode.page_url(:fr)  #=> "http://www.addic7ed.com/serie/Game_of_Thrones/6/9/8"
+```
+
+> ℹ️ This is used internally to list available subtitles (see `subtitles` method above) but is also useful when later downloading a subtitle file because it can be used as a referrer (which is a required HTTP header to download subtitle files).
+
+> 💥 It raises `Addic7ed::LanguageNotSupported` if an unknown language code is passed to `page_url`.
+
+### `Addic7ed::SubtitlesCollection`
+
+A `SubtitlesCollection` is an enumerable class that provides several filtering methods:
+
+* `compatible_with(group)` which returns only subtitles compatible with the given `group` releases
+* `completed` which returns only completed subtitles
+* `for_language(language)` which returns only subtitles in the given `language`
+* `most_popular` which returns the most downloaded subtitle
+
+Those methods are chainable, which lets you, for example:
+
+* select subtitles completed and compatible with a given release group:
+
+    ```ruby
+    good_subtitles = episode.subtitles.completed.compatible_with("KILLERS")
+    ```
+
+* find the most popular subtitle among those:
+
+    ```ruby
+    best_subtitle = good_subtitles.most_popular
+    ```
+
+> 💥 It raises `LanguageNotSupported` when `for_language` is called with an unknown/unsupported language code.
+
+> 💡 A `SubtitlesCollection` instance can be filtered using any method from `Enumerable` (including your well-known friends `each`, `map`, `select`, `reject`, `find`, `group_by`, `any?`, `count`, `inject`, `sort`, `reduce`, ...).
+
+### `Addic7ed::Subtitle`
+
+A `Subtitle` object represents a subtitle file available on Addic7ed. It has several attributes:
+
+```ruby
+subtitle = Addic7ed::Subtitle.new(
+  version:   "Version KILLERS, 720p AVS, 0.00 MBs",
+  language:  "French",
+  status:    "Completed",
+  source:    "http://sous-titres.eu",
+  downloads: 10335,
+  comment:   "works with 1080p.BATV",
+  corrected: true,
+  hi:        false,
+  url:       "http://www.addic7ed.com/original/113643/4"
+)
+
+subtitle.version      #=> "Version KILLERS, 720p AVS, 0.00 MBs"
+subtitle.language     #=> "French"
+subtitle.status       #=> "Completed"
+subtitle.source       #=> "http://sous-titres.eu"
+subtitle.downloads    #=> 10335
+subtitle.comment      #=> "works with 1080p.BATV"
+subtitle.corrected    #=> true
+subtitle.hi           #=> false
+subtitle.url          #=> "http://www.addic7ed.com/original/113643/4"
+```
+
+It also has a special `completed?` instance method that returns a boolean (`true` if `status` is `"Completed"`, `false` otherwise):
+
+```ruby
+subtitle.completed?   #=> true
+```
+
+### `Addic7ed::VideoFile`
+
+The `VideoFile` class lets you extract and guess relevant information from a video file name, then provides them as instance methods:
+
+```ruby
+video = Addic7ed::VideoFile.new("~/Downloads/Game.of.Thrones.S06E09.720p.HDTV.x264-AVS[eztv].mkv")
+
+video.showname      #=> "Game.Of.Thrones"
+video.season        #=> 6
+video.episode       #=> 9
+video.tags          #=> ["720P", "HDTV", "X264"]
+video.group         #=> "AVS"
+video.distribution  #=> "EZTV"
+video.basename      #=> "Game.of.Thrones.S06E09.720p.HDTV.x264-AVS[eztv].mkv"
+```
+
+> 💥 It raises `InvalidFilename` when it fails to infer any information from the file name 😢
+
+## Fair use
+
+Addic7ed restricts the number of subtitles downloads to 15 per 24h (30 per 24h for registered users, and 55 for VIP users). Don't get mad, they have to pay for their servers, you know. Ho, and by the way, please, **please**: do not hammer their servers, play fair!
+
+## Supported Ruby versions
+
+This project [supports](https://github.com/michaelbaudino/addic7ed-ruby/blob/full-rewrite/.travis.yml) the following Ruby versions/implementations:
 
 * Ruby 2.0 (MRI)
 * Ruby 2.1 (MRI)
 * Ruby 2.2 (MRI)
 * Ruby 2.3 (MRI)
+* Ruby 2.4 (MRI)
+* Ruby 2.5 (MRI)
 * Rubinius
 * JRuby
 
-:warning: Rubinius users may have to manually install [RubySL](https://github.com/RubySL) before they can use `addic7ed-ruby`:
+⚠️ Rubinius users may have to manually install [RubySL](https://github.com/RubySL) before they can use `addic7ed-ruby`:
 
 ```shell
 $ gem install rubysl
 ```
 
-### License
+## Contributing
 
-This project is released under the terms of the MIT license.
-See `LICENSE.md` file for details.
+[Bug reports](michaelbaudino/addic7ed-ruby/issues) and [pull requests](michaelbaudino/addic7ed-ruby/pulls) are welcome on GitHub.
+
+This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct (see `CODE_OF_CONDUCT.md` file) 🤗
+
+Also, if you like the awesome work done by the Addic7ed team, please consider [donating to them](http://www.addic7ed.com) 💰
+
+### Local development
+
+When developing locally, we provide a handy REPL console with all the code already loaded:
+
+```shell
+bin/console
+```
+
+There's even a mode where you don't rely on Addic7ed to be reachable (all network connections are blocked, and a page is mocked to work on):
+
+```shell
+bin/console --mock
+```
+
+### Documentation
+
+The API reference can be generated locally using Yard:
+
+```shell
+bundle exec yard
+```
+
+It is then available as static HTML files in the `doc` directory of this codebase (point your browser to `doc/index.html`).
+
+## License
+
+This gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT) (see `LICENSE.md` file).

@@ -1,10 +1,12 @@
-unless RUBY_ENGINE == 'rbx'
-  require 'coveralls'
+# frozen_string_literal: true
+
+unless RUBY_ENGINE == "rbx"
+  require "coveralls"
   Coveralls.wear!
 end
 
-require 'webmock/rspec'
-require 'pry'
+require "webmock/rspec"
+require "pry"
 
 WebMock.disable_net_connect!(allow_localhost: true)
 
@@ -21,6 +23,9 @@ RSpec.configure do |config|
   config.raise_errors_for_deprecations!
 
   config.before(:each) do
-    stub_request(:get, "http://www.addic7ed.com").to_return(File.new("spec/responses/homepage.http"))
+    stub_request(:get, "http://www.addic7ed.com")
+      .to_return(File.new("spec/responses/homepage.http"))
   end
 end
+
+require "./lib/addic7ed"
