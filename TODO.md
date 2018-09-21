@@ -41,3 +41,4 @@ Here is a list of future features I'd like to implement.
 * [x] refactor how HI works (allow both "no HI", "force HI" and "don't care")
 * [ ] add specs for HTML parsing
 * [ ] support registered users (to avoid download throttle)
+* [ ] use https://github.com/p0deje/yard-doctest to enforce documentation maintainance
